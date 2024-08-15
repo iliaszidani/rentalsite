@@ -1,4 +1,4 @@
-const Amenities = () => {
+const Amenities = (car) => {
   const amenitiesContent = [
     { id: 1, name: "Airbag" },
     { id: 2, name: "FM Radio" },

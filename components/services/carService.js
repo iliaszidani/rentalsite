@@ -1,14 +1,12 @@
 import axiosInstance from '../../lib/axiosConfig';
-import axios from 'axios';
+
 export const getCars = async () => {
   try {
-  
-    const response = await axios.get('http://localhost:8000/api/get-all-cars-for-client');
-    console.log('response fetching :', response);
+    console.log('Appel à getCars');
+    const response = await axiosInstance.get('http://localhost:8000/api/get-all-cars-for-client');
     return response.all_cars;
-} catch (error) {
-      console.error('Error fetching cars:', error);
-
+  } catch (error) {
+    console.error('Erreur lors de la récupération des voitures:', error);
     throw error;
   }
 };

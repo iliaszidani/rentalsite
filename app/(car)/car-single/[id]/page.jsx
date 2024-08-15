@@ -21,12 +21,19 @@ export const metadata = {
   description: "GoTrip - Travel & Tour React NextJS Template",
 };
 
-const TourSingleV1Dynamic = ({ params }) => {
-  const id = params.id;
-  const car = carsData.find((item) => item.id == id) || carsData[0];
 
+
+const TourSingleV1Dynamic = async ({ params }) => {
+  const id = params.id;
+  // const car = carsData.find((item) => item.id == id) || carsData[0];
+  console.log("id ",id);
+    const response = await fetch(`http://127.0.0.1:8000/api/show-car-for-client/${id}`, {cache: 'no-store'} );
+    const data = await response.json();
+    const car2 = data.car;
+    console.log('data ',data);
   return (
     <>
+  
       {/* End Page Title */}
 
       <div className="header-margin"></div>
@@ -39,19 +46,19 @@ const TourSingleV1Dynamic = ({ params }) => {
       {/* End top breadcrumb */}
 
       <section className="pt-40">
-        <div className="container">
+        <div className="container">  
           <div className="row y-gap-30">
             <div className="col-lg-8">
               <div className="row y-gap-20 justify-between items-end">
                 <div className="col-auto">
-                  <h1 className="text-30 sm:text-24 fw-600">{car?.title}</h1>
+                  <h1 className="text-30 sm:text-24 fw-600">{car2?.brands.brand_name} {car2?.categories.category_name}</h1>
                   <div className="row x-gap-10 items-center pt-10">
                     <div className="col-auto">
                       <div className="d-flex x-gap-5 items-center">
                         <i className="icon-location text-16 text-light-1" />
-                        <div className="text-15 text-light-1">
+                        {/* <div className="text-15 text-light-1">
                           {car?.location}
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     {/* End .col */}
@@ -89,7 +96,13 @@ const TourSingleV1Dynamic = ({ params }) => {
               {/* End .row */}
 
               <div className="mt-40">
-                <SlideGallery />
+                {/* <SlideGallery /> */}
+                <div >
+                  {
+                    car2?.image_url != null ? <img src={car2?.image_url} alt="" /> : 'image not found'
+                  }
+                      
+                  </div>
               </div>
             </div>
             {/* End col-lg-8 left car gallery */}
@@ -102,7 +115,7 @@ const TourSingleV1Dynamic = ({ params }) => {
                       <div className="text-14 text-light-1">
                         From
                         <span className="text-20 fw-500 text-dark-1 ml-5">
-                          US{car?.price}
+                          US{car2?.car_price}
                         </span>
                       </div>
                     </div>
@@ -113,14 +126,14 @@ const TourSingleV1Dynamic = ({ params }) => {
                         <div className="text-14 text-right mr-10">
                           <div className="lh-15 fw-500">Exceptional</div>
                           <div className="lh-15 text-light-1">
-                            {car?.numberOfReviews} reviews
+                            {car2?.numberOfReviews !=null ? car2?.numberOfReviews : 0} reviews
                           </div>
                         </div>
                         {/* End div */}
 
                         <div className="size-40 flex-center bg-yellow-1 rounded-4">
                           <div className="text-14 fw-600 text-dark-1">
-                            {car?.ratings}
+                            {car2?.ratings !=null ? car2?.ratings : 0}
                           </div>
                         </div>
                         {/* End div */}
@@ -152,9 +165,9 @@ const TourSingleV1Dynamic = ({ params }) => {
           <div className="row">
             <div className="col-lg-8">
               <div>
-                <h3 className="text-22 fw-500">Property highlights</h3>
-                <PropertyHighlights />
-                <Overview />
+                <h3 className="text-22 fw-500">Property highlights </h3>
+                <PropertyHighlights car={car2}/>
+                <Overview car={car2} />
               </div>
             </div>
             {/* End .col-lg-8 */}

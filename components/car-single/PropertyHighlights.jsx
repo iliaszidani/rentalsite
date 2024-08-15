@@ -1,11 +1,12 @@
-const PropertyHighlights = () => {
+const PropertyHighlights = ({car}) => {
   const propertyContent = [
     {
       id: 1,
       icon: "icon-user-2",
       name: "User",
-      content: "4",
+      content: car.seating_capacity,
     },
+    
     {
       id: 2,
       icon: "icon-luggage",
@@ -16,14 +17,15 @@ const PropertyHighlights = () => {
       id: 3,
       icon: "icon-transmission",
       name: "Transmission",
-      content: "Automatic",
+      content: car.transmission,
     },
     {
       id: 4,
       icon: "icon-speedometer",
       name: "Mileage",
-      content: "Unlimited",
+      content: `${car.mileage} `,
     },
+    
   ];
   return (
     <div className="row y-gap-30 justify-between pt-20">
