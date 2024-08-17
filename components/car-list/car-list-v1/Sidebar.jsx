@@ -8,7 +8,7 @@ import MileageFilter from "../sidebar/MileageFilter";
 import TransmissionFilter from "../sidebar/TransmissionFilter";
 import FuelPolicyFilter from "../sidebar/FuelPolicyFilter";
 
-const Sidebar = () => {
+const Sidebar = ({cars , filterCarsByPrice}) => {
   return (
     <>
       <div className="sidebar__item -no-border position-relative">
@@ -38,7 +38,7 @@ const Sidebar = () => {
         <h5 className="text-18 fw-500 mb-10">Prix</h5>
         <div className="row x-gap-10 y-gap-30">
           <div className="col-12">
-            <PirceSlider />
+            <PirceSlider cars={cars} filterCarsByPrice={filterCarsByPrice}/>
           </div>
         </div>
       </div>

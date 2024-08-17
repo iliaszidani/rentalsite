@@ -1,28 +1,35 @@
-const PropertyHighlights = () => {
+const PropertyHighlights = ({car}) => {
+  console.log("car", car)
   const propertyContent = [
     {
       id: 1,
       icon: "icon-user-2",
-      name: "User",
-      content: "4",
+      name: "Seating capacity",
+      content: car.seating_capacity,
     },
     {
       id: 2,
       icon: "icon-luggage",
       name: "Luggage",
-      content: "2",
+      content: car.small_bag + car.large_bag,
     },
     {
       id: 3,
       icon: "icon-transmission",
       name: "Transmission",
-      content: "Automatic",
+      content: car.transmission,
     },
     {
       id: 4,
       icon: "icon-speedometer",
       name: "Mileage",
       content: "Unlimited",
+    },
+    {
+      id: 5,
+      icon: "icon-fuel",
+      name: "Fuel",
+      content:car.fuel_type,
     },
   ];
   return (
@@ -34,6 +41,7 @@ const PropertyHighlights = () => {
             <div className="text-15 lh-15">
               {item.name}
               <br /> {item.content}
+              
             </div>
           </div>
         </div>

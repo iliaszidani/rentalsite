@@ -310,3 +310,37 @@
 .icon-facebook:before {
   content: "\e928";
 }
+
+.icon-fuel:before {
+  content: url('../../ay-icons/gas-pump-solid.svg');
+  display: inline-block;
+  
+  width: 1em; /* Adjust size as needed */
+  height: 1em; /* Adjust size as needed */
+  
+}
+.icon-fan:before {
+  content: url('../../ay-icons/fan-option-svgrepo-com.svg');
+  display: inline-block;
+  
+  width: 1em; /* Adjust size as needed */
+  height: 1em; /* Adjust size as needed */
+  
+}
+.icon-sort-asc:before {
+  content: url('../../ay-icons/sort-direction-asc.png');
+  display: inline-block;
+  
+  width: 1em; /* Adjust size as needed */
+  height: 1em; /* Adjust size as needed */
+  
+}
+.icon-sort-desc:before {
+  content: url('../../ay-icons/sort-direction-asc.png');
+  transform: rotate(90);
+  display: inline-block;
+  
+  width: 1em; /* Adjust size as needed */
+  height: 1em; /* Adjust size as needed */
+  
+}

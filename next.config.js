@@ -9,6 +9,16 @@ module.exports = {
         },
       ];
     },
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'http',
+          hostname: 'localhost',
+          port: '',
+          pathname: '/car-rental-api/public/photos/cars/images/**',
+        },
+      ],
+    },
   };
 
 
