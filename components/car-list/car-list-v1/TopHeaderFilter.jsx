@@ -24,7 +24,7 @@ const TopHeaderFilter = ({ onSort, isAscending }) => {
   Sort
   </button>
   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-  <li><button className="dropdown-item bg-blue-1-05 text-15 text-blue-1"  onClick={onSort} >Sort by price {isAscending ? '(asc)' :'(desc)'}</button></li>
+  <li><button className="dropdown-item bg-blue-1-05 text-15 text-blue-1"  onClick={onSort} >Sort by price {isAscending ?  <p className="p-icon">   &#8593;</p> :  <p className="p-icon">&#8595;</p>}</button></li>
     {/* <li><a className="dropdown-item bg-blue-1-05 text-15 text-blue-1"onClick={onSort} >dec-</a></li> */}
     <li><a className="dropdown-item bg-blue-1-05 text-15 text-blue-1" href="#">Something else here</a></li>
   </ul>

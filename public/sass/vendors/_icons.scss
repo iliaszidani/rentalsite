@@ -327,20 +327,11 @@
   height: 1em; /* Adjust size as needed */
   
 }
-.icon-sort-asc:before {
-  content: url('../../ay-icons/sort-direction-asc.png');
+ 
+
+.p-icon{
+  width: 1em;
+  height: 1em;
   display: inline-block;
-  
-  width: 1em; /* Adjust size as needed */
-  height: 1em; /* Adjust size as needed */
-  
-}
-.icon-sort-desc:before {
-  content: url('../../ay-icons/sort-direction-asc.png');
-  transform: rotate(90);
-  display: inline-block;
-  
-  width: 1em; /* Adjust size as needed */
-  height: 1em; /* Adjust size as needed */
-  
+ 
 }
