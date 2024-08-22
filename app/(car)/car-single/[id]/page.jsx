@@ -37,14 +37,16 @@ const CarSinglePage = ({ params }) => {
       }
 
       try {
+        console.log("...fetching car with id ", params.id);
         const carData = await getCarData(id);
         setCar(carData);
+        console.log("car Data  ", carData);
       } catch (error) {
         console.error("Error fetching car data:", error);
       }
     };
 
- 
+    
 
     fetchCarData();
  
@@ -70,14 +72,14 @@ const CarSinglePage = ({ params }) => {
   }
 
 
-const TourSingleV1Dynamic = async ({ params }) => {
-  const id = params.id;
-  // const car = carsData.find((item) => item.id == id) || carsData[0];
-  console.log("id ",id);
-    const response = await fetch(`http://127.0.0.1:8000/api/show-car-for-client/${id}`, {cache: 'no-store'} );
-    const data = await response.json();
-    const car2 = data.car;
-    console.log('data ',data);
+// const TourSingleV1Dynamic = async ({ params }) => {
+//   const id = params.id;
+//   // const car = carsData.find((item) => item.id == id) || carsData[0];
+//   console.log("id ",id);
+//     const response = await fetch(`http://localhost/car-rental-api/public/api/show-car-for-client/${id}`, {cache: 'no-store'} );
+//     const data = await response.json();
+//     const car2 = data.car;
+//     console.log('data ',data);
   return (
     <>
       <div className="header-margin"></div>
@@ -305,7 +307,7 @@ const TourSingleV1Dynamic = async ({ params }) => {
     </>
   );
 };
-}
+ 
 export default dynamic(() => Promise.resolve(CarSinglePage), {
   ssr: false,
 });

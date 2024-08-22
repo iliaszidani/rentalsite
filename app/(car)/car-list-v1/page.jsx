@@ -54,7 +54,7 @@ import CarProperties from "@/components/car-list/car-list-v1/CarPropertes";
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://127.0.0.1:8000/api/get-all-cars-for-client');
+      const response = await fetch('http://localhost/car-rental-api/public/api/get-all-cars-for-client');
       console.log(response);
       if(response.status === 201) {
       const data = await response.json();
