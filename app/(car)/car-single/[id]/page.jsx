@@ -69,13 +69,22 @@ const CarSinglePage = ({ params }) => {
     return <div>Loading...</div>; // look if there is loading cards from bootstrap
   }
 
+
+const TourSingleV1Dynamic = async ({ params }) => {
+  const id = params.id;
+  // const car = carsData.find((item) => item.id == id) || carsData[0];
+  console.log("id ",id);
+    const response = await fetch(`http://127.0.0.1:8000/api/show-car-for-client/${id}`, {cache: 'no-store'} );
+    const data = await response.json();
+    const car2 = data.car;
+    console.log('data ',data);
   return (
     <>
       <div className="header-margin"></div>
       <Header3 />
       <TopBreadCrumb />
       <section className="pt-40">
-        <div className="container">
+        <div className="container">  
           <div className="row y-gap-30">
             <div className="col-lg-8">
               <div className="row y-gap-20 justify-between items-end">
@@ -296,7 +305,7 @@ const CarSinglePage = ({ params }) => {
     </>
   );
 };
-
+}
 export default dynamic(() => Promise.resolve(CarSinglePage), {
   ssr: false,
 });

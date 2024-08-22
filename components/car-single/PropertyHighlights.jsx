@@ -7,6 +7,7 @@ const PropertyHighlights = ({car}) => {
       name: "Seating capacity",
       content: car.seating_capacity,
     },
+    
     {
       id: 2,
       icon: "icon-luggage",
@@ -23,7 +24,7 @@ const PropertyHighlights = ({car}) => {
       id: 4,
       icon: "icon-speedometer",
       name: "Mileage",
-      content: "Unlimited",
+      content: `${car.mileage} `,
     },
     {
       id: 5,
