@@ -23,5 +23,6 @@ export const findPlaceSlice = createSlice({
   },
 });
 
+
 export const { addCurrentTab } = findPlaceSlice.actions;
 export default findPlaceSlice.reducer;

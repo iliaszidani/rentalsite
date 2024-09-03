@@ -33,7 +33,7 @@ const index = () => {
               data-aos="fade-up" 
               data-aos-delay="200" 
             >
-              <MainFilterSearchBox />
+              <MainFilterSearchBox isHome={true} />
             </div>
             {/* End tab-filter */}
           </div>

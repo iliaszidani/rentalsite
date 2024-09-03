@@ -24,10 +24,10 @@ const MainMenu = ({ style = "" }) => {
     <nav className="menu js-navList">
       <ul className={`menu__nav ${style} -is-active`}>
         <li>
-          <a href="/home_8">
+          <Link href="/home_8">
             <span className="mr-10">Accueil</span>
             
-          </a>
+          </Link>
           {/* <ul className="subnav">
             {homeItems.map((menu, i) => (
               <li

@@ -1,7 +1,7 @@
 export const homeItems = [
  
   {
-    name: "Home 08",
+    name: "Home",
     routePath: "/home_8",
   },
 
