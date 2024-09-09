@@ -1,13 +1,14 @@
 
 "use client";
-const TopHeaderFilter = ({ onSort, isAscending }) => {
+const TopHeaderFilter = ({ onSort, isAscending, sortedCarsLength }) => {
   // increment
+  const messageCarsCount =  sortedCarsLength === 0 ?"Ops, no cars found. Try to change the search filter" : sortedCarsLength ===1 ? `${sortedCarsLength} car found.`: `${sortedCarsLength} cars found.` ;
   return (
     <>
       <div className="row y-gap-10 items-center justify-between">
         <div className="col-auto">
           <div className="text-18">
-            <span className="fw-500">3,269 properties</span> in Europe
+            <span className="fw-500">{messageCarsCount}  </span> 
           </div>
         </div>
         {/* End .col */}
@@ -24,7 +25,14 @@ const TopHeaderFilter = ({ onSort, isAscending }) => {
   Sort
   </button>
   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-  <li><button className="dropdown-item bg-blue-1-05 text-15 text-blue-1"  onClick={onSort} >Sort by price {isAscending ?  <p className="p-icon">   &#8593;</p> :  <p className="p-icon">&#8595;</p>}</button></li>
+  <li><button className="dropdown-item bg-blue-1-05 text-15 text-blue-1"  onClick={onSort} >Sort by price {isAscending ?  <p className="p-icon">   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="size-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 18.75 7.5-7.5 7.5 7.5" />
+  <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 7.5-7.5 7.5 7.5" />
+</svg>
+</p> :  <p className="p-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="size-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
+</svg>
+</p>}</button></li>
     {/* <li><a className="dropdown-item bg-blue-1-05 text-15 text-blue-1"onClick={onSort} >dec-</a></li> */}
     <li><a className="dropdown-item bg-blue-1-05 text-15 text-blue-1" href="#">Something else here</a></li>
   </ul>

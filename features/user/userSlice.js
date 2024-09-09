@@ -1,14 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { loginUser, logoutUser } from "./thunk";
+import { loginUser, logoutUser, registerUser } from "./thunk";
 import Cookies from "js-cookie";
  
 
 const initialState = {
-  user: JSON.parse(localStorage.getItem("user")) || {},
+  user: typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) || {} : {},
   reservations: [],
   isLoading: false,
   error: null,
+  errorList:{}
 };
 
 export const userSlice = createSlice({
@@ -52,6 +53,24 @@ export const userSlice = createSlice({
       .addCase(logoutUser.rejected, (state ,action) => {
         console.log('logoutUser.rejected ',  action.error)
        
+      }).addCase(registerUser.pending, (state ) => {
+        state.isLoading = true;
+        state.errorList = {};
+        
+       
+      }).addCase(registerUser.fulfilled, (state ,action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+        if (typeof window !== "undefined") {
+          localStorage.setItem("user", JSON.stringify(action.payload));
+        }
+        Cookies.set("token", action.payload.token);
+       
+      }).addCase(registerUser.rejected, (state ,action) => {
+          console.log("rejected ", action.payload.errorList.errorList);
+        state.isLoading = false;
+        state.error = action.error;
+        state.errorList = action.payload.errorList.errorList;
       });
   },
 });

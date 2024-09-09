@@ -101,7 +101,7 @@ const Header3 = () => {
                   </div>
                 ) : (
                   <div className="d-flex items-center ml-20 is-menu-opened-hide">
-                    <div className="d-flex items-center position-relative">
+                    <div className="d-flex items-center position-relative me-5">
                       <span
                         className="icon-user text-inherit text-22 cursor-pointer"
                         onClick={toggleDropdown}
@@ -162,7 +162,7 @@ const Header3 = () => {
                 {/* End btn-group */}
 
                 {/* Start mobile menu icon */}
-                <div className="d-none md:d-flex x-gap-20 items-center pl-30 text-dark-1">
+                <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-dark-1">
                   {!user.user && (
                     <div>
                       <Link

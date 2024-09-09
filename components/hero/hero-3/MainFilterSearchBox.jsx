@@ -7,40 +7,23 @@ import GuestSearch from "./GuestSearch";
 import LocationSearch from "./LocationSearch";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { setSearchData } from "@/features/searchData/searchDataSlice";
+import { setBookingDetails } from "@/features/car/carSlice"; 
 
 const MainFilterSearchBox = ({isHome , initialData}) => {
   const { tabs, currentTab } = useSelector((state) => state.hero) || {};
   const dispatch = useDispatch();
   const Router = useRouter();
-  const [differentLocations, setDifferentLocations] = useState(initialData?.isDifferentLocations  || false);
-  const [searchData, setSearchData] = useState({
-    isFilled: initialData?.isFilled || false,
-    isDifferentLocations: initialData?.isDifferentLocations || false,
-    pick_up_agency: initialData?.pickUpAgency || "",
-    drop_off_agency: initialData?.dropOffAgency || "",
-    pick_up_time: initialData?.pickUpTime || "",
-    drop_off_time: initialData?.dropOffTime || "",
-  });
-
-  // handleInitialDataChange // this is for date 2 should be date 1 plus 1
-  useEffect(() => {
-    setDifferentLocations(initialData?.isDifferentLocations || false);
-  }, [initialData]);
-
+  const { searchData, isLoading  } = useSelector((state) => state.searchData);
+ 
   const handleFilterChange = (name, value) => {
     setSearchData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    if (!differentLocations) {
-      searchData.drop_off_agency = searchData.pick_up_agency;
-    }
-    searchData.isFilled = true;
-    const url = `/car-list-v1?isFilled=${searchData.isFilled}&isDifferentLocations=${differentLocations}&pick_up_agency=${encodeURIComponent(JSON.stringify(searchData.pick_up_agency))}&drop_off_agency=${encodeURIComponent(JSON.stringify(searchData.drop_off_agency))}&pick_up_time=${encodeURIComponent(searchData.pick_up_time.toString())}&drop_off_time=${encodeURIComponent(searchData.drop_off_time.toString())}`;
-
-    // Navigate to the target page with query parameters
-    Router.push(url);
+    event.preventDefault();  
+    dispatch(setBookingDetails(searchData))
+    Router.push("/car-list-v1");
   };
 
   return (
@@ -67,25 +50,27 @@ const MainFilterSearchBox = ({isHome , initialData}) => {
           <div className="button-grid items-center d-lg-flex justify-content-between">
             <LocationSearch
               isDropOff={false}
-              changeDataFilter={handleFilterChange}
-              initialData={initialData}
+              // changeDataFilter={handleFilterChange}
+              // initialData={initialData}
               required
             />
             {searchData.isFilled ? (
-              initialData?.isDifferentLocations && (
+              searchData?.isDifferentLocations && (
                 <LocationSearch
-                  changeDataFilter={handleFilterChange}
+                
+                  // changeDataFilter={handleFilterChange}
                   isDropOff={true}
-                  initialData={initialData}
+                  // initialData={initialData}
                   required
                 />
               )
             ) : (
-              differentLocations && (
+              searchData?.isDifferentLocations && (
                 <LocationSearch
-                  changeDataFilter={handleFilterChange}
+                
+                  // changeDataFilter={handleFilterChange}
                   isDropOff={true}
-                  initialData={initialData}
+                  // initialData={initialData}
                   required
                 />
               )
@@ -95,8 +80,9 @@ const MainFilterSearchBox = ({isHome , initialData}) => {
               <div>
                 <h4 className="text-15 fw-500 ls-2 lh-16">Check in</h4>
                 <DateSearch
-                  changeDataFilter={handleFilterChange}
-                  initialData={initialData}
+                  // changeDataFilter={handleFilterChange}
+                  // initialData={initialData}
+                  isDropOff={false}
                   required
                 />
               </div>
@@ -105,10 +91,10 @@ const MainFilterSearchBox = ({isHome , initialData}) => {
               <div>
                 <h4 className="text-15 fw-500 ls-2 lh-16">Check out</h4>
                 <DateSearch
-                  changeDataFilter={handleFilterChange}
+                  // changeDataFilter={handleFilterChange}
                   isDropOff={true}
                   searchData={searchData}
-                  initialData={initialData}
+                  // initialData={initialData}
                   required
                 />
               </div>
@@ -118,6 +104,7 @@ const MainFilterSearchBox = ({isHome , initialData}) => {
               <button
                 type="submit"
                 className="mainSearch__submit button -dark-1 py-15 px-35 h-60 col-12 rounded-4 bg-blue-1 text-white"
+                disabled={  isLoading  }
               >
                 <i className="icon-search text-20 mr-10" />
                 Chercher
@@ -133,8 +120,13 @@ const MainFilterSearchBox = ({isHome , initialData}) => {
             name="Je souhaite restituer la voiture à un autre endroit"
             value="in-range"
             style={{ width: "50px" }}
-            checked={differentLocations}
-            onChange={() => setDifferentLocations(!differentLocations)}
+            checked={searchData.isDifferentLocations}
+            onChange={() => { 
+
+              dispatch( setSearchData({...searchData, isDifferentLocations: !searchData.isDifferentLocations}))
+              
+              // setDifferentLocations(!differentLocations)
+             }}
           />
           <label htmlFor="searchbox-toolbox-drop-off-checkbox-desktop">
             <span className={`checkbox-label ${!isHome && 'text-dark'} `}>
@@ -146,5 +138,6 @@ const MainFilterSearchBox = ({isHome , initialData}) => {
     </>
   );
 };
+
 
 export default MainFilterSearchBox;
