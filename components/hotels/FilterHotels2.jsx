@@ -1,29 +1,38 @@
-
 'use client'
-
 import Image from "next/image";
-import Link from "next/link";
-import Slider from "react-slick";
-import { hotelsData } from "../../data/hotels";
-import isTextMatched from "../../utils/isTextMatched";
 import { useEffect, useState } from "react";
+import 'swiper/swiper-bundle.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper';
+import isTextMatched from "../../utils/isTextMatched";
 
-const FilterHotels2 = ({filterOption}) => {
-  const [filteredItems, setFilteredItems] = useState([])
-  useEffect(() => {
-    setFilteredItems(hotelsData.filter(elm=>elm.city == filterOption))
-   
-  }, [filterOption])
+const FilterHotels2 = ({ filterOption, cars }) => {
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [selectedBrand, setSelectedBrand] = useState('All'); // Marque par défaut
+  const [brands, setBrands] = useState([]);
   
-  var itemSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  useEffect(() => {
+    // Récupération des marques depuis l'API
+    fetch('http://127.0.0.1:8000/api/get-all-brands-for-client')
+      .then(response => response.json())
+      .then(data => {
+        const carBrands = new Set(cars.map(car => car.brands.brand_name));
+        const filteredBrands = ['All', ...data.map(brand => brand.brand_name).filter(brand => carBrands.has(brand))];
+        setBrands(filteredBrands);
+      })
+      .catch(error => console.error('Erreur lors de la récupération des marques :', error));
+  }, [cars]);
+  useEffect(() => {
+    // Filtrage par marque
+    const brandFilteredItems = (cars || []).filter(item => {
+      console.log('selectedBrand', selectedBrand)
+      return selectedBrand === 'All' || item?.brands?.brand_name === selectedBrand;
+    }
+    );
+    setFilteredItems(brandFilteredItems);
+  }, [cars, selectedBrand, filterOption]);
 
-  // custom navigation
+  // Navigation personnalisée
   function ArrowSlick(props) {
     let className =
       props.type === "next"
@@ -48,77 +57,97 @@ const FilterHotels2 = ({filterOption}) => {
   }
 
   return (
-    <>
-      {filteredItems.slice(0, 8).map((item) => (
-        <div
-          className="col-xl-3 col-lg-3 col-sm-6"
-          key={item?.id}
-          data-aos="fade"
-          data-aos-delay={item.delayAnimation}
-        >
-          <Link
-            href={`/hotel-single-v1/${item.id}`}
-            className="hotelsCard -type-1 hover-inside-slider"
+    <div>
+      {/* Texte pour la sélection des marques */}
+      <div style={{ marginBottom: '10px' , textAlign: 'center' }}>
+        <label htmlFor="brandSelect"> Sélectionner une marque </label>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+        {brands.map(brand => (
+          <button
+            key={brand}
+            onClick={() => setSelectedBrand(brand)}
+            style={{
+              margin: '0 5px',
+              padding: '10px 20px',
+              backgroundColor: selectedBrand === brand ? '#dc3545' : '#f8f9fa',
+              color: selectedBrand === brand ? '#fff' : '#dc3545',
+              border: '1px solid #dc3545',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              outline: 'none',
+              fontWeight: 'bold'
+            }}
+          >
+            {brand}
+          </button>
+        ))}
+      </div>
+
+      {/* Affichage des éléments filtrés */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+      {filteredItems.slice(0, 10).map((item) => (
+          <div
+            className="col-xl-3 col-lg-3 col-sm-6"
+            key={item?.id}
+            data-aos="fade"
+            data-aos-delay={item.delayAnimation}
+            style={{ flex: '0 0 auto', width: '250px' }} 
           >
             <div className="hotelsCard__image">
-              <div className="cardImage inside-slider">
-                <Slider
-                  {...itemSettings}
-                  arrows={true}
-                  nextArrow={<ArrowSlick type="next" />}
-                  prevArrow={<ArrowSlick type="prev" />}
-                >
-                  {item?.slideImg?.map((slide, i) => (
-                    <div className="cardImage ratio ratio-1:1" key={i}>
-                      <div className="cardImage__content ">
-                        <Image
-                          width={300}
-                          height={300}
-                          className="rounded-4 col-12 js-lazy"
-                          src={slide}
-                          alt="image"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </Slider>
-
-                <div className="cardImage__wishlist">
-                  <button className="button -blue-1 bg-white size-30 rounded-full shadow-2">
-                    <i className="icon-heart text-12" />
-                  </button>
-                </div>
-
-                <div className="cardImage__leftBadge">
-                  <div
-                    className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
-                      isTextMatched(item?.tag, "breakfast included")
-                        ? "bg-dark-1 text-white"
-                        : ""
-                    } ${
-                      isTextMatched(item?.tag, "best seller")
-                        ? "bg-blue-1 text-white"
-                        : ""
-                    } 
-                    } ${
-                      isTextMatched(item?.tag, "-25% today")
-                        ? "bg-brown-1 text-white"
-                        : ""
-                    } 
-                     ${
-                       isTextMatched(item?.tag, "top rated")
-                         ? "bg-yellow-1 text-dark-1"
-                         : ""
-                     }`}
+              <div className="cardImage w-250 md:w-1/1 rounded-4 border-light">
+                <div className="custom_inside-slider">
+                  <Swiper
+                    className="mySwiper"
+                    modules={[Pagination, Navigation]}
+                    pagination={{ clickable: true }}
+                    navigation={true}
                   >
-                    {item?.tag}
-                  </div>
+                    <img src={item.image} alt="" />
+                    {item?.slideImg?.map((slide, i) => (
+                      <SwiperSlide key={i}>
+                        <div className="ratio ratio-1:1">
+                          <div className="cardImage__content">
+                            <Image
+                              width={250}
+                              height={250}
+                              className="rounded-4 col-12 js-lazy"
+                              src={slide}
+                              priority
+                              alt={`Image ${i}`}
+                            />
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+              </div>
+              <div className="cardImage__leftBadge">
+                <div className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
+                  isTextMatched(item?.tag, "breakfast included")
+                    ? "bg-dark-1 text-white"
+                    : ""
+                } ${
+                  isTextMatched(item?.tag, "best seller")
+                    ? "bg-blue-1 text-white"
+                    : ""
+                } ${
+                  isTextMatched(item?.tag, "-25% today")
+                    ? "bg-brown-1 text-white"
+                    : ""
+                } ${
+                  isTextMatched(item?.tag, "top rated")
+                    ? "bg-yellow-1 text-dark-1"
+                    : ""
+                }`}>
+                  {item?.tag}
                 </div>
               </div>
             </div>
             <div className="hotelsCard__content mt-10">
               <h4 className="hotelsCard__title text-dark-1 text-18 lh-16 fw-500">
-                <span>{item?.title}</span>
+                <span>{item?.car_name}</span>
               </h4>
               <p className="text-light-1 lh-14 text-14 mt-5">
                 {item?.location}
@@ -128,24 +157,40 @@ const FilterHotels2 = ({filterOption}) => {
                   {item?.ratings}
                 </div>
                 <div className="text-14 text-dark-1 fw-500 ml-10">
-                  Exceptional
+                  Exceptionnel
                 </div>
                 <div className="text-14 text-light-1 ml-10">
                   {item?.numberOfReviews} reviews
                 </div>
               </div>
+
+              {/* Ajout des informations sur l'adresse et la ville de l'agence */}
+              {item?.agencies?.address_agence && item?.agencies?.city_agence && (
+                <>
+                  <div className="col-auto mt-10">
+                    <div className="text-14 text-light-1">
+                      {item?.agencies.address_agence}, {item?.agencies.city_agence.toUpperCase()}
+                    </div>
+                  </div>
+                  <div className="col-auto">
+                    <div className="size-3 rounded-full bg-light-1" />
+                  </div>
+                </>
+              )}
+
               <div className="mt-5">
                 <div className="fw-500">
-                  Starting from{" "}
-                  <span className="text-blue-1">US${item?.price}</span>
+                Starting from{" "}
+                  <span className="text-blue-1">US${item?.car_price}
+                  </span>
                 </div>
               </div>
             </div>
-          </Link>
-        </div>
-      ))}
-    </>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
-
 export default FilterHotels2;
+

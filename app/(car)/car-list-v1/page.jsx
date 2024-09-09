@@ -33,13 +33,113 @@ import CarProperties from "@/components/car-list/car-list-v1/CarPropertes";
   
   // };
 
-  const Index = () => {
-    const [sortedCars, setSortedCars] = useState([]);
-    const [sortedCarsCopy, setSortedCarsCopy] = useState([]);
-    const [isAscending, setIsAscending] = useState(true); 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(99);
+  
+const Index = () => {
+  const [sortedCars, setSortedCars] = useState([]);
+  const [sortedCarsCopy, setSortedCarsCopy] = useState([]);
+  const [isAscending, setIsAscending] = useState(true); 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(99);
   const itemsPerPage = 1;
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedFuelType, setSelectedFuelType] = useState(null); 
+  const [selectedTransmission, setSelectedTransmission] = useState(null);
+  const [selectedMileage, setSelectedMileage] = useState(null);
+  const [selectedSpecification, setSelectedSpecification] = useState(null);
+
+  const handleSpecificationsChange = (specification) => {
+    console.log('handleSpecificationChange', specification);
+    setSelectedSpecification(specification);
+    console.log('cars before ', sortedCars);
+  
+    const filteredCars = sortedCarsCopy.filter(car => {
+      return Object.keys(specification).every(key => {
+        return Array.isArray(specification[key]) && specification[key].length > 0
+          ? specification[key].includes(car[key])
+          : true; 
+      });
+    });
+    console.log('cars after ', filteredCars);
+    setSortedCars(filteredCars);
+    setTotalPages(Math.ceil(filteredCars.length / itemsPerPage)); 
+    console.log('filteredCars', filteredCars);
+    console.log('Total pages:', totalPages);  
+  };
+  
+
+  const handleMileageChange = (mileage) => {
+    console.log('handleMileageChange', mileage);
+    setSelectedMileage(mileage);
+    console.log('cars before ', sortedCars)
+    const filteredCars = sortedCarsCopy.filter(car => mileage.includes(car.mileage));
+    console.log('cars after ', filteredCars);
+    setSortedCars(filteredCars);
+    console.log('setSortedCars', filteredCars);
+    setTotalPages(Math.ceil(filteredCars.length / itemsPerPage)); 
+    console.log('Total pages:', totalPages);
+  };
+
+
+
+  const handleTransmissionChange = (transmission) => {
+    setSelectedTransmission(transmission);
+    if (transmission.length === 0) {
+      setSortedCars(sortedCarsCopy);
+      setTotalPages(Math.ceil(sortedCarsCopy.length / itemsPerPage));
+    } else {
+      const filteredCars = sortedCarsCopy.filter(car => transmission.includes(car.transmission));
+      if (filteredCars.length === 0) {
+        setSortedCars(sortedCarsCopy);
+        setTotalPages(Math.ceil(sortedCarsCopy.length / itemsPerPage));
+      } else {
+        setSortedCars(filteredCars);
+        setTotalPages(Math.ceil(filteredCars.length / itemsPerPage));
+      }
+    }    
+  };
+  
+
+  const handleFuelTypeChange = (fuelType) => {
+    console.log('handleFuelTypeChange', fuelType);
+    setSelectedFuelType(fuelType);
+    if (fuelType.length === 0) {
+      setSortedCars(sortedCarsCopy);
+      setTotalPages(Math.ceil(sortedCarsCopy.length / itemsPerPage));
+    } else {
+      const filteredCars = sortedCarsCopy.filter(car => fuelType.includes(car.fuel_type));  
+      if (filteredCars.length === 0) {
+        setSortedCars(sortedCarsCopy);
+        setTotalPages(Math.ceil(sortedCarsCopy.length / itemsPerPage));
+      } else {
+        setSortedCars(filteredCars);
+        setTotalPages(Math.ceil(filteredCars.length / itemsPerPage));
+      }
+    }    
+  };
+  
+
+  const resetFilters = () => {
+    setSelectedCategories([]);
+  
+    setSortedCars(sortedCarsCopy);
+    setTotalPages(Math.ceil(sortedCarsCopy.length / itemsPerPage));
+  };
+  const handleCategoryChange = (categories) => {
+    console.log('handleCategoryChange', categories);
+    setSelectedCategories(categories);
+    
+    if (categories.length === 0) {
+      resetFilters();
+      return;
+    }
+    
+    const newCars = sortedCarsCopy.filter(car => categories.includes(car.categories.id));
+    setSortedCars(newCars);
+    console.log('setSortedCars', newCars);  
+    setTotalPages(Math.ceil(newCars.length / itemsPerPage)); 
+  };
+  
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -72,6 +172,7 @@ import CarProperties from "@/components/car-list/car-list-v1/CarPropertes";
   };
   fetchData();
   }, []);
+
   const sortCarsByPrice = () => {
     console.log('calling sortCarsByPrice:');
     console.log('before: ', sortedCars);
@@ -94,6 +195,7 @@ import CarProperties from "@/components/car-list/car-list-v1/CarPropertes";
     setTotalPages(Math.ceil(filtered.length / itemsPerPage));
     setSortedCars(filtered);
   };
+  
 
   return (
     <>
@@ -127,7 +229,14 @@ import CarProperties from "@/components/car-list/car-list-v1/CarPropertes";
           <div className="row y-gap-30">
             <div className="col-xl-3">
               <aside className="sidebar y-gap-40 xl:d-none">
-                <Sidebar cars={sortedCarsCopy} filterCarsByPrice={filterCarsByPrice} />
+                <Sidebar cars={sortedCarsCopy}
+                 filterCarsByPrice={filterCarsByPrice}  
+                handleCategoryChange={handleCategoryChange} 
+                handleFuelTypeChange={handleFuelTypeChange} 
+                handleTransmissionChange={handleTransmissionChange}
+                handleMileageChange={handleMileageChange}
+                handleSpecificationsChange={handleSpecificationsChange}
+                />
               </aside>
               {/* End sidebar for desktop */}
 
@@ -147,11 +256,20 @@ import CarProperties from "@/components/car-list/car-list-v1/CarPropertes";
                     aria-label="Close"
                   ></button>
                 </div>
+                
                 {/* End offcanvas header */}
 
                 <div className="offcanvas-body">
                   <aside className="sidebar y-gap-40  xl:d-block">
-                    <Sidebar  cars={sortedCars} filterCarsByPrice={filterCarsByPrice}/>
+                    <Sidebar  cars={sortedCars} 
+                    filterCarsByPrice={filterCarsByPrice} 
+                    handleCategoryChange={handleCategoryChange} 
+                    handleFuelTypeChange={handleFuelTypeChange} 
+                    handleTransmissionChange={handleTransmissionChange}
+                    handleMileageChange={handleMileageChange}
+                    handleSpecificationsChange={handleSpecificationsChange}
+                   
+                    />
                   </aside>
                 </div>
                 {/* End offcanvas body */}
@@ -159,31 +277,29 @@ import CarProperties from "@/components/car-list/car-list-v1/CarPropertes";
               {/* End mobile menu sidebar */}
             </div>
             {/* End col */}
-            { sortedCars.length == 0 ?  
-     <div>
-           <div className="spinner-grow text-danger" role="status"> </div>
-           <div className="spinner-grow text-danger" role="status"> </div>
-           <div className="spinner-grow text-danger" role="status"> </div>
-           <div className="spinner-grow text-danger" role="status"> </div>
-           <div className="spinner-grow text-danger" role="status"> </div></div>
-      
-          :
+            {sortedCars.length === 0 ? (
+  <div className="d-flex justify-content-center align-items-center vh-100">
+    <div className="spinner-grow text-danger" role="status"></div>
+    <div className="spinner-grow text-danger" role="status"></div>
+    <div className="spinner-grow text-danger" role="status"></div>
+    <div className="spinner-grow text-danger" role="status"></div>
+    <div className="spinner-grow text-danger" role="status"></div>
+  </div>
+) : (
+  <div className="col-xl-9">
+    <TopHeaderFilter onSort={sortCarsByPrice} isAscending={isAscending} />
+    <div className="mt-30"></div>
+    <div className="row y-gap-30">
+      <CarProperties cars={getCurrentPageCars()} />
+    </div>
+    <Pagination
+      totalPages={totalPages}
+      currentPage={currentPage}
+      onPageChange={handlePageChange}
+    />
+  </div>
+)}
 
-            <div className="col-xl-9 ">
-            <TopHeaderFilter onSort={sortCarsByPrice} isAscending={isAscending} />
-              <div className="mt-30"></div>
-              {/* End mt--30 */}
-              <div className="row y-gap-30">
-              <CarProperties cars={getCurrentPageCars()} />
-              </div>
-              {/* End .row */}
-              <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              onPageChange={handlePageChange}
-            />
-            </div>
-  }
             {/* End .col for right content */}
           </div>
           {/* End .row */}

@@ -1,4 +1,6 @@
+'use client';
 import dynamic from "next/dynamic";
+import { useState, useEffect } from 'react';
 import Footer6 from "@/components/footer/footer-6";
 import Header8 from "@/components/header/header-8";
 import Hero8 from "@/components/hero/hero-8";
@@ -19,13 +21,34 @@ import PopularDestinations from "@/components/destinations/PopularDestinations";
 import FilterHotels4 from "@/components/hotels/FilterHotels4";
 import DefaultFooter from "@/components/footer/default";
 import CallToActions from "@/components/common/CallToActions";
+import FilterHotels2 from "@/components/hotels/FilterHotels2";
 
-export const metadata = {
-  title: "Home-8 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
-};
+// Remove the metadata export
+// export const metadata = {
+//   title: "Home-8 || GoTrip - Travel & Tour React NextJS Template",
+//   description: "GoTrip - Travel & Tour React NextJS Template",
+// };
 
 const home_8 = () => {
+  const [cars, setCars] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/get-all-cars-for-client');
+      console.log(response);
+
+      const data = await response.json();
+      console.log(data);
+      setCars(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       {/* End Page Title */}
@@ -43,9 +66,9 @@ const home_8 = () => {
             <div className="col-auto">
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title">Pourquoi nous choisir?</h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
+                <div className=" sectionTitle__text mt-5 sm:mt-0">
                 Nous nous engageons à fournir des véhicules de qualité et un service exceptionnel !
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -64,15 +87,17 @@ const home_8 = () => {
           <div className="row justify-center text-center">
             <div className="col-auto">
               <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">Chercher par catégorie </h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
+                <h2 className="sectionTitle__title">Chercher par marque  </h2>
+                <div className=" sectionTitle__text mt-5 sm:mt-0">
                   
-                </p>
+                </div>
               </div>
             </div>
           </div>
           {/* End .row */}
-          <FilterHotels4 />
+          {cars &&
+          <FilterHotels2 cars={cars.all_cars}/>
+          }
         </div>
         {/* End .container */}
       </section>
@@ -85,9 +110,9 @@ const home_8 = () => {
             <div className="col-auto">
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title">Destinations</h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
+                <div className=" sectionTitle__text mt-5 sm:mt-0">
                 Ces destinations populaires ont beaucoup à offrir !
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -111,11 +136,11 @@ const home_8 = () => {
               <h2 className="text-30 fw-600">
               BIENVENUE À L'AGENCE DE LOCATION RENTAL 365
               </h2>
-              <p className="mt-40 lg:mt-20">
+              <div className="mt-40 lg:mt-20">
                Explorez Rental 365, la plateforme de réservation de location de voitures de renommée mondiale,
                offrant une expérience exceptionnelle à ses utilisateurs.
                Découvrez pourquoi des milliers de clients choisissent RENTAL 365 pour leurs voyages et leurs déplacements.
-              </p>
+              </div>
 
               <div className="d-inline-block mt-40 lg:mt-20">
                 <a href="http://localhost:3000/about" className="button -md -blue-1 bg-dark-1 text-white">
@@ -150,9 +175,9 @@ const home_8 = () => {
                 <h2 className="sectionTitle__title">
                 FAQ - Questions Fréquemment Posées
                 </h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
+                <div className=" sectionTitle__text mt-5 sm:mt-0">
                 Tout ce que vous devez savoir pour une location sans soucis
-                </p>
+                </div>
               </div>
             </div>
           </div>

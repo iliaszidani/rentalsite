@@ -27,7 +27,7 @@ import 'swiper/swiper-bundle.css';
 const CarProperties = ({ cars }) => {
   console.log('les cars ' , cars);
   // if (!cars || !Array.isArray(cars) || cars.length === 0) {
-  //   // Gérer le cas où cars est undefined ou n'est pas un tableau
+  // Gérer le cas où cars est undefined ou n'est pas un tableau
   //   return (
   //     <div>
   //       {/* Aucune voiture disponible */}
@@ -131,7 +131,7 @@ const CarProperties = ({ cars }) => {
                         </div>
                       </div>
                       <div className="col-sm-6">
-                        <div className="d-flex items-center">
+                        <div className="d-flex items-center"> 
                           <i className="icon-luggage" />
                           <div className="text-14 ml-10">{item?.luggage}</div>
                         </div>
