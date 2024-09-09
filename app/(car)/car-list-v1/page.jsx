@@ -154,7 +154,7 @@ const Index = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://localhost/car-rental-api/public/api/get-all-cars-for-client');
+      const response = await fetch('http://localhost:8000/api/get-all-cars-for-client');
       console.log(response);
       if(response.status === 201) {
       const data = await response.json();

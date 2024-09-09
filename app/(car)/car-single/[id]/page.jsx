@@ -76,7 +76,7 @@ const CarSinglePage = ({ params }) => {
 //   const id = params.id;
 //   // const car = carsData.find((item) => item.id == id) || carsData[0];
 //   console.log("id ",id);
-//     const response = await fetch(`http://localhost/car-rental-api/public/api/show-car-for-client/${id}`, {cache: 'no-store'} );
+//     const response = await fetch(`http://localhost:8000/api/show-car-for-client/${id}`, {cache: 'no-store'} );
 //     const data = await response.json();
 //     const car2 = data.car;
 //     console.log('data ',data);
