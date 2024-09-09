@@ -66,7 +66,9 @@ const CarProperties = ({ cars }) => {
                         }}
                         navigation={true}
                       >
-                        <img src={item.image} alt="" />
+                        
+                        
+                        <img src={item.image} alt=""    style={{objectFit:"cover"}}/>
                         {item?.slideImg?.map((slide, i) => (
                           <SwiperSlide key={i}>
                             <div className="ratio ratio-1:1">
@@ -102,24 +104,26 @@ const CarProperties = ({ cars }) => {
                 <div className="d-flex flex-column h-full justify-between">
                   <div>
                     <div className="row x-gap-5 items-center">
+                      { item?.agencies.address_agence && item?.agencies.city_agence &&
+<>
                       <div className="col-auto">
                         <div className="text-14 text-light-1">
-                          {item?.location}
+                          {item?.agencies.address_agence}, {item?.agencies.city_agence.toUpperCase()}
                         </div>
                       </div>
                       <div className="col-auto">
                         <div className="size-3 rounded-full bg-light-1" />
                       </div>
+</>
+                      }
                       <div className="col-auto">
                         <div className="text-14 text-light-1">{item.body_type}</div>
                       </div>
                     </div>
-                    <h2 className="text-20 lh-18 fw-500 mt-5">
-                      {item?.car_local_price} 
-                    </h2>
+              
 
                     <h3 className="text-18 lh-16 fw-500 mt-5">
-                      {item["brands"]['brand_name']} <span className="text-15 text-light-1">or similar</span>
+                      {item["brands"]['brand_name']} {item.series.serie_name} <span className="text-15 text-light-1">or similar</span>
                     </h3>
                   </div>
                   <div className="col-lg-7 mt-20">
@@ -133,7 +137,7 @@ const CarProperties = ({ cars }) => {
                       <div className="col-sm-6">
                         <div className="d-flex items-center"> 
                           <i className="icon-luggage" />
-                          <div className="text-14 ml-10">{item?.luggage}</div>
+                          <div className="text-14 ml-10">{item?.small_bag + item?.large_bag} </div>
                         </div>
                       </div>
                       <div className="col-sm-6">
@@ -145,19 +149,19 @@ const CarProperties = ({ cars }) => {
                       <div className="col-sm-6">
                         <div className="d-flex items-center">
                           <i className="icon-speedometer" />
-                          <div className="text-14 ml-10">{item?.speed}</div>
+                          <div className="text-14 ml-10">Unlimited</div>
                         </div>
                       </div>
                       <div className="col-sm-6">
                        { item?.climate_control === 1  &&  <div className="d-flex items-center">
-                          <i className="icon-transmission" />
+                          <i className="icon-fan" />
                           <div className="text-14 ml-10"> Air conditioning</div>
                         </div>}
                       </div>
                       <div className="col-sm-6">
                         <div className="d-flex items-center">
-                          <i className="icon-speedometer" />
-                          <div className="text-14 ml-10">Full to full</div>
+                          <i className="icon-fuel" />
+                          <div className="text-14 ml-10">{item?.fuel_type}</div>
                         </div>
                       </div>
                     </div>
@@ -195,7 +199,7 @@ const CarProperties = ({ cars }) => {
                 {/* End .row */}
 
                 <div className="text-22 lh-12 fw-600 mt-70 md:mt-20">
-                  US${item.car_price}
+                  {item.car_price} MAD
                 </div>
                 <div className="text-14 text-light-1 mt-5">Total</div>
                 <Link

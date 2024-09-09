@@ -1,9 +1,10 @@
 const PropertyHighlights = ({car}) => {
+  console.log("car", car)
   const propertyContent = [
     {
       id: 1,
       icon: "icon-user-2",
-      name: "User",
+      name: "Seating capacity",
       content: car.seating_capacity,
     },
     
@@ -11,7 +12,7 @@ const PropertyHighlights = ({car}) => {
       id: 2,
       icon: "icon-luggage",
       name: "Luggage",
-      content: "2",
+      content: car.small_bag + car.large_bag,
     },
     {
       id: 3,
@@ -25,7 +26,12 @@ const PropertyHighlights = ({car}) => {
       name: "Mileage",
       content: `${car.mileage} `,
     },
-    
+    {
+      id: 5,
+      icon: "icon-fuel",
+      name: "Fuel",
+      content:car.fuel_type,
+    },
   ];
   return (
     <div className="row y-gap-30 justify-between pt-20">
@@ -36,6 +42,7 @@ const PropertyHighlights = ({car}) => {
             <div className="text-15 lh-15">
               {item.name}
               <br /> {item.content}
+              
             </div>
           </div>
         </div>

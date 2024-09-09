@@ -310,3 +310,28 @@
 .icon-facebook:before {
   content: "\e928";
 }
+
+.icon-fuel:before {
+  content: url('../../ay-icons/gas-pump-solid.svg');
+  display: inline-block;
+  
+  width: 1em; /* Adjust size as needed */
+  height: 1em; /* Adjust size as needed */
+  
+}
+.icon-fan:before {
+  content: url('../../ay-icons/fan-option-svgrepo-com.svg');
+  display: inline-block;
+  
+  width: 1em; /* Adjust size as needed */
+  height: 1em; /* Adjust size as needed */
+  
+}
+ 
+
+.p-icon{
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+ 
+}

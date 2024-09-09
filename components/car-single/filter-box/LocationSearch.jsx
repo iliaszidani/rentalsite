@@ -3,9 +3,10 @@
 
 import { useState } from "react";
 
-const LocationSearch = () => {
+const LocationSearch = ({setDataToSend,isPickUp}) => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
+ 
 
   const locationSearchContent = [
     {
@@ -38,6 +39,7 @@ const LocationSearch = () => {
   const handleOptionClick = (item) => {
     setSearchValue(item.name);
     setSelectedItem(item);
+    setDataToSend((prev)=>({...prev,[isPickUp?"pickUpAgence":"dropOffAgence"  ]:item.name+", "+item.address}));
   };
 
   return (
@@ -66,7 +68,8 @@ const LocationSearch = () => {
           <div className="bg-white px-20 py-20 sm:px-0 sm:py-15 rounded-4">
             <ul className="y-gap-5 js-results">
               {locationSearchContent.map((item) => (
-                <li
+                
+               <li
                   className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1 ${
                     selectedItem && selectedItem.id === item.id ? "active" : ""
                   }`}
