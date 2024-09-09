@@ -2,12 +2,15 @@
 
 import React, { useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
+import { useSelector } from "react-redux";
 
 const DateSearch = ({ carAvailabilities , setDays,setDataToSend }) => {
   const [dates, setDates] = useState([
     // new DateObject().setDay(15),
     // new DateObject().setDay(14).add(1, "month"),
   ]);
+
+ 
 
   const isDateDisabled = (date) => {
     

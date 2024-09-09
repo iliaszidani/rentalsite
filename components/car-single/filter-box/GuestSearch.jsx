@@ -7,7 +7,7 @@ const counters = [
   { name: "BabySeat", defaultValue: 0, price:180 },
   // { name: "Rooms", defaultValue: 1 },
 ];
-
+ 
 const Counter = ({ name, defaultValue, onCounterChange , price }) => {
   const [count, setCount] = useState(defaultValue);
   const incrementCount = () => {
@@ -71,7 +71,7 @@ const Counter = ({ name, defaultValue, onCounterChange , price }) => {
   );
 };
 
-const GuestSearch = ( {setExtras} ) => {
+const GuestSearch = ( {setExtras, optionsDetails} ) => {
   const [guestCounts, setGuestCounts] = useState({
     AdditionalDriver: 0,
     BabySeat:0,
@@ -81,11 +81,12 @@ const GuestSearch = ( {setExtras} ) => {
   const handleCounterChange = (name, value) => {
 
     setGuestCounts((prevState) => ({ ...prevState, [name]: value }));
-    setExtras(name,value);
+    // setExtras(name,value);
     //3yt lchi function mn lfo9
   };
+  console.log("options", optionsDetails)
   return (
-    <div className="searchMenu-guests px-20 py-10 border-light rounded-4 js-form-dd js-form-counters">
+    <div className="searchMenu-guests     rounded-4 js-form-dd js-form-counters">
       <div
         data-bs-toggle="dropdown"
         data-bs-auto-close="outside"

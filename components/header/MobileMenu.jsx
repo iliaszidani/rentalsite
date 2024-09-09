@@ -58,9 +58,13 @@ const MobileMenu = () => {
   return (
     <>
       <div className="pro-header d-flex align-items-center justify-between border-bottom-light">
-        <Link href="/">
-          <img src="/img/general/logo-dark.svg" alt="brand" />
-        </Link>
+      <Link href="/" className="header-logo mr-20">
+                  <img
+                    src="/img/general/Sans_titre-2-removebg-preview.png"
+                    alt="logo icon"
+                  />
+              
+                </Link>
         {/* End logo */}
 
         <div
@@ -78,7 +82,7 @@ const MobileMenu = () => {
         <Sidebar width="400" backgroundColor="#fff">
 
           <Menu>
-            <SubMenu label="Home" className={ homeItems.some((item=>item.routePath?.split('/')[1] == pathname.split('/')[1])) ? "menu-active-link":''}>
+            {/* <SubMenu label="Home" className={ homeItems.some((item=>item.routePath?.split('/')[1] == pathname.split('/')[1])) ? "menu-active-link":''}>
               {homeItems.map((item, i) => (
                 <MenuItem
                   key={i}
@@ -93,10 +97,10 @@ const MobileMenu = () => {
                   {item.name}
                 </MenuItem>
               ))}
-            </SubMenu>
+            </SubMenu> */}
             {/* End  All Home Menu */}
 
-            <SubMenu label="Categories" className={isActiveParent ? 'menu-active-link':'' }>
+            {/* <SubMenu label="Categories" className={isActiveParent ? 'menu-active-link':'' }>
               {categorieMobileItems.map((item) => (
                 <SubMenu label={item.title} key={item.id} className={isActiveNestedParent == item.id ? 'menu-active-link':'inactive-menu'}>
                   {item.menuItems.map((single) => (
@@ -121,7 +125,7 @@ const MobileMenu = () => {
             </SubMenu>
             {/* End  All Categories Menu */}
 
-            <MenuItem
+            {/* <MenuItem
              onClick={()=>router.push("/destinations")}
              className={
               pathname === "/destinations"
@@ -132,8 +136,8 @@ const MobileMenu = () => {
             >
               Desitinations
             </MenuItem>
-            {/* End  Desitinations Menu */}
-
+            End  Desitinations Menu */}  
+{/* 
             <SubMenu label="Blog" className={ blogItems.some((item=>item.routePath?.split('/')[1] == pathname.split('/')[1])) ? "menu-active-link":''}>
               {blogItems.map((item, i) => (
                 <MenuItem
@@ -148,9 +152,9 @@ const MobileMenu = () => {
                   {item.name}
                 </MenuItem>
               ))}
-            </SubMenu>
+            </SubMenu> */}
             {/* End  All Blog Menu */}
-
+{/* 
             <SubMenu label="Pages" className={ pageItems.some((item=>item.routePath?.split('/')[1] == pathname.split('/')[1])) ? "menu-active-link":''}>
               {pageItems.map((item, i) => (
                 <MenuItem
@@ -165,10 +169,10 @@ const MobileMenu = () => {
                   {item.name}
                 </MenuItem>
               ))}
-            </SubMenu>
+            </SubMenu> */}
             {/* End  All Pages Menu */}
 
-            <SubMenu label="Dashboard" className={ pathname.split('/')[1] == 'dashboard'  || pathname.split('/')[1] == 'vendor-dashboard' ? "menu-active-link":''}>
+            {/* <SubMenu label="Dashboard" className={ pathname.split('/')[1] == 'dashboard'  || pathname.split('/')[1] == 'vendor-dashboard' ? "menu-active-link":''}>
               {dashboardItems.map((item, i) => (
                 <MenuItem
                   key={i}
@@ -182,9 +186,36 @@ const MobileMenu = () => {
                   {item.name}
                 </MenuItem>
               ))}
-            </SubMenu>
+            </SubMenu> */}
             {/* End  All Dashboard Menu */}
 
+            <MenuItem
+             onClick={()=>router.push("/home_8")}
+             className={
+              pathname === "/home_8" ? "menu-active-link" : ""
+            }
+             
+            >
+              Accueil
+            </MenuItem>
+            <MenuItem
+             onClick={()=>router.push("/about")}
+             className={
+              pathname === "/about" ? "menu-active-link" : ""
+            }
+             
+            >
+             À propos de nous
+            </MenuItem>
+            <MenuItem
+             onClick={()=>router.push("/car-list-v1")}
+             className={
+              pathname === "/car-list-v1" ? "menu-active-link" : ""
+            }
+             
+            >
+             Voitures
+            </MenuItem>
             <MenuItem
              onClick={()=>router.push("/contact")}
              className={

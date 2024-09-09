@@ -18,6 +18,8 @@ import Faq from "@/components/faq/Faq";
 import MapPropertyFinder from "@/components/car-single/MapPropertyFinder";
 import notFound from "@/app/not-found";
 import { getCarData } from "@/lib/getCarData";
+import MainFilterSearchBox from "@/components/hero/hero-3/MainFilterSearchBox";
+import SignlePageSkeleton from "@/components/SignlePageSkeleton";
 
 const CarSinglePage = ({ params }) => {
   const [nbrDays, setNbrDays] = useState(1);
@@ -66,11 +68,7 @@ const CarSinglePage = ({ params }) => {
     setExtras((prev)=> ({...prev , [formatedName]:value}));
   };
   
-
-  if (!car) {
-    return <div>Loading...</div>; // look if there is loading cards from bootstrap
-  }
-
+ 
 
 // const TourSingleV1Dynamic = async ({ params }) => {
 //   const id = params.id;
@@ -85,6 +83,10 @@ const CarSinglePage = ({ params }) => {
       <div className="header-margin"></div>
       <Header3 />
       <TopBreadCrumb />
+      {
+        !car ?
+        <SignlePageSkeleton/>
+        :    <>
       <section className="pt-40">
         <div className="container">  
           <div className="row y-gap-30">
@@ -92,7 +94,7 @@ const CarSinglePage = ({ params }) => {
               <div className="row y-gap-20 justify-between items-end">
                 <div className="col-auto">
                   <h1 className="text-30 sm:text-24 fw-600">
-                    {car.brands.brand_name} {car.series.serie_name}
+                    {car.car.brands.brand_name} {car.car.series.serie_name}
                   </h1>
                   <div className="row x-gap-10 items-center pt-10">
                     <div className="col-auto">
@@ -129,12 +131,12 @@ const CarSinglePage = ({ params }) => {
                         <div className="text-14 text-right mr-10">
                           <div className="lh-15 fw-500">Exceptional</div>
                           <div className="lh-15 text-light-1">
-                            {car.numberOfReviews || 0} reviews
+                            {car.car.numberOfReviews || 0} reviews
                           </div>
                         </div>
                         <div className="size-40 flex-center bg-yellow-1 rounded-4">
                           <div className="text-14 fw-600 text-dark-1">
-                            {car.ratings || 0}
+                            {car.car.ratings || 0}
                           </div>
                         </div>
                       </div>
@@ -145,8 +147,8 @@ const CarSinglePage = ({ params }) => {
               </div>
               <div className="mt-40">
                 <div className="text-center">
-                  {car.image_url ? (
-                    <img src={car.image_url} alt="" />
+                  {car.car.image_url ? (
+                    <img src={car.car.image_url} alt="" />
                   ) : (
                     "image not found"
                   )}
@@ -162,7 +164,7 @@ const CarSinglePage = ({ params }) => {
                     <div className="col-auto">
                       <div className="text-14 text-light-1">
                         <span className="text-20 fw-500 text-dark-1 ml-5">
-                          {car.car_price * nbrDays} MAD
+                          {car.car.car_price * nbrDays} MAD
                         </span>
                         &nbsp; For {nbrDays} day
                       </div>
@@ -192,12 +194,12 @@ const CarSinglePage = ({ params }) => {
                         nbrDays > 1 &&
 
                         <div className="small text-14 text-light-1">
-                      {car.car_price } MAD For one day
+                      {car.car.car_price } MAD For one day
                       <hr/>
                       </div>
                       }
                       <div className="text-18 fw-500 text-dark-1">
-                      Total: {car.car_price * nbrDays + additionalDriverPrice * extras.nbrAdditionalDriver + babySeatPrice* extras.nbrBabySeat} MAD
+                      Total: {car.car.car_price * nbrDays + additionalDriverPrice * extras.nbrAdditionalDriver + babySeatPrice* extras.nbrBabySeat} MAD
                       </div>
                     </div>
                  
@@ -207,8 +209,8 @@ const CarSinglePage = ({ params }) => {
                   <div className="px-30 py-30 rounded-4 border-light shadow-4 bg-white w-360 lg:w-full">
                   <div className="row y-gap-15 items-center justify-between position-relative">
                   <div className="row y-gap-20 pt-20">
-                    <FilterBox carDetails={car} setDays={handleDaysChange}  setExtras={handleExtrasChange} ExtrasValues={extras} />
-                    
+                    <FilterBox  carDetails={car}  /> {/* setDays={handleDaysChange}  setExtras={handleExtrasChange} ExtrasValues={extras} />*/}
+                    {/* <MainFilterSearchBox/> */}
                   </div>
                 </div>
                 </div>
@@ -299,7 +301,9 @@ const CarSinglePage = ({ params }) => {
         {/* End .container */}
       </section>
       {/* End Reply Comment box section */}
-
+      </> 
+      }
+                  
       <CallToActions />
       {/* End Call To Actions Section */}
 

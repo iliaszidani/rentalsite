@@ -4,7 +4,7 @@ import DefaultHeader from "@/components/header/default-header";
 import DefaultFooter from "@/components/footer/default";
 import LoginWithSocial from "@/components/common/LoginWithSocial";
 import SignUpForm from "@/components/common/SignUpForm";
-
+import Header3 from "@/components/header/header-3";
 export const metadata = {
   title: "Sign Up || GoTrip - Travel & Tour React NextJS Template",
   description: "GoTrip - Travel & Tour React NextJS Template",
@@ -18,7 +18,7 @@ const SignUp = () => {
       <div className="header-margin"></div>
       {/* header top margin */}
 
-      <DefaultHeader />
+      <Header3 />
       {/* End Header 1 */}
 
       <section className="layout-pt-lg layout-pb-lg bg-blue-2">
@@ -29,7 +29,7 @@ const SignUp = () => {
                 <SignUpForm />
                 {/* End SignUP */}
 
-                <div className="row y-gap-20 pt-30">
+                {/* <div className="row y-gap-20 pt-30">
                   <div className="col-12">
                     <div className="text-center">or sign in with</div>
                   </div>
@@ -40,7 +40,7 @@ const SignUp = () => {
                       and Privacy Statement.
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {/* End .row */}
               </div>
             </div>
