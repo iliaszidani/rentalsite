@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSpecificationFilter } from '@/features/car/carSlice';
 
 const filterCarsBySpecification = (cars, spec, values) => {
   return cars.filter(car => values.includes(car[spec]));
 };
 
 const SpecificationsFilter = ({ cars, handleSpecificationsChange }) => {
+  const dispatch = useDispatch();
   const [selectedSpecifications, setSelectedSpecifications] = useState({
     climate_control: [],
     gps: [],
@@ -24,11 +27,10 @@ const SpecificationsFilter = ({ cars, handleSpecificationsChange }) => {
       doors: filterCarsBySpecification(cars, 'doors', [5]),
     });
     console.log('filteredCars', filteredCars);
-
   }, [cars]);
-
   useEffect(() => {
-    handleSpecificationsChange(selectedSpecifications);
+    dispatch(setSpecificationFilter(selectedSpecifications));
+    // setSpecificationFilter(selectedSpecifications);
   }, [selectedSpecifications]);
 
   const handleCheckboxChange = (spec, value) => {
@@ -47,9 +49,7 @@ const SpecificationsFilter = ({ cars, handleSpecificationsChange }) => {
       };
     });
     console.log('selectedSpecifications', selectedSpecifications);
-
   };
-
   return (
     <>
       <div className="row y-gap-10 items-center justify-between">

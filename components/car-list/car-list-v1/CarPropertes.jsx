@@ -49,7 +49,6 @@ const CarProperties = ({ cars }) => {
   const carsToShow = cars ? cars.slice(0, 10) : [];
   return (
     <>
-
       {carsToShow.map((item) => (
         <div className="col-12" key={item?.id}>
           <div className="border-top-light pt-30">
@@ -66,8 +65,6 @@ const CarProperties = ({ cars }) => {
                         }}
                         navigation={true}
                       >
-                        
-                        
                         <img src={item.image} alt=""    style={{objectFit:"cover"}}/>
                         {item?.slideImg?.map((slide, i) => (
                           <SwiperSlide key={i}>
@@ -120,10 +117,8 @@ const CarProperties = ({ cars }) => {
                         <div className="text-14 text-light-1">{item.body_type}</div>
                       </div>
                     </div>
-              
-
                     <h3 className="text-18 lh-16 fw-500 mt-5">
-                      {item["brands"]['brand_name']} {item.series.serie_name} <span className="text-15 text-light-1">or similar</span>
+                      {item["brands"]['brand_name']} {item.series?.serie_name} <span className="text-15 text-light-1">or similar</span>
                     </h3>
                   </div>
                   <div className="col-lg-7 mt-20">
@@ -179,7 +174,6 @@ const CarProperties = ({ cars }) => {
                 </div>
               </div>
               {/* End col-md */}
-
               <div className="col-md-auto text-right md:text-left">
                 <div className="row x-gap-10 y-gap-10 justify-end items-center md:justify-start">
                   <div className="col-auto">
@@ -197,17 +191,14 @@ const CarProperties = ({ cars }) => {
                   {/* End col */}
                 </div>
                 {/* End .row */}
-
                 <div className="text-22 lh-12 fw-600 mt-70 md:mt-20">
                   {item.car_price} MAD
                 </div>
                 <div className="text-14 text-light-1 mt-5">Total</div>
                 <Link
                   href={`/car-single/${item.id}`}
-                  
                   className="button h-50 px-24 bg-dark-1 -yellow-1 text-white mt-24"
                 >
-
                   View Detail <div className="icon-arrow-top-right ml-15" />
                 </Link>
               </div>
@@ -220,6 +211,4 @@ const CarProperties = ({ cars }) => {
     </>
   );
 };
-
 export default CarProperties;
-

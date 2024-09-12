@@ -1,7 +1,7 @@
 const Specifications = ({car}) => {
   const speciContent = [
     { id: 1, name: "Make", content: car.car.brands.brand_name   },
-    { id: 2, name: "Model", content: car.car.series.serie_name },
+    { id: 2, name: "Model", content: car.car.series?.serie_name },
     { id: 3, name: "Made Year", content: car.car.year_of_manufacture  },
     { id: 4, name: "Mileage", content: car.car.mileage },
     // { id: 5, name: "Mileage", content: "120,556" },
@@ -21,5 +21,4 @@ const Specifications = ({car}) => {
     </div>
   );
 };
-
 export default Specifications;

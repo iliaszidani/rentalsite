@@ -86,10 +86,12 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { useDispatch } from 'react-redux';
+import { setCategoryFilter } from '@/features/car/carSlice';
 const CategorieFilters = ({ onCategoryChange }) => {  
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -101,12 +103,12 @@ const CategorieFilters = ({ onCategoryChange }) => {
         console.error('Erreur lors de la récupération des catégories:', error);
       }
     };
-
     fetchCategories();
   }, []);
 
   useEffect(() => {
-    onCategoryChange(selectedCategories);
+    dispatch(setCategoryFilter(selectedCategories));
+    // onCategoryChange(selectedCategories);
   }, [selectedCategories]);
 
   const handleCheckboxChange = (categoryId) => {
@@ -116,7 +118,6 @@ const CategorieFilters = ({ onCategoryChange }) => {
         : [...prevSelected, categoryId]
     );
   };
-
   return (
     <>
       {categories.map((category) => (

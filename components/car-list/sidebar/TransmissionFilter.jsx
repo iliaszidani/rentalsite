@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {setTransmissionFilter} from '@/features/car/carSlice'
 
 const filterCarsByTransmission = (cars, transmission) => {
   return cars.filter(car => car.transmission === transmission);
 };
 
-const TransmissionFilter = ({ cars, handleTransmissionChange }) => {  
+const TransmissionFilter = ({ cars, handleTransmissionChange }) => { 
+  const dispatch = useDispatch(); 
   const [selectedTransmissions, setSelectedTransmissions] = useState([]);
   const [automaticCars, setAutomaticCars] = useState([]);
   const [manualCars, setManualCars] = useState([]);
@@ -15,7 +18,7 @@ const TransmissionFilter = ({ cars, handleTransmissionChange }) => {
   }, [cars]);
 
   useEffect(() => {
-    handleTransmissionChange(selectedTransmissions);
+    dispatch(setTransmissionFilter(selectedTransmissions));
   }, [selectedTransmissions]);
 
   const handleCheckboxChange = (transmission) => {

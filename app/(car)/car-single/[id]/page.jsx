@@ -18,7 +18,7 @@ import Faq from "@/components/faq/Faq";
 import MapPropertyFinder from "@/components/car-single/MapPropertyFinder";
 import notFound from "@/app/not-found";
 import { getCarData } from "@/lib/getCarData";
-import MainFilterSearchBox from "@/components/hero/hero-3/MainFilterSearchBox";
+// import MainFilterSearchBox from "@/components/hero/hero-3/MainFilterSearchBox";
 import SignlePageSkeleton from "@/components/SignlePageSkeleton";
 
 const CarSinglePage = ({ params }) => {
@@ -37,7 +37,6 @@ const CarSinglePage = ({ params }) => {
       if (!/^\d+$/.test(id)) {
         return notFound();
       }
-
       try {
         console.log("...fetching car with id ", params.id);
         const carData = await getCarData(id);
@@ -47,20 +46,13 @@ const CarSinglePage = ({ params }) => {
         console.error("Error fetching car data:", error);
       }
     };
-
     
-
     fetchCarData();
- 
- 
- 
   }, [params.id]);
-
   const handleDaysChange = (nbr) => {
     console.log("nbr ", nbr);
     setNbrDays(nbr);
   };
-
   const handleExtrasChange = (name,value) => {
     console.log("val ", value);
     console.log("name ",name)
@@ -68,11 +60,8 @@ const CarSinglePage = ({ params }) => {
     setExtras((prev)=> ({...prev , [formatedName]:value}));
   };
   
- 
-
 // const TourSingleV1Dynamic = async ({ params }) => {
-//   const id = params.id;
-//   // const car = carsData.find((item) => item.id == id) || carsData[0];
+//   const id = params.id; // const car = carsData.find((item) => item.id == id) || carsData[0];
 //   console.log("id ",id);
 //     const response = await fetch(`http://localhost:8000/api/show-car-for-client/${id}`, {cache: 'no-store'} );
 //     const data = await response.json();
@@ -94,7 +83,7 @@ const CarSinglePage = ({ params }) => {
               <div className="row y-gap-20 justify-between items-end">
                 <div className="col-auto">
                   <h1 className="text-30 sm:text-24 fw-600">
-                    {car.car.brands.brand_name} {car.car.series.serie_name}
+                    {car.car.brands.brand_name} {car.car.series?.serie_name}
                   </h1>
                   <div className="row x-gap-10 items-center pt-10">
                     <div className="col-auto">
@@ -141,8 +130,7 @@ const CarSinglePage = ({ params }) => {
                         </div>
                       </div>
                     </div>
-                  </div>
-                  
+                  </div>                  
                 </div>
               </div>
               <div className="mt-40">
@@ -156,11 +144,9 @@ const CarSinglePage = ({ params }) => {
               </div>
             </div>
             <div className="col-lg-4">
-              <div className="">    {/* d-flex justify-end */}
-          
+              <div className="">    {/* d-flex justify-end */}          
                 <div className="px-30 py-30 rounded-4 border-light shadow-4 bg-white w-360 lg:w-full mb-20">
-                  <div className="row y-gap-15 items-center justify-between position-relative">
-                 
+                  <div className="row y-gap-15 items-center justify-between position-relative">                 
                     <div className="col-auto">
                       <div className="text-14 text-light-1">
                         <span className="text-20 fw-500 text-dark-1 ml-5">
@@ -170,19 +156,16 @@ const CarSinglePage = ({ params }) => {
                       </div>
                       <hr/>
                       { ( extras.nbrAdditionalDriver != 0 || extras.nbrBabySeat !=0 ) &&
-
                         <>
                      <div className="strong text-16 text-dark-1">
                        To pay at pick-up
                       </div>
                       { extras.nbrAdditionalDriver != 0 &&
-
                         <div className="small text-14 text-light-1">
                         + {additionalDriverPrice * extras.nbrAdditionalDriver} MAD ({extras.nbrAdditionalDriver}x Additional Driver)
                       </div>
                       }
                       { extras.nbrBabySeat != 0 &&
-
                         <div className="small text-14 text-light-1">
                         + {babySeatPrice* extras.nbrBabySeat} MAD ({extras.nbrBabySeat}x Baby Seat)
                         </div>
@@ -192,7 +175,6 @@ const CarSinglePage = ({ params }) => {
                       }
                       { 
                         nbrDays > 1 &&
-
                         <div className="small text-14 text-light-1">
                       {car.car.car_price } MAD For one day
                       <hr/>
@@ -201,11 +183,9 @@ const CarSinglePage = ({ params }) => {
                       <div className="text-18 fw-500 text-dark-1">
                       Total: {car.car.car_price * nbrDays + additionalDriverPrice * extras.nbrAdditionalDriver + babySeatPrice* extras.nbrBabySeat} MAD
                       </div>
-                    </div>
-                 
+                    </div>                
                   </div>
-                  </div>
-                  
+                  </div>                  
                   <div className="px-30 py-30 rounded-4 border-light shadow-4 bg-white w-360 lg:w-full">
                   <div className="row y-gap-15 items-center justify-between position-relative">
                   <div className="row y-gap-20 pt-20">
@@ -271,7 +251,6 @@ const CarSinglePage = ({ params }) => {
         </div>
       </section>
       {/* End Review section */}
-
       <section className="mt-40 border-top-light pt-40 layout-pb-lg">
         <div className="container">
           <div className="row y-gap-30 justify-between">
@@ -285,12 +264,10 @@ const CarSinglePage = ({ params }) => {
                 </div>
               </div>
               {/* End .row */}
-
               <ReplyFormReview2 />
               {/* End ReplyFormReview */}
             </div>
             {/* End .col-xl-3 */}
-
             <div className="col-xl-8">
               <ReplyForm />
             </div>
@@ -302,16 +279,13 @@ const CarSinglePage = ({ params }) => {
       </section>
       {/* End Reply Comment box section */}
       </> 
-      }
-                  
+      }                 
       <CallToActions />
       {/* End Call To Actions Section */}
-
       <DefaultFooter />
     </>
   );
-};
- 
+}; 
 export default dynamic(() => Promise.resolve(CarSinglePage), {
   ssr: false,
 });

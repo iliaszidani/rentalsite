@@ -8,6 +8,8 @@ import MileageFilter from "../sidebar/MileageFilter";
 import TransmissionFilter from "../sidebar/TransmissionFilter";
 import FuelPolicyFilter from "../sidebar/FuelPolicyFilter";
 import React, { useState, useEffect } from 'react';
+import {setFuelTypeFilter} from '@/features/car/carSlice'
+import { useDispatch } from 'react-redux';
 
 
 const filterCarsByFuelType = (cars, fuelType) => {
@@ -15,10 +17,11 @@ const filterCarsByFuelType = (cars, fuelType) => {
 };
 
 const FuelTypeFilter = ({ cars , handleFuelTypeChange }) => {
+  const dispatch = useDispatch();
   const [selectedFuelTypes, setSelectedFuelTypes] = useState([]);
   const [gasolineCars, setGasolineCars] = useState([]);
-  const [dieselCars, setDieselCars] = useState([]);
-  const [electricCars, setElectricCars] = useState([]);
+  // const [dieselCars, setDieselCars] = useState([]);
+  // const [electricCars, setElectricCars] = useState([]);
   const [hybridCars, setHybridCars] = useState([]);
 
   useEffect(() => {
@@ -27,23 +30,19 @@ const FuelTypeFilter = ({ cars , handleFuelTypeChange }) => {
   }, [cars]);
 
   useEffect(() => {
-    handleFuelTypeChange(selectedFuelTypes);
+    dispatch(setFuelTypeFilter(selectedFuelTypes));
   }, [selectedFuelTypes]);
 
   const handleCheckboxChange = (fuelType) => {
     console.log('car fuelType ',fuelType);
     console.log('selected fuelTypes bef: ' ,selectedFuelTypes)
     setSelectedFuelTypes(prevSelectedFuelTypes =>
-
       prevSelectedFuelTypes.includes(fuelType)
         ? prevSelectedFuelTypes.filter(type => type !== fuelType)
         : [...prevSelectedFuelTypes, fuelType]
-
     );
     console.log('selected fuelTypes aft: ' ,selectedFuelTypes)
-
   };
-
   return (
     <>
       <div className="row y-gap-10 items-center justify-between">
@@ -125,8 +124,6 @@ const FuelTypeFilter = ({ cars , handleFuelTypeChange }) => {
     </>
   );
 };
-
-
 const CommentairesFilters = () => {
   return (
     <div>
@@ -149,95 +146,22 @@ const CommentairesFilters = () => {
     </div>
   );
 };
-
-// const FournisseurFilter = () => {
-//   const fournisseurs = [
-//     { label: "AirCar", count: "0" },
-//     { label: "Autounion", count: "0" },
-//     { label: "Budget", count: "0" },
-//     { label: "Europcar", count: "0" },
-//     { label: "Firefly", count: "0" },
-//     { label: "Goldcar", count: "0" },
-//     { label: "Green Motion", count: "0" },
-//     { label: "Hertz", count: "0" },
-//     { label: "Keddy By Europcar", count: "0" },
-//     { label: "Payless", count: "0" },
-//     { label: "Surprice", count: "0" },
-//     { label: "Sixt", count: "0" },
-//     { label: "Thrifty", count: "0" },
-//   ];
-
-//   return (
-//     <>
-//       {fournisseurs.map((fournisseur, index) => (
-//         <div className="row y-gap-10 items-center justify-between" key={index}>
-//           <div className="col-auto">
-//             <div className="form-checkbox d-flex items-center">
-//               <input type="checkbox" />
-//               <div className="form-checkbox__mark">
-//                 <div className="form-checkbox__icon icon-check" />
-//               </div>
-//               <div className="text-15 ml-10">{fournisseur.label}</div>
-//             </div>
-//           </div>
-//           <div className="col-auto">
-//             <div className="text-15 text-light-1">{fournisseur.count}</div>
-//           </div>
-//         </div>
-//       ))}
-//     </>
-//   );
-// };
-
-// const DepotGarantieFilter = () => {
-//   const depots = [
-//     { label: "0 MAD-3.000 MAD", count: 0 },
-//     { label: "3.000 MAD-6.000 MAD", count: 0 },
-//     { label: "6.000 MAD et plus", count: 167 },
-//   ];
-
-//   return (
-//     <div>
-//       {depots.map((depot, index) => (
-//         <div className="row y-gap-10 items-center justify-between" key={index}>
-//           <div className="col-auto">
-//             <div className="form-checkbox d-flex items-center">
-//               <input type="checkbox" />
-//               <div className="form-checkbox__mark">
-//                 <div className="form-checkbox__icon icon-check" />
-//               </div>
-//               <div className="text-15 ml-10">{depot.label}</div>
-//             </div>
-//           </div>
-//           <div className="col-auto">
-//             <div className="text-15 text-light-1">{depot.count}</div>
-//           </div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
 const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeChange ,
   handleTransmissionChange ,handleMileageChange ,handleSpecificationsChange}) => {
- 
   return (
     <>
       <div className="sidebar__item -no-border position-relative">
         <Map />
       </div>
       {/* End find map */}
-
       <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">Location</h5>
         <div className="sidebar-checkbox">
           <LocationFilters />
         </div>
-        
         {/* End Sidebar-checkbox */}
       </div>
       {/* End Location filter */}
-
       <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">Categorie</h5>
         <div className="sidebar-checkbox">
@@ -246,12 +170,11 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
         {/* End Sidebar-checkbox */}
       </div>
       {/* End Category filter */}
-
       <div className="sidebar__item pb-30">
         <h5 className="text-18 fw-500 mb-10">Prix</h5>
         <div className="row x-gap-10 y-gap-30">
           <div className="col-12">
-            <PirceSlider cars={cars} filterCarsByPrice={filterCarsByPrice}/>
+            <PirceSlider/>
           </div>
         </div>
       </div>
@@ -260,7 +183,6 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
 <div className="sidebar-checkbox">
   <SupplierFilters />
 </div> */}
-
 <div className="sidebar__item">
   <h5 className="text-18 fw-500 mb-10">Note des commentaires</h5>
   <div className="sidebar-checkbox">
@@ -269,7 +191,6 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
   {/* End Sidebar-checkbox */}
 </div>
       {/* End Supplier filter */}
-
       <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">Specifications</h5>
         <div className="sidebar-checkbox">
@@ -277,7 +198,6 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
         </div>
       </div>
       {/* End Specifications filter */}
-
       {/* <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">Mileage/Kilometres</h5>
         <div className="sidebar-checkbox">
@@ -286,7 +206,6 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
         {/* End Sidebar-checkbox */}
       {/* </div> */}
       {/* End Kilometres filter */}
-
       <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">Transmission</h5>
         <div className="sidebar-checkbox">
@@ -312,7 +231,6 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
         </div>
       </div> */}
       {/* End Fournisseur filter */}
-
       {/* <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">Dépôt de garantie à la prise en charge</h5>
         <div className="sidebar-checkbox">
@@ -321,7 +239,6 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
         {/* End Sidebar-checkbox */}
       {/* </div> */}
       {/* End Depot de garantie filter */}
-
       <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">Voiture carburant</h5>
         <div className="sidebar-checkbox">
@@ -330,10 +247,6 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
       </div>
       {/* End Voiture Electronique filter */}
     </>
-
-    
   );
 };
-
 export default Sidebar;
-
