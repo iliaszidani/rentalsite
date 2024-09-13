@@ -135,49 +135,99 @@ export const carSlice = createSlice({
       .addCase(fetchCars.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchCars.fulfilled, (state, action) => {
-        console.log("fetchCars.fulfilled action.payload", action.payload);
-        state.cars = action.payload.all_cars; // Store all fetched cars  
-        // If bookingDetails exist, apply the filtering logic
-        const { pick_up_agency, drop_off_agency, pick_up_time, drop_off_time } = state.filters.bookingDetails || {};
-        if (pick_up_agency && pick_up_time && drop_off_agency && drop_off_time) {
-          const userCity = pick_up_agency.name.toLowerCase();  // Assuming name is the city
-          const userAddress = pick_up_agency.address.toLowerCase();
-          console.log("Filtering based on booking details...");
-          state.filteredCars = state.cars.filter(car => {
-            const carCity = car.agencies.city_agence.toLowerCase();
-            const carAddress = car.agencies.address_agence.toLowerCase();
-            const userPickUpDate = new Date(pick_up_time);
-            const userDropOffDate = new Date(drop_off_time);
-            // Check car's availability for the selected dates
-            const isAvailable = car.availabilities.every(range => {
-              const carStartDate = new Date(range.date_start);
-              const carEndDate = new Date(range.date_end);
-              // If the availability flag is 1 (meaning available), skip the blocked range
-              if (range.availability === 0) {
-                // Check if the user's pick-up or drop-off date falls within the blocked range
-                if (
-                  (userPickUpDate >= carStartDate && userPickUpDate <= carEndDate) ||
-                  (userDropOffDate >= carStartDate && userDropOffDate <= carEndDate)
-                ) {
-                  return false; // If any date clashes, the car is unavailable
-                }
-              }
-              return true; // Car is available if there's no clash with the blocked range
-            });
-            // Match city or address
-            const valideCity = carCity.includes(userCity) || userCity.includes(carCity);
-            const valideAddress = carAddress.includes(userAddress) || userAddress.includes(carAddress);
-            return (valideCity || valideAddress) && isAvailable;
-          });
-        } else {
-          // If no booking details, show all cars
-          console.log("No booking details available, showing all cars.");
-          state.filteredCars = state.cars;
+
+
+
+
+.addCase(fetchCars.fulfilled, (state, action) => {
+  console.log("fetchCars.fulfilled action.payload", action.payload);
+  state.cars = action.payload.all_cars; // Store all fetched cars  
+  // If bookingDetails exist, apply the filtering logic
+  const { pick_up_agency, drop_off_agency, pick_up_time, drop_off_time } = state.filters.bookingDetails || {};
+  if (pick_up_agency && pick_up_time && drop_off_agency && drop_off_time) {
+    const userCity = pick_up_agency.name.toLowerCase();  // Assuming name is the city
+    const userAddress = pick_up_agency.address.toLowerCase();
+    console.log("Filtering based on booking details...");
+    state.filteredCars = state.cars.filter(car => {
+      const carCity = car.agencies.city_agence.toLowerCase();
+      const carAddress = car.agencies.address_agence.toLowerCase();
+      const userPickUpDate = new Date(pick_up_time);
+      const userDropOffDate = new Date(drop_off_time);
+      // Check car's availability for the selected dates
+      const isAvailable = car.availabilities.every(range => {
+        const carStartDate = new Date(range.date_start);
+        const carEndDate = new Date(range.date_end);
+        // If the availability flag is 1 (meaning available), skip the blocked range
+        if (range.availability === 0) {
+          // Check if the user's pick-up or drop-off date falls within the blocked range
+          if (
+            (userPickUpDate >= carStartDate && userPickUpDate <= carEndDate) ||
+            (userDropOffDate >= carStartDate && userDropOffDate <= carEndDate)
+          ) {
+            return false; // If any date clashes, the car is unavailable
+          }
         }
-        state.totalPages = Math.ceil(state.filteredCars.length / state.itemsPerPage); 
-        state.isLoading = false;
-      })
+        return true; // Car is available if there's no clash with the blocked range
+      });
+      // Match city or address
+      const valideCity = carCity.includes(userCity) || userCity.includes(carCity);
+      const valideAddress = carAddress.includes(userAddress) || userAddress.includes(carAddress);
+      return (valideCity || valideAddress) && isAvailable;
+    });
+  } else {
+    // If no booking details, show all cars
+    console.log("No booking details available, showing all cars.");
+    state.filteredCars = state.cars;
+  }
+  state.totalPages = Math.ceil(state.filteredCars.length / state.itemsPerPage); 
+  state.isLoading = false;
+})
+
+
+      // .addCase(fetchCars.fulfilled, (state, action) => {
+      //   console.log("fetchCars.fulfilled action.payload", action.payload);
+      //   state.cars = action.payload.all_cars; // Store all fetched cars  
+      //   // If bookingDetails exist, apply the filtering logic
+      //   const { pick_up_agency, drop_off_agency, pick_up_time, drop_off_time } = state.filters.bookingDetails || {};
+      //   if (pick_up_agency && pick_up_time && drop_off_agency && drop_off_time) {
+      //     const userCity = pick_up_agency.name.toLowerCase();  // Assuming name is the city
+      //     const userAddress = pick_up_agency.address.toLowerCase();
+      //     console.log("Filtering based on booking details...");
+      //     state.filteredCars = state.cars.filter(car => {
+      //       const carCity = car.agencies.city_agence.toLowerCase();
+      //       const carAddress = car.agencies.address_agence.toLowerCase();
+      //       const userPickUpDate = new Date(pick_up_time);
+      //       const userDropOffDate = new Date(drop_off_time);
+      //       // Check car's availability for the selected dates
+      //       const isAvailable = car.availabilities.every(range => {
+      //         const carStartDate = new Date(range.date_start);
+      //         const carEndDate = new Date(range.date_end);
+      //         // If the availability flag is 1 (meaning available), skip the blocked range
+      //         if (range.availability === 0) {
+      //           // Check if the user's pick-up or drop-off date falls within the blocked range
+      //           if (
+      //             (userPickUpDate >= carStartDate && userPickUpDate <= carEndDate) ||
+      //             (userDropOffDate >= carStartDate && userDropOffDate <= carEndDate)
+      //           ) {
+      //             return false; // If any date clashes, the car is unavailable
+      //           }
+      //         }
+      //         return true; // Car is available if there's no clash with the blocked range
+      //       });
+      //       // Match city or address
+      //       const valideCity = carCity.includes(userCity) || userCity.includes(carCity);
+      //       const valideAddress = carAddress.includes(userAddress) || userAddress.includes(carAddress);
+      //       return (valideCity || valideAddress) && isAvailable;
+      //     });
+      //   } else {
+      //     // If no booking details, show all cars
+      //     console.log("No booking details available, showing all cars.");
+      //     state.filteredCars = state.cars.concat(state.cars, state.cars, state.cars, state.cars, state.cars, state.cars, state.cars, state.cars);         
+      //     state.totalPages = Math.ceil(state.filteredCars.length / state.itemsPerPage); 
+      //   }
+      //   state.totalPages = Math.ceil(state.filteredCars.length / state.itemsPerPage); 
+      //   state.isLoading = false;
+      // })
       .addCase(fetchCars.rejected, (state , action) => {
         console.error("fetchCars.rejected ", action.error)
         state.isLoading = false;
@@ -188,3 +238,47 @@ export const { sortCarsByPrice, setBookingDetails,
   resetFilters ,   setCategoryFilter, setFuelTypeFilter, 
   setTransmissionFilter, setSpecificationFilter, setCarsByPrice } = carSlice.actions;
 export default carSlice.reducer;
+
+// .addCase(fetchCars.fulfilled, (state, action) => {
+//   console.log("fetchCars.fulfilled action.payload", action.payload);
+//   state.cars = action.payload.all_cars; // Store all fetched cars  
+//   // If bookingDetails exist, apply the filtering logic
+//   const { pick_up_agency, drop_off_agency, pick_up_time, drop_off_time } = state.filters.bookingDetails || {};
+//   if (pick_up_agency && pick_up_time && drop_off_agency && drop_off_time) {
+//     const userCity = pick_up_agency.name.toLowerCase();  // Assuming name is the city
+//     const userAddress = pick_up_agency.address.toLowerCase();
+//     console.log("Filtering based on booking details...");
+//     state.filteredCars = state.cars.filter(car => {
+//       const carCity = car.agencies.city_agence.toLowerCase();
+//       const carAddress = car.agencies.address_agence.toLowerCase();
+//       const userPickUpDate = new Date(pick_up_time);
+//       const userDropOffDate = new Date(drop_off_time);
+//       // Check car's availability for the selected dates
+//       const isAvailable = car.availabilities.every(range => {
+//         const carStartDate = new Date(range.date_start);
+//         const carEndDate = new Date(range.date_end);
+//         // If the availability flag is 1 (meaning available), skip the blocked range
+//         if (range.availability === 0) {
+//           // Check if the user's pick-up or drop-off date falls within the blocked range
+//           if (
+//             (userPickUpDate >= carStartDate && userPickUpDate <= carEndDate) ||
+//             (userDropOffDate >= carStartDate && userDropOffDate <= carEndDate)
+//           ) {
+//             return false; // If any date clashes, the car is unavailable
+//           }
+//         }
+//         return true; // Car is available if there's no clash with the blocked range
+//       });
+//       // Match city or address
+//       const valideCity = carCity.includes(userCity) || userCity.includes(carCity);
+//       const valideAddress = carAddress.includes(userAddress) || userAddress.includes(carAddress);
+//       return (valideCity || valideAddress) && isAvailable;
+//     });
+//   } else {
+//     // If no booking details, show all cars
+//     console.log("No booking details available, showing all cars.");
+//     state.filteredCars = state.cars;
+//   }
+//   state.totalPages = Math.ceil(state.filteredCars.length / state.itemsPerPage); 
+//   state.isLoading = false;
+// })

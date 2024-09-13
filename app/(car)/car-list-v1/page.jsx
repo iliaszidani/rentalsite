@@ -28,11 +28,11 @@ const Index = () => {
   const [sortedCarsCopy, setSortedCarsCopy] = useState([]);
   // const [isAscending, setIsAscending] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  
   const searchParams = useSearchParams();
   const Router = useRouter();
   const dispatch = useDispatch();
-  const { cars, filteredCars, isLoading , isAscending, totalPages} = useSelector((state) => state.car);
+  const { cars, filteredCars, isLoading , isAscending, totalPages, itemsPerPage} = useSelector((state) => state.car);
 
   useEffect(() => {
     dispatch(fetchCars());

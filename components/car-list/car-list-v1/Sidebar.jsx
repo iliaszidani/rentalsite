@@ -2,11 +2,11 @@ import Map from "../sidebar/Map";
 import LocationFilters from "../sidebar/LocationFilters";
 import PirceSlider from "../sidebar/PirceSlider";
 import CategorieFilters from "../sidebar/CategorieFilters";
-import SupplierFilters from "../sidebar/SupplierFilters";
+// import SupplierFilters from "../sidebar/SupplierFilters";
 import SpecificationsFilter from "../sidebar/SpecificationsFilter";
-import MileageFilter from "../sidebar/MileageFilter";
+// import MileageFilter from "../sidebar/MileageFilter";
 import TransmissionFilter from "../sidebar/TransmissionFilter";
-import FuelPolicyFilter from "../sidebar/FuelPolicyFilter";
+// import FuelPolicyFilter from "../sidebar/FuelPolicyFilter";
 import React, { useState, useEffect } from 'react';
 import {setFuelTypeFilter} from '@/features/car/carSlice'
 import { useDispatch } from 'react-redux';
