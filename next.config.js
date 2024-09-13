@@ -15,7 +15,7 @@ module.exports = {
           protocol: 'http',
           hostname: 'localhost',
           port: '',
-          pathname: '/car-rental-api/public/photos/cars/images/**',
+          pathname: ':8000/photos/cars/images/**',
         },
       ],
     },

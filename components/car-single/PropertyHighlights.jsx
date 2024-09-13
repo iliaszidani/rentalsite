@@ -6,8 +6,7 @@ const PropertyHighlights = ({car}) => {
       icon: "icon-user-2",
       name: "Seating capacity",
       content: car.seating_capacity,
-    },
-    
+    },    
     {
       id: 2,
       icon: "icon-luggage",
@@ -50,5 +49,4 @@ const PropertyHighlights = ({car}) => {
     </div>
   );
 };
-
 export default PropertyHighlights;

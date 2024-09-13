@@ -66,9 +66,16 @@
 // export default PirceSlider;
 
 
+
+
 import React, { useState, useEffect } from 'react';
 import InputRange from 'react-input-range';
-const PriceSlider = ({ cars , filterCarsByPrice }) => {
+import { useDispatch, useSelector } from "react-redux";
+import {setCarsByPrice} from "@/features/car/carSlice";
+
+const PriceSlider = () => {
+  const { cars} = useSelector((state) => state.car);
+  const dispatch = useDispatch();
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(2000);
   const [price, setPrice] = useState({ min: 0, max: 0 });
@@ -96,12 +103,12 @@ const PriceSlider = ({ cars , filterCarsByPrice }) => {
           value={price}
           onChange={value => {
             setPrice(value)
-            filterCarsByPrice(value.min, value.max);
+            // filterCarsByPrice(value.min, value.max);
+            dispatch(setCarsByPrice(value))
           } }
         />
       </div> 
     </div>
   );
 };
-
 export default PriceSlider;
