@@ -1,37 +1,57 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Alert = ({ time, errorList = {} }) => {
-  useEffect(() => {
-    const alerts = document.querySelectorAll('.alert');
-    alerts.forEach(alert => {
-      const progressBar = alert.querySelector('.progress-bar');
-      if (progressBar) {
-        let width = 0;
-        const interval = setInterval(() => {
-          width += 100 / (time / 100);
-          progressBar.style.width = `${width}%`;
-          if (width >= 100) {
-            clearInterval(interval);
-          }
-        }, 100);
+  const [visibleAlerts, setVisibleAlerts] = useState(errorList);
+  const [progress, setProgress] = useState({});
 
-        setTimeout(() => {
-          if (alert) {
-            alert.classList.remove('show');
+  useEffect(() => {
+    if (Object.keys(errorList).length > 0) {
+      setVisibleAlerts(errorList);
+      
+      // Set progress bar for each alert
+      const newProgress = Object.fromEntries(
+        Object.keys(errorList).map((key) => [key, 0])
+      );
+      setProgress(newProgress);
+
+      const interval = setInterval(() => {
+        setProgress((prevProgress) => {
+          const updatedProgress = { ...prevProgress };
+          let allCompleted = true;
+
+          Object.keys(updatedProgress).forEach((key) => {
+            if (updatedProgress[key] < 100) {
+              updatedProgress[key] += 100 / (time / 100);
+              allCompleted = false;
+            }
+          });
+
+          if (allCompleted) {
             clearInterval(interval);
           }
-        }, time);
-      }
-    });
-  }, [time, errorList]);
+
+          return updatedProgress;
+        });
+      }, 100);
+
+      const timer = setTimeout(() => {
+        setVisibleAlerts({});
+      }, time);
+
+      return () => {
+        clearInterval(interval);
+        clearTimeout(timer);
+      };
+    }
+  }, [errorList, time]);
 
   return (
     <div className="alerts-container position-fixed top-0 end-0" style={{ zIndex: 9999, maxWidth: '500px' }}>
-      {Object.entries(errorList).map(([key, value], index) => (
+      {Object.entries(visibleAlerts).map(([key, value], index) => (
         <div key={index} className="alert alert-danger alert-dismissible fade show" role="alert">
           <strong>{key}:</strong> {value.join(', ')}
           <div className="progress" style={{ height: '5px', marginTop: '10px' }}>
-            <div className="progress-bar" role="progressbar" style={{ width: '0%' }}></div>
+            <div className="progress-bar" role="progressbar" style={{ width: `${progress[key] || 0}%` }}></div>
           </div>
         </div>
       ))}

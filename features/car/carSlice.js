@@ -11,12 +11,18 @@ const initialState = {
     price: null,
     bookingDetails: null
   },
+  activeCarExtras : []
+ 
 };
 
 export const carSlice = createSlice({
   name: "car-slice",
   initialState,
   reducers: {
+    setActiveCarExtras: (state, action) => {
+      state.activeCarExtras = action.payload;
+       
+    },
     setPriceFilter: (state, action) => {
       state.filters.price = action.payload;
       state.filteredCars = state.cars.filter(car => car.price <= action.payload);
@@ -134,6 +140,6 @@ export const carSlice = createSlice({
   },
 });
 
-export const { setPriceFilter, setBookingDetails, resetFilters } = carSlice.actions;
+export const { setPriceFilter, setBookingDetails, resetFilters, setActiveCarExtras } = carSlice.actions;
 
 export default carSlice.reducer;

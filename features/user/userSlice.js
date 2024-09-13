@@ -23,6 +23,12 @@ export const userSlice = createSlice({
     setReservations(state, action) {
       state.reservations = action.payload;
     },
+    getUserFromStorage(state, action) {
+      state.user = action.payload;
+    }, 
+    updateUserProfile: (state, action) => {
+      state.user = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -75,5 +81,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, setReservations } = userSlice.actions;
+export const { setUser, setReservations , getUserFromStorage, updateUserProfile } = userSlice.actions;
 export default userSlice.reducer;

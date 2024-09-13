@@ -20,17 +20,43 @@ import notFound from "@/app/not-found";
 import { getCarData } from "@/lib/getCarData";
 import MainFilterSearchBox from "@/components/hero/hero-3/MainFilterSearchBox";
 import SignlePageSkeleton from "@/components/SignlePageSkeleton";
+import { differenceInDays } from 'date-fns';
+import { useDispatch, useSelector } from "react-redux";
+import Cookies from "js-cookie";
+import { getUserFromStorage } from "@/features/user/userSlice";
 
 const CarSinglePage = ({ params }) => {
-  const [nbrDays, setNbrDays] = useState(1);
-  const [extras, setExtras] = useState({
-    nbrAdditionalDriver: 0,
-    nbrBabySeat: 0,
-  });
-  const additionalDriverPrice = 500;
-  const babySeatPrice = 180;
   const [car, setCar] = useState(null);
+  const dispatch = useDispatch();
+  // Redux state
+  const activeCarExtras = useSelector((state) => state.car.activeCarExtras);
+  const searchData = useSelector((state) => state.searchData.searchData);
+  const user = useSelector((state) => state.user);
 
+
+  useEffect(() => {
+    // Check if there is a user in localStorage on page load
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      dispatch(getUserFromStorage(storedUser)); // Sync Redux with stored user
+    }
+
+    // Listen for storage events from other windows/tabs
+    const handleStorageChange = (event) => {
+      if (event.key === "user") {
+        const newUser = JSON.parse(event.newValue);
+        dispatch(getUserFromStorage(newUser)); // Sync Redux with updated user from another tab/window
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [dispatch]);
+  
   useEffect(() => {
     const fetchCarData = async () => {
       const id = params.id;
@@ -39,36 +65,39 @@ const CarSinglePage = ({ params }) => {
       }
 
       try {
-        console.log("...fetching car with id ", params.id);
+        console.log("Fetching car with id", id);
         const carData = await getCarData(id);
         setCar(carData);
-        console.log("car Data  ", carData);
       } catch (error) {
         console.error("Error fetching car data:", error);
       }
     };
 
-    
-
     fetchCarData();
- 
- 
- 
   }, [params.id]);
 
-  const handleDaysChange = (nbr) => {
-    console.log("nbr ", nbr);
-    setNbrDays(nbr);
+  // Calculate number of days
+  const pickUpDate = new Date(searchData.pick_up_time);
+  const dropOffDate = new Date(searchData.drop_off_time);
+  const nbrDays = Math.max(1, differenceInDays(dropOffDate, pickUpDate));
+
+  // Calculate extras cost
+  const calculateExtrasCost = () => {
+    if (!car || !car.vendor_options) return 0;
+
+    return activeCarExtras.reduce((total, extra) => {
+      const option = car.vendor_options.find(opt => opt.id === extra.id);
+      if (!option) return total;
+
+      const price = parseFloat(option.option_price);
+      const isPerDay = option.option_type == 0; // 0: per day, 1: per rental
+      console.log("isPerDay ", isPerDay, " for ", option.option_name);
+      const extraCost = isPerDay ? price * nbrDays * extra.quantity : price * extra.quantity;
+      return total + extraCost;
+    }, 0);
   };
 
-  const handleExtrasChange = (name,value) => {
-    console.log("val ", value);
-    console.log("name ",name)
-    const formatedName = name === 'BabySeat' ? 'nbrBabySeat' : name ==='AdditionalDriver' ?'nbrAdditionalDriver' : name;
-    setExtras((prev)=> ({...prev , [formatedName]:value}));
-  };
-  
- 
+  const extrasCost = calculateExtrasCost();
 
 // const TourSingleV1Dynamic = async ({ params }) => {
 //   const id = params.id;
@@ -85,7 +114,7 @@ const CarSinglePage = ({ params }) => {
       <TopBreadCrumb />
       {
         !car ?
-        <SignlePageSkeleton/>
+      <SignlePageSkeleton/>
         :    <>
       <section className="pt-40">
         <div className="container">  
@@ -161,47 +190,35 @@ const CarSinglePage = ({ params }) => {
                 <div className="px-30 py-30 rounded-4 border-light shadow-4 bg-white w-360 lg:w-full mb-20">
                   <div className="row y-gap-15 items-center justify-between position-relative">
                  
-                    <div className="col-auto">
-                      <div className="text-14 text-light-1">
-                        <span className="text-20 fw-500 text-dark-1 ml-5">
-                          {car.car.car_price * nbrDays} MAD
-                        </span>
-                        &nbsp; For {nbrDays} day
-                      </div>
-                      <hr/>
-                      { ( extras.nbrAdditionalDriver != 0 || extras.nbrBabySeat !=0 ) &&
-
-                        <>
-                     <div className="strong text-16 text-dark-1">
-                       To pay at pick-up
-                      </div>
-                      { extras.nbrAdditionalDriver != 0 &&
-
-                        <div className="small text-14 text-light-1">
-                        + {additionalDriverPrice * extras.nbrAdditionalDriver} MAD ({extras.nbrAdditionalDriver}x Additional Driver)
-                      </div>
-                      }
-                      { extras.nbrBabySeat != 0 &&
-
-                        <div className="small text-14 text-light-1">
-                        + {babySeatPrice* extras.nbrBabySeat} MAD ({extras.nbrBabySeat}x Baby Seat)
+                  <div className="col-auto">
+                        <div className="text-14 text-light-1">
+                          <span className="text-20 fw-500 text-dark-1 ml-5">
+                            {car.car.car_price * nbrDays} MAD
+                          </span>
+                          &nbsp; For {nbrDays} day(s)
                         </div>
-                      }
-                      <hr/>
-                      </>
-                      }
-                      { 
-                        nbrDays > 1 &&
-
-                        <div className="small text-14 text-light-1">
-                      {car.car.car_price } MAD For one day
-                      <hr/>
+                        <hr />
+                        {activeCarExtras.length > 0 && (
+                          <>
+                            <div className="strong text-16 text-dark-1">
+                              To pay for Extras
+                            </div>
+                            {activeCarExtras.map((extra) => {
+                              const option = car.vendor_options.find(opt => opt.id === extra.id);
+                              return (
+                                <div key={extra.id} className="small text-14 text-light-1">
+                                  + {parseFloat(option.option_price) * extra.quantity} MAD (
+                                  {extra.quantity}x {option.option_name})  per { option.option_type ? 'rental' : "day"}
+                                </div>
+                              );
+                            })}
+                            <hr />
+                          </>
+                        )}
+                        <div className="text-18 fw-500 text-dark-1">
+                          Total: {car.car.car_price * nbrDays + extrasCost} MAD
+                        </div>
                       </div>
-                      }
-                      <div className="text-18 fw-500 text-dark-1">
-                      Total: {car.car.car_price * nbrDays + additionalDriverPrice * extras.nbrAdditionalDriver + babySeatPrice* extras.nbrBabySeat} MAD
-                      </div>
-                    </div>
                  
                   </div>
                   </div>

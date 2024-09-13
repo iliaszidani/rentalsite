@@ -1,13 +1,15 @@
 
 'use client'
 
-import { useState } from "react";
+import { setSearchData } from "@/features/searchData/searchDataSlice";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
  
 
 const LocationSearch = ({setDataToSend,  isDropOff ,searchData , carDetails}) => {
   console.log('LocationSearchcar ', carDetails)
   const [selectedItem, setSelectedItem] = useState(null);
-
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState(isDropOff ? searchData.drop_off_agency.name : searchData.pick_up_agency.name);
 
   const locationSearchContent = [
@@ -38,20 +40,42 @@ const LocationSearch = ({setDataToSend,  isDropOff ,searchData , carDetails}) =>
     },
   ];
 
+  useEffect(() => {
+    if (carDetails?.agencies?.city_agence) {
+      dispatch(
+        setSearchData({
+          ...searchData,
+          pick_up_agency: {
+            ...searchData.pick_up_agency, // Spread the existing pick_up_agency object
+            name: carDetails.agencies.city_agence, // Update the name property
+          },
+        })
+      );
+    }
+  },  []);
+  
   const handleOptionClick = (item) => {
     setSearchValue(item.name);
     setSelectedItem(item);
     setDataToSend((prev)=>({...prev,[isPickUp?"pickUpAgence":"dropOffAgence"  ]:item.name+", "+item.address}));
+    
   };
+
+
 
   return (
     <>
-      <div className="searchMenu-loc px-20 py-10 border-light rounded-4 js-form-dd js-liverSearch"  style={{
-      backgroundColor: "#e9ecef",  // light grey background like Bootstrap disabled
-      cursor: "not-allowed",       // change cursor to indicate disabled state
-      opacity: 0.65,    
-      pointerEvents:"none"           // reduce opacity
-    }}>
+    <div
+  className="searchMenu-loc px-20 py-10 border-light rounded-4 js-form-dd js-liverSearch"
+  style={{
+    backgroundColor: !isDropOff ? "#e9ecef" : "transparent",   
+    cursor: !isDropOff ? "not-allowed" : "auto",             
+    opacity: !isDropOff ? 0.65 : 1,                           
+    pointerEvents: !isDropOff ? "none" : "auto"                
+  }}
+>
+ 
+
         <div
           data-bs-toggle="dropdown"
           data-bs-auto-close="true"
@@ -66,7 +90,7 @@ const LocationSearch = ({setDataToSend,  isDropOff ,searchData , carDetails}) =>
               placeholder="City or Airport"
               className="js-search js-dd-focus disabled"
               // value={searchValue  }
-              value={carDetails.agencies.city_agence  }
+              value={isDropOff ?  searchData.drop_off_agency.name : carDetails.agencies.city_agence  }
               onChange={(e) => setSearchValue(e.target.value)}
             />
           </div>

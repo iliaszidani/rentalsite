@@ -34,12 +34,25 @@ const Header3 = () => {
       setDropdownVisible(false);
     }
   };
+  // useEffect(() => {
+  //   window.addEventListener("scroll", changeBackground);
+  //   return () => {
+  //     window.removeEventListener("scroll", changeBackground);
+  //   };
+  // }, []);
+
+  // replace the commented useEffect 
   useEffect(() => {
-    window.addEventListener("scroll", changeBackground);
+    if (typeof window !== 'undefined') {
+      window.addEventListener("scroll", changeBackground);
+    }
     return () => {
-      window.removeEventListener("scroll", changeBackground);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener("scroll", changeBackground);
+      }
     };
   }, []);
+  
 
   return (
     <>

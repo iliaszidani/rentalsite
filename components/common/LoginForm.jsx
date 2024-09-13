@@ -4,15 +4,20 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "@/features/user/thunk";
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 const LoginForm = () => {
   const router = useRouter();
+  const searchParams = useSearchParams(); // To rea
   const dispatch = useDispatch(); 
   const [credentials, setCredentials] = useState({ phone1_or_email: '', password: '' });
   const { isLoading, error, user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (user?.token) {
+    if  (user?.token && searchParams.get('close') === 'true'){
+      console.log("a1 close");
+      window.close();
+    }else if(user?.token && searchParams.get('close') != 'true'){
+      console.log("a1 push");
       router.push("/"); // Navigate to home page after successful login
     }
   }, [user, router]);
@@ -21,11 +26,30 @@ const LoginForm = () => {
   const handleChange = (event) => { 
     setCredentials((prev)=>({...prev, [event.target.name]:event.target.value }))
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("credentials:", credentials);
-    dispatch(loginUser(credentials))
+  
+    try {
+      // Wait for the login to complete
+      const result = await dispatch(loginUser(credentials));
+  
+      // Check if login was successful (you might need to adjust this based on your response structure)
+      if (result.payload?.token) {
+        console.log("Login successful");
+  
+        const closeWindow = searchParams.get('close') === 'true';
+        if (closeWindow) {
+          window.close();  // Close the popup window if 'close=true'
+        }
+      } else {
+        console.log("Login failed");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
   };
+  
 
   return (
     <form className="row y-gap-20" onSubmit={handleSubmit}>

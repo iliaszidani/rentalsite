@@ -5,10 +5,16 @@ import GuestSearch from "./GuestSearch";
 import LocationSearch from "./LocationSearch";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchData } from "@/features/searchData/searchDataSlice";
+import Alert from "@/components/common/Alert";
+import axiosInstance from "@/lib/axiosConfig";
+import Cookies from "js-cookie";
 
 const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
   console.log(" ExtrasValues ", ExtrasValues);
   const { searchData } = useSelector((state) => state.searchData);
+  const { activeCarExtras } = useSelector((state) => state.car);
+  const { user } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
   const [dataToSend, setDataToSend] = useState({
     pickUpAgence: "",
@@ -23,13 +29,127 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
   useEffect(() => {
     setDataToSend((prev) => ({ ...prev, ["extras"]: ExtrasValues }));
   }, [ExtrasValues]);
-  const handleBookSubmit = (val) => {
-    console.log("clicked sub", searchData);
+
+
+  const [errorList, setErrorList] = useState({});
+
+
+
+
+  const formatDateForMySQL = (date) => {
+    const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    const isoString = localDate.toISOString();
+    return isoString.slice(0, 19).replace('T', ' ');
   };
-  console.log("carDetails ", carDetails)
+  
+  
+  const handleBookSubmit = async  (e) => {
+    e.preventDefault();
+
+
+ 
+
+   
+    
+    setErrorList({});
+    const pickUpTime = new Date(searchData.pick_up_time);
+    const dropOffTime = new Date(searchData.drop_off_time);
+    const errors = {};
+
+    if (!pickUpTime || !dropOffTime) {
+      errors["Time Error"] = ["Pick-up or drop-off time is missing"];
+    }
+
+    const isWithinAvailability = carDetails.car.availabilities.some((availability) => {
+      const availabilityStart = new Date(availability.date_start);
+      const availabilityEnd = new Date(availability.date_end);
+      return availability.availability === 1 &&
+        pickUpTime >= availabilityStart && pickUpTime <= availabilityEnd &&
+        dropOffTime >= availabilityStart && dropOffTime <= availabilityEnd;
+    });
+    
+    const hasUnavailableDates = carDetails.car.availabilities.some((availability) => {
+      const availabilityStart = new Date(availability.date_start);
+      const availabilityEnd = new Date(availability.date_end);
+      return availability.availability === 0 &&
+        ((pickUpTime >= availabilityStart && pickUpTime <= availabilityEnd) ||
+         (dropOffTime >= availabilityStart && dropOffTime <= availabilityEnd) ||
+         (pickUpTime <= availabilityStart && dropOffTime >= availabilityEnd));
+    });
+     
+    
+    if (!isWithinAvailability || hasUnavailableDates) {
+      errors["Availability Error"] = ["Either pick-up or drop-off date is outside available date ranges or falls within unavailable dates"];
+    }
+    if (Object.keys(errors).length > 0) {
+      setErrorList({});
+      // Update errorList after clearing to force the component to re-render
+      setTimeout(() => {
+        setErrorList(errors);
+      }, 0);
+    } else {
+      console.log("All dates are valid, proceed with booking.");
+      const token = Cookies.get("token");
+ 
+      if(Object.keys(user).length == 0 || !token){
+        setErrorList({});
+        errors["Login Error"] = ["Please log in or create an account to proceed with your reservation."];
+
+      // Update errorList after clearing to force the component to re-render
+      setTimeout(() => {
+        setErrorList(errors);
+      }, 0);
+        console.log("not logged ")
+        const width = 600;
+        const height = 700;
+        const left = (window.innerWidth - width) / 2;
+        const top = (window.innerHeight - height) / 2;
+      
+        window.open('/login?close=true', 'Login', `width=${width},height=${height},top=${top},left=${left}`);
+      
+        // window.open('/login', "_blank")
+      }else{
+        console.log("logged ")
+
+        const dataToSend = {
+          date_start: formatDateForMySQL(new Date(searchData.pick_up_time)),
+          date_end: formatDateForMySQL(new Date(searchData.drop_off_time)),
+          car_options: activeCarExtras, // Include selected extras
+        };
+        console.log("reservation dataToSend  ", dataToSend)
+        
+         
+        try{
+          const response = await axiosInstance.post(`/api/cars/reserve/${carDetails.car.id}`, dataToSend)
+          console.log('response ', response)
+        }catch(e){
+          console.error('error /cars/reserve catch ', e )
+          if(e.response.message){
+
+            errors["API Error"] = [e.response.message]; // Add the error message to the errors object
+          }else{
+
+            errors["API Error"] = [e.message]; // Add the error message to the errors object
+          }
+          setErrorList({});
+          setTimeout(() => {
+            setErrorList(errors);
+          }, 0);
+        }
+      }
+
+    }
+    setErrorList({});
+
+
+    
+  };
+
 
   return (
-    <>
+    <form className="  y-gap-20 pt-20 col-12 " onSubmit={handleBookSubmit}>
+      
+        <Alert time={5000} errorList={errorList} />  {/* Add the Alert component here */}
     <div className="col-12  " 
    
     >
@@ -52,9 +172,9 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
     <div className="col-12"> <LocationSearch
             //if ( carSinglePage ){
               searchData={searchData}
-            disabled={true}
+            disabled={false}
             // }
-
+            carDetails={carDetails.car}
             // changeDataFilter={handleFilterChange}
             isDropOff={true}
             // initialData={initialData}
@@ -68,7 +188,7 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
         <div>
           <h4 className="text-15 fw-500 ls-2 lh-16">Date</h4>
           <DateSearch
-          carAvailabilities={carDetails.availabilities}
+          carAvailabilities={carDetails.car.availabilities}
           // changeDataFilter={handleFilterChange}
           // initialData={initialData}
           isDropOff={false}
@@ -82,7 +202,7 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
         <div>
           <h4 className="text-15 fw-500 ls-2 lh-16">Date</h4>
           <DateSearch 
-          carAvailabilities={carDetails.availabilities}
+          carAvailabilities={carDetails.car.availabilities}
           // changeDataFilter={handleFilterChange}
           // initialData={initialData}
           isDropOff={true}
@@ -94,8 +214,9 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
     <div className="col-12">
       <GuestSearch     optionsDetails={carDetails.vendor_options} />
     </div>
-    {
-      searchData.isFilled &&
+    {/* {
+      check if vendor allow drop off in diffrent locations if true you should use the drop off locations
+      searchData.isFilled && */} 
     <div className="home-checkbox">
           <input
             id="searchbox-toolbox-drop-off-checkbox-desktop"
@@ -117,19 +238,19 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
             </span>
           </label>
         </div>
-    }
+    {/* } */}
    
 
     <div className="col-12">
       <button
         className="button -dark-1 py-15 px-35 h-60 col-12 rounded-4 bg-yellow-1 text-dark-1"
-        onClick={(val) => handleBookSubmit(val)}
+     type="submit"
       >
         <i className="icon-search text-20 mr-10" />
         Book Now
       </button>
     </div>
-  </>
+  </form  >
   );
 };
 
