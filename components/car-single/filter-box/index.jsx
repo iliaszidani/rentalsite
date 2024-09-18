@@ -90,8 +90,9 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
     } else {
       console.log("All dates are valid, proceed with booking.");
       const token = Cookies.get("token");
+     
  
-      if(Object.keys(user).length == 0 || !token){
+      if(Object.keys(user).length == 0 || !token ||!user.token){
         setErrorList({});
         errors["Login Error"] = ["Please log in or create an account to proceed with your reservation."];
 

@@ -78,7 +78,19 @@ const CarSinglePage = ({ params }) => {
   // Calculate number of days
   const pickUpDate = new Date(searchData.pick_up_time);
   const dropOffDate = new Date(searchData.drop_off_time);
-  const nbrDays = Math.max(1, differenceInDays(dropOffDate, pickUpDate));
+
+  const diffInMs = dropOffDate - pickUpDate;
+
+// Step 2: Convert difference to days (including fractions)
+const diffInDays = diffInMs / (1000 * 60 * 60 * 24); // Milliseconds to days
+  
+// Step 3: Define the threshold to start rounding up
+const threshold = 0.05; // 2.05 days will be rounded to 3
+
+// Step 4: Calculate the number of days using a custom rounding logic
+const nbrDays = Math.max(1, Math.ceil(diffInDays - threshold  )); // Round up based on threshold
+
+  // const nbrDays = Math.max(1, differenceInDays(dropOffDate, pickUpDate));
 
   // Calculate extras cost
   const calculateExtrasCost = () => {
