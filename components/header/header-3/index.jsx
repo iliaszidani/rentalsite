@@ -70,10 +70,10 @@ const Header3 = () => {
                 </Link>
                 {/* End logo */}
 
-                <HeaderSearch />
+                {/* <HeaderSearch /> */}
                 {/* End logo */}
 
-                <div className="header-menu">
+                <div className="header-menu" style={{marginLeft: "7rem"}}>
                   <div className="header-menu__content">
                     <MainMenu style="text-dark-1" />
                   </div>
@@ -96,7 +96,7 @@ const Header3 = () => {
                   </div>
                   {/* End vertical devider*/}
 
-                  {/* <LanguageMegaMenu textClass="text-dark-1" /> */}
+                  <LanguageMegaMenu textClass="text-dark-1" />
                   {/* End Megamenu for Language */}
                 </div>
                 {/* End language and currency selector */}

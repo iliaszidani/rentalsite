@@ -143,6 +143,8 @@ const MainMenu = ({ style = "" }) => {
         <li className={pathname === "/contact" ? "current" : ""}>
           <Link href="/contact">Contact</Link>
         </li>
+
+        
       </ul>
     </nav>
   );

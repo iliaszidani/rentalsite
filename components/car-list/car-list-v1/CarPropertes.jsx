@@ -57,14 +57,19 @@ const CarProperties = ({ cars }) => {
                   <div className="cardImage w-250 md:w-1/1 rounded-4 border-light">
                     <div className="custom_inside-slider">
                       <Swiper
-                        className="mySwiper"
+                        className="mySwiper car-properties-image"
                         modules={[Pagination, Navigation]}
                         pagination={{
                           clickable: true,
                         }}
                         navigation={true}
                       >
-                        <img src={item.image} alt=""    style={{objectFit:"cover"}}/>
+                        <img src={item.image} alt=""  className=''  style={{objectFit:"cover"}}/>
+                        {
+                          item.vendors.vendor_logo_url ?
+                        <img src={item.vendors.vendor_logo_url} alt="logo_partner"  className='car-properties-image-logo'  style={{objectFit:"cover"}}/>
+                       : <img src="https://img.freepik.com/free-vector/red-prohibited-sign-no-icon-warning-stop-symbol-safety-danger-isolated-vector-illustration_56104-912.jpg" alt="logo_partner"  className='car-properties-image-logo'  style={{objectFit:"cover"}}/>
+                        }
                         {item?.slideImg?.map((slide, i) => (
                           <SwiperSlide key={i}>
                             <div className="ratio ratio-1:1">

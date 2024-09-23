@@ -159,6 +159,7 @@ const FilterHotels2 = ({ filterOption, cars }) => {
                       alt=""
                       style={{ objectFit: "cover", maxWidth: "100%" }}
                     />
+                      <img src={item.vendors.vendor_logo_url} alt="logo_partner"  className='car-properties-image-logo'  style={{objectFit:"cover"}}/>
                     {item?.slideImg?.map((slide, i) => (
                       <SwiperSlide key={i}>
                         <div className="ratio ratio-1:1">

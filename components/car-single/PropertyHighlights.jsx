@@ -5,31 +5,31 @@ const PropertyHighlights = ({car}) => {
       id: 1,
       icon: "icon-user-2",
       name: "Seating capacity",
-      content: car.seating_capacity,
+      content: car.car.seating_capacity,
     },    
     {
       id: 2,
       icon: "icon-luggage",
       name: "Luggage",
-      content: car.small_bag + car.large_bag,
+      content: car.car.small_bag + car.car.large_bag,
     },
     {
       id: 3,
       icon: "icon-transmission",
       name: "Transmission",
-      content: car.transmission,
+      content: car.car.transmission,
     },
     {
       id: 4,
       icon: "icon-speedometer",
       name: "Mileage",
-      content: `${car.mileage} `,
+      content: `${car.car.mileage} `,
     },
     {
       id: 5,
       icon: "icon-fuel",
       name: "Fuel",
-      content:car.fuel_type,
+      content:car.car.fuel_type,
     },
   ];
   return (

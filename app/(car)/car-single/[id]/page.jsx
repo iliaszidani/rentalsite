@@ -184,9 +184,12 @@ const nbrDays = Math.max(1, Math.ceil(diffInDays - threshold  )); // Round up ba
                 </div>
               </div>
               <div className="mt-40">
-                <div className="text-center">
+                <div className="text-center car-properties-image">
                   {car.car.image_url ? (
+                    <>
                     <img src={car.car.image_url} alt="" />
+                    <img src={car.car.vendors.vendor_logo_url} alt="logo_partner"  className='car-properties-image-logo'  style={{objectFit:"cover"}}/>
+                    </>
                   ) : (
                     "image not found"
                   )}
