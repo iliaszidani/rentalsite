@@ -32,7 +32,7 @@
 //   );
 // }
 
-'use client'
+
 import Wrapper from "@/components/layout/Wrapper";
 import MainHome from "../app/(homes)/home_1/page";
 

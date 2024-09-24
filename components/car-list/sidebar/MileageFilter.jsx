@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 
 // Fonction pour filtrer les voitures en fonction du kilométrage
