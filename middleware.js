@@ -12,28 +12,81 @@
 //     }
 // }
 
-import { NextResponse } from "next/server";
+
+
+// start  of check authentication 
+
+// import { NextResponse } from "next/server";
+// const app_url = "http://localhost:3000";
+
+// export default function middleware(req) {
+//   let verify = req.cookies.get("token");
+//   let url = req.url;
+//   const { searchParams } = new URL(url);
+
+//   // Check if the 'close' parameter exists and is set to 'true'
+//   const isClose = searchParams.get('close') === 'true';
+
+//   // If the user is logged in and tries to access the login or signup page with 'close=true', do not redirect
+//   if (verify && (url.includes('/login') || url.includes('/signup'))) {
+//     if (!isClose) {
+//       return NextResponse.redirect(app_url + "/"); // Redirect to home if 'close=true' is not present
+//     }
+//   }
+
+//   // If the user is not authenticated and tries to access protected pages (e.g., profile), redirect to login
+//   if (!verify && url.includes('/profile')) {
+//     return NextResponse.redirect(app_url + "/login");
+//   }
+
+//   return NextResponse.next();
+// }
+
+// end of check authentication 
+
+
+
+
+//merged : 
+import { NextResponse, NextRequest } from "next/server";
+
 const app_url = "http://localhost:3000";
+const PUBLIC_FILE = /\.(.*)$/; // Static file pattern
 
-export default function middleware(req) {
+export async function middleware(req) {
+  const { searchParams, pathname } = req.nextUrl;
   let verify = req.cookies.get("token");
-  let url = req.url;
-  const { searchParams } = new URL(url);
+  const isClose = searchParams.get("close") === "true";
 
-  // Check if the 'close' parameter exists and is set to 'true'
-  const isClose = searchParams.get('close') === 'true';
+  // Ignore requests to static files and API routes
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.includes("/api/") ||
+    PUBLIC_FILE.test(pathname)
+  ) {
+    return NextResponse.next(); // Let the request pass without interference
+  }
 
-  // If the user is logged in and tries to access the login or signup page with 'close=true', do not redirect
-  if (verify && (url.includes('/login') || url.includes('/signup'))) {
+  // Localization logic: If no locale is specified, redirect to locale based on cookie or default to 'en'
+  if (req.nextUrl.locale === "default") {
+    const locale = req.cookies.get("NEXT_LOCALE")?.value || "en";
+    return NextResponse.redirect(
+      new URL(`/${locale}${pathname}${req.nextUrl.search}`, req.url)
+    );
+  }
+
+  // Authentication logic: Check token and redirect based on authentication
+  if (verify && (pathname.includes("/login") || pathname.includes("/signup"))) {
+    // Redirect to home if the user is logged in and tries to access login or signup
     if (!isClose) {
-      return NextResponse.redirect(app_url + "/"); // Redirect to home if 'close=true' is not present
+      return NextResponse.redirect(app_url + "/");
     }
   }
 
   // If the user is not authenticated and tries to access protected pages (e.g., profile), redirect to login
-  if (!verify && url.includes('/profile')) {
+  if (!verify && pathname.includes("/profile")) {
     return NextResponse.redirect(app_url + "/login");
   }
 
-  return NextResponse.next();
+  return NextResponse.next(); // Let the request pass through if no conditions match
 }

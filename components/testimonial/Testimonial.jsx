@@ -4,6 +4,7 @@
 import Image from "next/image";
 import Slider from "react-slick";
 import { testimonial1 } from "../../data/testimonialData";
+import userImage from "../../public/img/user.PNG"
 
 const Testimonial = () => {
   var settings = {
@@ -57,7 +58,7 @@ const Testimonial = () => {
                   <Image
                     width={60}
                     height={60}
-                    src={item.avatar}
+                    src={userImage}
                     alt="image"
                     className="size-60"
                   />

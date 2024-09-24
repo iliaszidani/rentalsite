@@ -2,15 +2,15 @@ const ContactInfo = () => {
   const contactContent = [
     {
       id: 1,
-      title: "Toll Free Customer Care",
-      action: "tel:+(1) 123 456 7890",
-      text: "***",
+      title: "Phone",
+      action: "tel:+212661327367",
+      text: "+(212) 6 61 32 73 67",
     },
     {
       id: 2,
-      title: "Need live support?",
-      action: "mailto:xyz@abc.com",
-      text: "***",
+      title: "Mail",
+      action: "mailto:elkhalifi@rental365.com",
+      text: "elkhalifi@rental365.com",
     },
   ];
   return (

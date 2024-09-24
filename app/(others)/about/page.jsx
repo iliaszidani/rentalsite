@@ -126,17 +126,18 @@ const About = () => {
           </div>
           {/* End .overflow-hidden */}
 
-          <div className="row y-gap-30 items-center pt-40 sm:pt-20">
-            <div className="col-xl-4">
+          <div className="row y-gap-30 items-center justify-center pt-40 sm:pt-20">
+            <div className="col-xl-4 ">
               <Counter2 />
             </div>
             {/* End .col */}
 
-            <div className="col-xl-8">
+            {/* <div className="col-xl-8">
               <div className="row y-gap-30 justify-between items-center">
                 <Brand />
               </div>
-            </div>
+            </div> */}
+
             {/* End .col */}
           </div>
           {/* End .row */}

@@ -164,8 +164,10 @@ const home_4 = () => {
           </div>
           {/* End .overflow-hidden */}
 
-          <div className="row y-gap-30 items-center pt-40 sm:pt-20">
+          <div className="row y-gap-30 items-center   pt-40 sm:pt-20">
             <div className="col-xl-4">
+
+              sdsd
               <Counter2 />
             </div>
             {/* End .col */}
