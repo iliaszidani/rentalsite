@@ -24,7 +24,7 @@ export default function FilterHotels4() {
     <div className="row justify-center pt-60">
       <div className="col-auto">
         <Link
-          href="/car-list-v1"
+          href="/cars"
           className="button px-40 h-50 -outline-blue-1 text-blue-1"
         >
           Voir tout <div className="icon-arrow-top-right ml-15" />

@@ -661,7 +661,7 @@ const ReservationTable = ({ reservations }) => {
                 <tr key={reservation.id}>
                   <td className="px-3 text-center">{reservation.id}</td>
                   <td className="px-3">
-                    <Link href={`/car-single/${reservation.car.id}`} className="text-decoration-none text-primary">
+                    <Link href={`/car/${reservation.car.id}`} className="text-decoration-none text-primary">
                       {reservation.car.car_name}
                     </Link>
                   </td>

@@ -23,7 +23,7 @@ const MainFilterSearchBox = ({isHome , initialData}) => {
   const handleSubmit = (event) => {
     event.preventDefault();  
     dispatch(setBookingDetails(searchData))
-    Router.push("/car-list-v1");
+    Router.push("/cars");
   };
 
   return (

@@ -5,7 +5,7 @@ const Address = () => {
       colClass: "col-lg-3",
       title: "Address",
       content: (
-        <>, Casablanca.</>
+        <>Casablanca, Maroc.</>
       ),
     },
     {
@@ -14,7 +14,7 @@ const Address = () => {
       title: "Phone",
       content: (
         <>
-          <a href="tel:+4733378901">+212</a>
+          <a href="tel:+(212) 6 61 32 73 67">+(212) 6 61 32 73 67</a>
         </>
       ),
     },
@@ -25,7 +25,7 @@ const Address = () => {
       content: (
         <>
           {" "}
-          <a href="mailto:i@gotrip.com">Rental356@...com</a>
+          <a href="mailto:support@rental356.com">support@rental356.com</a>
         </>
       ),
     },

@@ -31,7 +31,11 @@ const Contact = () => {
       <div className="map-outer">
         <div className="map-canvas">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106376.61820950884!2d-7.622277100000054!3d33.572356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7d2b110853a47%3A0xc7098dd7e152153b!2sR%C3%A9sidence%20Universitaire%20Abdelmoumen%20Centre!5e0!3m2!1sfr!2sma!4v1719047026597!5m2!1sfr!2sma"
+           
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.971455156699!2d-7.6256444!3d33.5712122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7d2b114000099%3A0xe13634bf611ffcc3!2sSCASCO%20Assurances%20Casablanca!5e0!3m2!1sen!2sma!4v1695560506012!5m2!1sen!2sma"
+    
+      
+        
             loading="lazy"
           ></iframe>
         </div>

@@ -29,7 +29,7 @@ export const homeItems = [
   },
   {
     name: "Home 08",
-    routePath: "/home_8",
+    routePath: "/home",
   },
   {
     name: "Home 09",
@@ -332,7 +332,7 @@ export const categorieMegaMenuItems = [
         megaBanner: "/img/backgrounds/5.png",
         title: "Things to do on your Next Car",
         btnText: "See Car",
-        btnRoute: "/car-list-v1",
+        btnRoute: "/cars",
         menuItems: [
           {
             id: 1,
@@ -340,7 +340,7 @@ export const categorieMegaMenuItems = [
             menuList: [
               {
                 name: "Car List v1",
-                routePath: "/car-list-v1",
+                routePath: "/cars",
               },
               {
                 name: "Car List v2",
@@ -358,8 +358,8 @@ export const categorieMegaMenuItems = [
               },
               {
                 name: "Car Single",
-                routePath: "/car-single/1",
-                routePath: "/car-single/1",
+                routePath: "/car/1",
+                routePath: "/car/1",
               },
             ],
           },
@@ -604,7 +604,7 @@ export const categorieMobileItems = [
         menuList: [
           {
             name: "Car List v1",
-            routePath: "/car-list-v1",
+            routePath: "/cars",
           },
           {
             name: "Car List v2",
@@ -622,7 +622,7 @@ export const categorieMobileItems = [
           },
           {
             name: "Car Single",
-            routePath: "/car-single/1",
+            routePath: "/car/1",
           },
         ],
       },

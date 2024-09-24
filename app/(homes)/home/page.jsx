@@ -31,7 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 //   description: "GoTrip - Travel & Tour React NextJS Template",
 // };
 
-const home_8 = () => {
+const home = () => {
   const dispatch = useDispatch();
    
 
@@ -190,4 +190,4 @@ const home_8 = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(home_8), { ssr: false });
+export default dynamic(() => Promise.resolve(home), { ssr: false });

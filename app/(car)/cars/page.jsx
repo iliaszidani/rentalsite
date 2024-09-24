@@ -1,20 +1,20 @@
 "use client";
 import CallToActions from "@/components/common/CallToActions";
-import Header11 from "@/components/header/header-11";
+ 
 import DefaultFooter from "@/components/footer/default";
 import MainFilterSearchBox from "@/components/hero/hero-3/MainFilterSearchBox";
-import TopHeaderFilter from "@/components/car-list/car-list-v1/TopHeaderFilter";
+import TopHeaderFilter from "@/components/car-list/cars/TopHeaderFilter";
 import Pagination from "@/components/car-list/common/Pagination";
-import Sidebar from "@/components/car-list/car-list-v1/Sidebar";
+import Sidebar from "@/components/car-list/cars/Sidebar";
 import Header3 from "@/components/header/header-3";
 import { useState, useEffect, Suspense, lazy } from "react";
-// import CarProperties from "@/components/car-list/car-list-v1/CarPropertes";
-import { useRouter, useSearchParams } from "next/navigation";
+// import CarProperties from "@/components/car-list/cars/CarPropertes";
+ 
 import Skeleton from "@/components/Skeleton";
 import { fetchCars } from "@/features/car/thunk";
 import { useDispatch, useSelector } from "react-redux";
-// const CarProperties = lazy(() => import('@/components/car-list/car-list-v1/CarPropertes'));
-import CarProperties from "@/components/car-list/car-list-v1/CarPropertes";
+// const CarProperties = lazy(() => import('@/components/car-list/cars/CarPropertes'));
+import CarProperties from "@/components/car-list/cars/CarPropertes";
 
 const Index = () => {
   // const [selectedCategories, setSelectedCategories] = useState([]);
@@ -29,8 +29,8 @@ const Index = () => {
   // const [isAscending, setIsAscending] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   
-  const searchParams = useSearchParams();
-  const Router = useRouter();
+ 
+ 
   const dispatch = useDispatch();
   const { cars, filteredCars, isLoading , isAscending, totalPages, itemsPerPage} = useSelector((state) => state.car);
 

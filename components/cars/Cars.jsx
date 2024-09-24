@@ -79,7 +79,7 @@ const Cars = () => {
             data-aos-delay={item.delayAnimation}
           >
             <Link
-              href={`/car-single/5`}
+              href={`/car/5`}
               className="carCard -type-1 d-block rounded-4 hover-inside-slider"
             >
               <div className="carCard__image">

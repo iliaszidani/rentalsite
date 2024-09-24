@@ -47,7 +47,7 @@ const PopularCars = () => {
               data-aos-delay={item?.delayAnimation}
             >
               <Link
-                href={`/car-single/${item.id}`}
+                href={`/car/${item.id}`}
                 className="carCard -type-1 d-block rounded-4 hover-inside-slider"
               >
                 <div className="carCard__image">

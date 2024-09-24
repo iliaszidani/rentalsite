@@ -190,9 +190,9 @@ const MobileMenu = () => {
             {/* End  All Dashboard Menu */}
 
             <MenuItem
-             onClick={()=>router.push("/home_8")}
+             onClick={()=>router.push("/home")}
              className={
-              pathname === "/home_8" ? "menu-active-link" : ""
+              pathname === "/home" ? "menu-active-link" : ""
             }
              
             >
@@ -208,9 +208,9 @@ const MobileMenu = () => {
              À propos de nous
             </MenuItem>
             <MenuItem
-             onClick={()=>router.push("/car-list-v1")}
+             onClick={()=>router.push("/cars")}
              className={
-              pathname === "/car-list-v1" ? "menu-active-link" : ""
+              pathname === "/cars" ? "menu-active-link" : ""
             }
              
             >
