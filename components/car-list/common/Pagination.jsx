@@ -1,5 +1,5 @@
 
- import { useState } from "react";
+
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const maxPagesToShow = 1; // Number of pages to show around the current page
