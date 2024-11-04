@@ -72,7 +72,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const DateSearch = ({
   isDropOff,
-  carAvailabilities = null
+  carAvailabilities = null , t
 }) => {
   const dispatch = useDispatch();
   const { searchData } = useSelector((state) => state.searchData);
@@ -98,15 +98,17 @@ const DateSearch = ({
 
   const handleChange = (e) => {
     const selectedDate = e?.toDate();
-    const className = getClassName(e);
+    const className = getClassName(e);  
+    const offset = selectedDate.getTimezoneOffset(); // in minutes
+ 
 
     if (className === "unavailable") {
       return; // Do not update state if the date is unavailable
     }
 
     const updatedSearchData = isDropOff
-      ? { ...searchData, drop_off_time: selectedDate }
-      : { ...searchData, pick_up_time: selectedDate };
+      ? { ...searchData, drop_off_time:  new Date(selectedDate.getTime() - offset * 60 * 1000).toISOString() } //was drop_off_time:selectedDate
+      : { ...searchData, pick_up_time:  new Date(selectedDate.getTime() - offset * 60 * 1000).toISOString() };
 
     dispatch(setSearchData(updatedSearchData));
   };
@@ -149,9 +151,9 @@ const DateSearch = ({
   return (
     <div className="text-15 text-light-1 ls-2 lh-16 custom_dual_datepicker">
       <DatePicker
-      
+        
         value={isDropOff ? searchData.drop_off_time : searchData.pick_up_time || initialDate}
-        placeholder="Select time"
+        placeholder={t("selectDateAndTime")}  
         format="DD/MM/YYYY HH:mm"
         minDate={getMinDate()}
         plugins={[<TimePicker hideSeconds />]}

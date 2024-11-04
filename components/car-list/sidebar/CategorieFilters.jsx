@@ -85,18 +85,25 @@
 
 'use client'
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+ 
 import { useDispatch } from 'react-redux';
-import { setCategoryFilter } from '@/features/car/carSlice';
-const CategorieFilters = ({ onCategoryChange }) => {  
+import { filterAll, setCategoryFilter } from '@/features/car/carSlice';
+import axiosInstance from '@/lib/axiosConfig';
+const CategorieFilters = () => {  
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const dispatch = useDispatch();
+  const [dir, setDir] = useState('ltr');
+  
+  useEffect(() => {
+    const direction = document.documentElement.getAttribute("dir");
+    setDir(direction);
+  }, []);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost/car-rental-api/public/api/get-all-categories-for-client');
+        const response = await axiosInstance.get('/api/get-all-categories-for-client'); // removed http://localhost/car-rental-api/public
         console.log('Données reçues:', response.data);
         setCategories(response.data);
       } catch (error) {
@@ -107,7 +114,8 @@ const CategorieFilters = ({ onCategoryChange }) => {
   }, []);
 
   useEffect(() => {
-    dispatch(setCategoryFilter(selectedCategories));
+    // dispatch(setCategoryFilter(selectedCategories));
+    dispatch(filterAll({categories: selectedCategories }));
     // onCategoryChange(selectedCategories);
   }, [selectedCategories]);
 
@@ -132,7 +140,7 @@ const CategorieFilters = ({ onCategoryChange }) => {
               <div className="form-checkbox__mark">
                 <div className="form-checkbox__icon icon-check" />
               </div>
-              <div className="text-15 ml-10">{category.category_name}</div>
+              <div className={`text-15 ${dir === "ltr"? "ml-10":"mr-10"} `}>{category.category_name}</div>
             </div>
           </div>
           <div className="col-auto">

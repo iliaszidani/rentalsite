@@ -1,3 +1,4 @@
+ 
 import Map from "../sidebar/Map";
 import LocationFilters from "../sidebar/LocationFilters";
 import PirceSlider from "../sidebar/PirceSlider";
@@ -8,29 +9,40 @@ import SpecificationsFilter from "../sidebar/SpecificationsFilter";
 import TransmissionFilter from "../sidebar/TransmissionFilter";
 // import FuelPolicyFilter from "../sidebar/FuelPolicyFilter";
 import React, { useState, useEffect } from 'react';
-import {setFuelTypeFilter} from '@/features/car/carSlice'
-import { useDispatch } from 'react-redux';
+import {filterAll, setFuelTypeFilter} from '@/features/car/carSlice'
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslations } from "next-intl";
 
 
-const filterCarsByFuelType = (cars, fuelType) => {
-  return cars.filter(car => car.fuel_type === fuelType);
-};
+// const filterCarsByFuelType = (cars, fuelType) => {
+//   return cars.filter(car => car.fuel_type === fuelType);
+// };
 
-const FuelTypeFilter = ({ cars , handleFuelTypeChange }) => {
+const FuelTypeFilter = ({t}) => {
+  
   const dispatch = useDispatch();
   const [selectedFuelTypes, setSelectedFuelTypes] = useState([]);
   const [gasolineCars, setGasolineCars] = useState([]);
-  // const [dieselCars, setDieselCars] = useState([]);
-  // const [electricCars, setElectricCars] = useState([]);
+  const [dieselCars, setDieselCars] = useState([]);
+  const [electricCars, setElectricCars] = useState([]);
   const [hybridCars, setHybridCars] = useState([]);
 
+  const [dir, setDir] = useState('ltr');
+  
   useEffect(() => {
-    setGasolineCars(filterCarsByFuelType(cars, 'Gasoline'));
-    setHybridCars(filterCarsByFuelType(cars, 'Hybrid'));
-  }, [cars]);
+    const direction = document.documentElement.getAttribute("dir");
+    setDir(direction);
+  }, []);
+
+
+  // useEffect(() => {
+  //   setGasolineCars(filterCarsByFuelType(cars, 'Gasoline'));
+  //   setHybridCars(filterCarsByFuelType(cars, 'Hybrid'));
+  // }, [cars]);
 
   useEffect(() => {
-    dispatch(setFuelTypeFilter(selectedFuelTypes));
+    // dispatch(setFuelTypeFilter(selectedFuelTypes));
+    dispatch(filterAll({selectedFuelTypes}));
   }, [selectedFuelTypes]);
 
   const handleCheckboxChange = (fuelType) => {
@@ -56,7 +68,7 @@ const FuelTypeFilter = ({ cars , handleFuelTypeChange }) => {
             <div className="form-checkbox__mark">
               <div className="form-checkbox__icon icon-check" />
             </div>
-            <div className="text-15 ml-10">Gasoline</div>
+            <div className={`text-15  ${dir === "ltr"? "ml-10":"mr-10"} `}>{t("CarsPage.Fuel.gasoline")}</div>
           </div>
         </div>
         <div className="col-auto">
@@ -64,7 +76,7 @@ const FuelTypeFilter = ({ cars , handleFuelTypeChange }) => {
         </div>
       </div>
       {/* End .row */}
-      {/* <div className="row y-gap-10 items-center justify-between">
+      <div className="row y-gap-10 items-center justify-between">
         <div className="col-auto">
           <div className="form-checkbox d-flex items-center">
             <input
@@ -75,15 +87,15 @@ const FuelTypeFilter = ({ cars , handleFuelTypeChange }) => {
             <div className="form-checkbox__mark">
               <div className="form-checkbox__icon icon-check" />
             </div>
-            <div className="text-15 ml-10">Diesel</div>
+            <div className={`text-15  ${dir === "ltr"? "ml-10":"mr-10"} `}>{t("CarsPage.Fuel.diesel")}</div>
           </div>
         </div>
         <div className="col-auto">
           <div className="text-15 text-light-1">{dieselCars.length}</div>
         </div>
-      </div> */}
+      </div>
       {/* End .row */}
-      {/* <div className="row y-gap-10 items-center justify-between">
+      <div className="row y-gap-10 items-center justify-between">
         <div className="col-auto">
           <div className="form-checkbox d-flex items-center">
             <input
@@ -94,13 +106,13 @@ const FuelTypeFilter = ({ cars , handleFuelTypeChange }) => {
             <div className="form-checkbox__mark">
               <div className="form-checkbox__icon icon-check" />
             </div>
-            <div className="text-15 ml-10">Electric</div>
+            <div className={`text-15  ${dir === "ltr"? "ml-10":"mr-10"} `}>{t("CarsPage.Fuel.electrical")}</div>
           </div>
         </div>
         <div className="col-auto">
           <div className="text-15 text-light-1">{electricCars.length}</div>
         </div>
-      </div> */}
+      </div>
       {/* End .row */}
       <div className="row y-gap-10 items-center justify-between">
         <div className="col-auto">
@@ -113,7 +125,7 @@ const FuelTypeFilter = ({ cars , handleFuelTypeChange }) => {
             <div className="form-checkbox__mark">
               <div className="form-checkbox__icon icon-check" />
             </div>
-            <div className="text-15 ml-10">Hybrid</div>
+            <div className={`text-15  ${dir === "ltr"? "ml-10":"mr-10"} `}>{t("CarsPage.Fuel.hybrid")}</div>
           </div>
         </div>
         <div className="col-auto">
@@ -124,30 +136,69 @@ const FuelTypeFilter = ({ cars , handleFuelTypeChange }) => {
     </>
   );
 };
-const CommentairesFilters = () => {
+const CommentairesFilters = ({t}) => {
+  const [dir, setDir] = useState('ltr');
+  
+  useEffect(() => {
+    const direction = document.documentElement.getAttribute("dir");
+    setDir(direction);
+  }, []);
   return (
     <div>
-      <div className="form-checkbox d-flex items-center">
+      {/* <div className="form-checkbox d-flex items-center">
         <input type="checkbox" />
         <div className="form-checkbox__mark">
           <div className="form-checkbox__icon icon-check" />
         </div>
-        <div className="text-15 ml-10">Très bien : 8 et plus</div>
-        <div className="text-15 text-light-1 ml-20">0</div>
+        <div className={`"text-15 ${dir === "ltr"? "ml-10":"mr-10"} `}>{t("CarsPage.SideFilter.ReviewsType.veryGood")}</div>
+        <div className={`text-15 text-light-1  ${dir === "ltr"? "ml-20":"mr-20"} `}>0</div>
       </div>
       <div className="form-checkbox d-flex items-center">
         <input type="checkbox" />
         <div className="form-checkbox__mark">
           <div className="form-checkbox__icon icon-check" />
         </div>
-        <div className="text-15 ml-10">Bien : 7 et plus</div>
-        <div className="text-15 text-light-1 ml-10">0</div>
-      </div>
+        <div className={`"text-15 ${dir === "ltr"? "ml-10":"mr-10"} `}>{t("CarsPage.SideFilter.ReviewsType.good")}</div>
+        <div className="col-auto bg-primary">
+        <div className={`text-15 text-light-1  ${dir === "ltr"? "ml-10":"mr-10"} `}>0</div>
+          </div>
+      </div> */}
+
+      <div className="row y-gap-10 items-center justify-between" >
+          <div className="col-auto">
+            <div className="form-checkbox d-flex items-center">
+              <input type="checkbox" />
+              <div className="form-checkbox__mark">
+                <div className="form-checkbox__icon icon-check" />
+              </div>
+              <div className={`text-15 ${dir === "ltr"? "ml-10":"mr-10"} `}>{t("CarsPage.SideFilter.ReviewsType.veryGood")}</div>
+            </div>
+          </div>
+          <div className="col-auto">
+            <div className="text-15 text-light-1">0</div>
+          </div>
+        </div>
+      <div className="row y-gap-10 items-center justify-between" >
+          <div className="col-auto">
+            <div className="form-checkbox d-flex items-center">
+              <input type="checkbox" />
+              <div className="form-checkbox__mark">
+                <div className="form-checkbox__icon icon-check" />
+              </div>
+              <div className={`text-15 ${dir === "ltr"? "ml-10":"mr-10"} `}>{t("CarsPage.SideFilter.ReviewsType.good")}</div>
+            </div>
+          </div>
+          <div className="col-auto">
+            <div className="text-15 text-light-1">0</div>
+          </div>
+        </div>
     </div>
   );
 };
-const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeChange ,
-  handleTransmissionChange ,handleMileageChange ,handleSpecificationsChange}) => {
+
+const Sidebar = ({ cars,
+  handleTransmissionChange    }) => {
+    const t=useTranslations();
   return (
     <>
       <div className="sidebar__item -no-border position-relative">
@@ -155,7 +206,7 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
       </div>
       {/* End find map */}
       <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Location</h5>
+        <h5 className="text-18 fw-500 mb-10">{t("CarsPage.SideFilter.location")}</h5>
         <div className="sidebar-checkbox">
           <LocationFilters />
         </div>
@@ -163,17 +214,17 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
       </div>
       {/* End Location filter */}
       <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Categorie</h5>
+        <h5 className="text-18 fw-500 mb-10">{t("CarsPage.SideFilter.categories")}</h5>
         <div className="sidebar-checkbox">
-        <CategorieFilters onCategoryChange={handleCategoryChange} />
+        <CategorieFilters   />
         </div>
         {/* End Sidebar-checkbox */}
       </div>
       {/* End Category filter */}
       <div className="sidebar__item pb-30">
-        <h5 className="text-18 fw-500 mb-10">Prix</h5>
+        <h5 className="text-18 fw-500 mb-10">{t("CarsPage.SideFilter.price")}</h5>
         <div className="row x-gap-10 y-gap-30">
-          <div className="col-12">
+          <div className="col-12" dir="ltr">
             <PirceSlider/>
           </div>
         </div>
@@ -184,17 +235,17 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
   <SupplierFilters />
 </div> */}
 <div className="sidebar__item">
-  <h5 className="text-18 fw-500 mb-10">Note des commentaires</h5>
+  <h5 className="text-18 fw-500 mb-10">{t("CarsPage.SideFilter.reviews")}</h5>
   <div className="sidebar-checkbox">
-    <CommentairesFilters />
+    <CommentairesFilters t={t} />
   </div>
   {/* End Sidebar-checkbox */}
 </div>
       {/* End Supplier filter */}
       <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Specifications</h5>
+        <h5 className="text-18 fw-500 mb-10">{t("CarsPage.SideFilter.Specifications.title")}</h5>
         <div className="sidebar-checkbox">
-          <SpecificationsFilter cars={cars} handleSpecificationsChange={handleSpecificationsChange} />
+          <SpecificationsFilter  t={t} />
         </div>
       </div>
       {/* End Specifications filter */}
@@ -207,9 +258,9 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
       {/* </div> */}
       {/* End Kilometres filter */}
       <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Transmission</h5>
+        <h5 className="text-18 fw-500 mb-10">{t("CarsPage.SideFilter.transmission")}</h5>
         <div className="sidebar-checkbox">
-        <TransmissionFilter cars={cars} handleTransmissionChange={handleTransmissionChange}  />
+        <TransmissionFilter cars={cars} handleTransmissionChange={handleTransmissionChange}  t={t}/>
         </div>
         {/* End Sidebar-checkbox */}
       </div>
@@ -240,9 +291,9 @@ const Sidebar = ({ cars,filterCarsByPrice, handleCategoryChange ,handleFuelTypeC
       {/* </div> */}
       {/* End Depot de garantie filter */}
       <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Voiture carburant</h5>
+        <h5 className="text-18 fw-500 mb-10">{t("CarsPage.SideFilter.fuel")}</h5>
         <div className="sidebar-checkbox">
-          <FuelTypeFilter cars={cars} handleFuelTypeChange={handleFuelTypeChange}/>
+          <FuelTypeFilter t={t} />
         </div>
       </div>
       {/* End Voiture Electronique filter */}

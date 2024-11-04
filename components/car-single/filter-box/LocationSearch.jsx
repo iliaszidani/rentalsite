@@ -11,7 +11,7 @@ const LocationSearch = ({setDataToSend,  isDropOff ,searchData , carDetails}) =>
   const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState(isDropOff ? searchData.drop_off_agency.name : searchData.pick_up_agency.name);
-
+console.log("zaz ", searchData)
   const locationSearchContent = [
     {
       id: 1,
@@ -68,11 +68,17 @@ const LocationSearch = ({setDataToSend,  isDropOff ,searchData , carDetails}) =>
     <div
   className="searchMenu-loc px-20 py-10 border-light rounded-4 js-form-dd js-liverSearch"
   style={{
-    backgroundColor: !isDropOff ? "#e9ecef" : "transparent",   
-    cursor: !isDropOff ? "not-allowed" : "auto",             
-    opacity: !isDropOff ? 0.65 : 1,                           
-    pointerEvents: !isDropOff ? "none" : "auto"                
+    backgroundColor:   "#e9ecef"  ,   
+    cursor:   "not-allowed" ,             
+    opacity: 0.65  ,                           
+    pointerEvents: "none"                 
   }}
+  // style={{
+  //   backgroundColor: !isDropOff ? "#e9ecef" : "transparent",   
+  //   cursor: !isDropOff ? "not-allowed" : "auto",             
+  //   opacity: !isDropOff ? 0.65 : 1,                           
+  //   pointerEvents: !isDropOff ? "none" : "auto"                
+  // }}
 >
  
 
@@ -90,7 +96,7 @@ const LocationSearch = ({setDataToSend,  isDropOff ,searchData , carDetails}) =>
               placeholder="City or Airport"
               className="js-search js-dd-focus disabled"
               // value={searchValue  }
-              value={isDropOff ?  searchData.drop_off_agency.name : carDetails.agencies.city_agence  }
+              value={isDropOff ?   (searchData.drop_off_agency.id ? searchData.drop_off_agency.location_city+", "+searchData.drop_off_agency.location_country : carDetails.agencies.address_agence ): (searchData.pick_up_agency.id ? searchData.pick_up_agency.location_city+", "+searchData.pick_up_agency.location_country : carDetails.agencies.address_agence ) }  // use car.agency.location.city , country . for drop_off we should get the accepted drop off location by this agency
               onChange={(e) => setSearchValue(e.target.value)}
             />
           </div>

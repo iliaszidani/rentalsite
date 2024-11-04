@@ -1,4 +1,11 @@
+import { useEffect, useState } from "react";
+
 const AppButton = () => {
+  const [direction , setDirection] = useState("");
+  useEffect(()=>{
+    const dir = document.documentElement.getAttribute("dir");
+    setDirection(dir);
+  }, [])
   const appContent = [
     {
       id: 1,
@@ -26,7 +33,7 @@ const AppButton = () => {
           key={item.id}
         >
           <i className={`${item.icon} text-24`} />
-          <a href={item.link} className="ml-20 d-block">
+          <a href={item.link} className={` d-block ${ direction === "ltr" ? "ml-20" : "mr-20"}`}  >
             <div className="text-14 text-light-1">{item.text}</div>
             <div className="text-15 lh-1 fw-500">{item.market}</div>
           </a>

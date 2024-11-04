@@ -5,8 +5,10 @@ import Image from "next/image";
 import Slider from "react-slick";
 import { testimonial1 } from "../../data/testimonialData";
 import userImage from "../../public/img/user.PNG"
+import { useTranslations } from "next-intl";
 
-const Testimonial = () => {
+const Testimonial = ( ) => {
+  const t = useTranslations("AboutPage");
   var settings = {
     dots: true,
     infinite: true,
@@ -37,6 +39,12 @@ const Testimonial = () => {
       },
     ],
   };
+  const googleTraductionStyle = {
+    color:"#777d78",
+    fontSize:"0.75em",
+    textDecoration:"underline"
+    
+  };
 
   return (
     <>
@@ -52,6 +60,7 @@ const Testimonial = () => {
             <p className="testimonials__text lh-18 fw-500 text-dark-1">
               {item.text}
             </p>
+            <span className="googleTraductionStyle">{t("Testimonial.translatedByGoogle")}</ span>
             <div className="pt-20 mt-28 border-top-light">
               <div className="row x-gap-20 y-gap-20 items-center">
                 <div className="col-auto">
@@ -66,7 +75,7 @@ const Testimonial = () => {
                 <div className="col-auto">
                   <div className="text-15 fw-500 lh-14">{item.name}</div>
                   <div className="text-14 lh-14 text-light-1 mt-5">
-                    {item.designation}
+                   { true ? t("Testimonial.user_type_male") : t("Testimonial.user_type_female")}
                   </div>
                 </div>
               </div>

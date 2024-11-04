@@ -955,7 +955,7 @@ $_displays: none, inline-block, block, flex;
 
         > *:first-child {
           min-width: 200px;
-          margin-right: 20px;
+            margin-right: 20px;
         }
       }
 
@@ -972,7 +972,7 @@ $_displays: none, inline-block, block, flex;
         > *:first-child {
           min-width: auto;
           width: 100%;
-          margin-right: 0;
+            margin-right: 0;
         }
       }
     }
@@ -1245,9 +1245,9 @@ $_displays: none, inline-block, block, flex;
   }
 }
 .booking-sidebar {
-  margin-left: 80px;
+    margin-left: 80px;
   @media (max-width: 1199px) {
-    margin-left: 0;
+      margin-left: 0;
   }
 }
 @media (min-width: 576px) {
@@ -1751,7 +1751,7 @@ table.table-5 {
           background-color: color-opac(blue-1, 0.05) !important;
 
           .icon {
-            margin-right: 12px;
+              margin-right: 12px;
             transform: rotate(90deg);
           }
         }
@@ -1889,7 +1889,7 @@ table.table-5 {
 
       > * + * {
         margin-top: 0;
-        margin-left: 10px;
+          margin-left: 10px;
       }
     }
 
@@ -2094,7 +2094,7 @@ table.table-5 {
     cursor: pointer;
     background: none;
     z-index: 2;
-    margin-right: 10px;
+      margin-right: 10px;
     position: absolute;
     top: 0;
     left: 0;

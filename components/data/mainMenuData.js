@@ -1,6 +1,6 @@
 export const homeItems = [
   {
-    name: "Home 01",
+    name: "Home",
     routePath: "/",
   },
   {
@@ -28,7 +28,7 @@ export const homeItems = [
     routePath: "/home_7",
   },
   {
-    name: "Home 08",
+    name: "Home",
     routePath: "/home",
   },
   {

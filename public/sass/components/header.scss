@@ -60,10 +60,10 @@
     position: relative;
 
     img {
-      width: 140px;
+      width: 265px;
 
       @include media-below(md) {
-        max-width: 120px;
+        max-width: 220px;
       }
     }
 
@@ -113,7 +113,7 @@
       .header__buttons {
         > *:nth-child(1) {
           color: white !important;
-          background-color: var(--color-dark-1) !important;
+              background-color: red !important;
           border-color: var(--color-dark-1) !important;
 
           &:hover {
@@ -505,7 +505,7 @@
             background-color: color-opac(blue-1, 0.05) !important;
 
             .icon {
-              margin-right: 12px;
+                margin-right: 12px;
               transform: rotate(90deg);
             }
           }
@@ -523,7 +523,7 @@
     }
     .mr-20 {
       order: 2;
-      margin-right: 0 !important;
+        margin-right: 0 !important;
     }
     .header-logo {
       order: 1;

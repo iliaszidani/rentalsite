@@ -1,4 +1,14 @@
+"use client";
+
+import { useEffect, useState } from 'react';
+
 const LocationFilter = () => {
+  const [dir, setDir] = useState('ltr');
+
+  useEffect(() => {
+    const direction = document.documentElement.getAttribute("dir");
+    setDir(direction);
+  }, []);
   const filters = [
     {
       label: "Airport (meet & greet)",
@@ -20,7 +30,7 @@ const LocationFilter = () => {
               <div className="form-checkbox__mark">
                 <div className="form-checkbox__icon icon-check" />
               </div>
-              <div className="text-15 ml-10">{filter.label}</div>
+              <div className={`text-15 ${dir === "ltr"? "ml-10":"mr-10"} `}>{filter.label}</div>
             </div>
           </div>
           <div className="col-auto">

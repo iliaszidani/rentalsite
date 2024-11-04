@@ -1,25 +1,25 @@
 import Image from "next/image";
 
-const Block1 = () => {
+const Block1 = ({t}) => {
   return (
     <>
       <div className="col-lg-5">
-        <h2 className="text-30 fw-600">BIENVENUE À L’AGENCE DE LOCATION RENTAL 365</h2>
-        <p className="mt-5">RENTAL 365 La plateforme leader mondial de réservation de location de voitures </p>
+        <h2 className="text-30 fw-600">{t("Welcome.title")}</h2>
+        <p className="mt-5">{t("Welcome.desc")}</p>
         <p className="text-dark-1 mt-60 lg:mt-40 md:mt-20">
      
 
-  L’agence de location de voiture Rental 365, n’a cessé de se développer grâce à une politique de qualité rigoureuse et d’évolution permanente.
+   {t('Welcome.morrDesc.phrase_1')}
 <br></br>
-L’activité de Rental 365 est basée sur la location courte et longue durée de véhicules au profit des particuliers et des sociétés.
+{t('Welcome.morrDesc.phrase_2')}
 <br></br>
-L’agence de location de voiture Rental 365 a su s’imposer sur le marché marocain par son professionnalisme, sa qualité de service, ainsi qu’un excellent rapport qualité prix.
+{t('Welcome.morrDesc.phrase_3')}
 
 <br></br>
-- Ponctualité, rigueur, sérieux sont les maîtres mots qui caractérisent le développement de la société Rental 365.
+{t('Welcome.morrDesc.phrase_4')}
 <br></br>
 
-- La ponctualité est une valeur clé de Rental 365, ce qui signifie que l'agence s'efforce d'être à l'heure pour la livraison et la récupération des véhicules loués. Cela garantit aux clients qu'ils peuvent compter sur l'agence pour respecter leurs engagements en matière de temps et de planification.
+{t('Welcome.morrDesc.phrase_5')}
 
 
 

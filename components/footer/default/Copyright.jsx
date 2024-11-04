@@ -1,22 +1,14 @@
 import Social from "../../common/social/Social";
 
-const Copyright = () => {
+const Copyright = ({t}) => {
   return (
     <div className="row justify-between items-center y-gap-10">
       <div className="col-auto">
         <div className="row x-gap-30 y-gap-10">
           <div className="col-auto">
             <div className="d-flex items-center">
-              © {new Date().getFullYear()} par
-              <a
-                href="https://themeforest.net/user/ib-themes"
-                className="mx-2"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                 Rental 356
-              </a>
-              Tous droits réservés.
+              © {new Date().getFullYear()  }{' '}
+              {t("Footer.copyright")} 
             </div>
           </div>
           {/* End .col */}

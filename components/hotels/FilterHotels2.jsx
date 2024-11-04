@@ -6,20 +6,27 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import isTextMatched from "../../utils/isTextMatched";
 import Link from "next/link";
+import axiosInstance from "@/lib/axiosConfig";
 
-const FilterHotels2 = ({ filterOption, cars }) => {
+const FilterHotels2 = ({ filterOption, cars, t }) => {
   const [filteredItems, setFilteredItems] = useState([]);
-  const [selectedBrand, setSelectedBrand] = useState("All"); // Marque par défaut
+  const [selectedBrand, setSelectedBrand] = useState(t("CarsByBrandSection.all")); // Marque par défaut
   const [brands, setBrands] = useState([]);
+  const [direction, setDirection] = useState('ltr');
 
   useEffect(() => {
+    const dir = document.documentElement.getAttribute('dir');
+    setDirection(dir);
+  }, []);
+  
+  useEffect(() => {
     // Récupération des marques depuis l'API
-    fetch("http://localhost/car-rental-api/public/api/get-all-brands-for-client")
-      .then((response) => response.json())
-      .then((data) => {
+    axiosInstance.get("/api/get-all-brands-for-client")  //removed: http://localhost/car-rental-api/public
+      .then((response) => {
+        const data = response.data;
         const carBrands = new Set(cars.map((car) => car.brands.brand_name));
         const filteredBrands = [
-          "All",
+          t("CarsByBrandSection.all"),
           ...data
             .map((brand) => brand.brand_name)
             .filter((brand) => carBrands.has(brand)),
@@ -35,7 +42,7 @@ const FilterHotels2 = ({ filterOption, cars }) => {
     const brandFilteredItems = (cars || []).filter((item) => {
       console.log("selectedBrand", selectedBrand);
       return (
-        selectedBrand === "All" || item?.brands?.brand_name === selectedBrand
+        selectedBrand === t("CarsByBrandSection.all") || item?.brands?.brand_name === selectedBrand
       );
     });
     setFilteredItems(brandFilteredItems);
@@ -66,10 +73,13 @@ const FilterHotels2 = ({ filterOption, cars }) => {
   }
 
   return (
+    
     <div>
-      {/* Texte pour la sélection des marques */}
-      <div style={{ marginBottom: "10px", textAlign: "center" }}>
-        <label htmlFor="brandSelect"> Sélectionner une marque </label>
+      {cars.length === 0 ?<div style={{ marginBottom: "10px", textAlign: "center" }}> {t('CarsByBrandSection.noDataFound')} </div>: 
+      <>
+        {/* Texte pour la sélection des marques */}
+        <div style={{ marginBottom: "10px", textAlign: "center" }}>
+        <label htmlFor="brandSelect"> {t('CarsByBrandSection.selectBrand')} </label>
       </div>
 
       <div class="tabs_controls row x-gap-15 justify-center js-tabs-controls">
@@ -84,9 +94,9 @@ const FilterHotels2 = ({ filterOption, cars }) => {
        style={{
         margin: "0 5px",
         padding: "10px 20px",
-        backgroundColor: selectedBrand === brand ? "#dc3545" : "#f8f9fa",
-        color: selectedBrand === brand ? "#fff" : "#dc3545",
-        border: "1px solid #dc3545",
+        backgroundColor: selectedBrand === brand ? "#F7C83E" : "#051036",
+        color: selectedBrand === brand ? "#051036" : "#F7C83E",
+        border: "1px solid #F7C83E",
         borderRadius: "4px",
         cursor: "pointer",
         outline: "none",
@@ -132,7 +142,18 @@ const FilterHotels2 = ({ filterOption, cars }) => {
       <div
        className="row y-gap-30"
       >
-        {filteredItems.slice(0, 10).map((item) => (
+        {filteredItems.slice(0, 10).map((item) => 
+        {
+          console.log("item ", item)
+          var rateBasedOnRatings =  'Good';
+          if(item?.ratings < 2 ){rateBasedOnRatings = "VeryPoor"}else
+          if(item?.ratings < 4 ){rateBasedOnRatings = "Poor"}else
+          if(item?.ratings < 6 ){rateBasedOnRatings = "Average"}else
+          if(item?.ratings < 8 ){rateBasedOnRatings = "Good"}else
+          if(item?.ratings <= 10 ){rateBasedOnRatings = "Excellent"}else{
+            rateBasedOnRatings = 'Good' //now for test, make it null 
+          }
+        return (
           <div
             className="col-xl-3 col-lg-3 col-sm-6 aos-init aos-animate"
             key={item?.id}
@@ -155,7 +176,7 @@ const FilterHotels2 = ({ filterOption, cars }) => {
                     navigation={true}
                   >
                     <img
-                      src={item.image}
+                      src={item.image_url}
                       alt=""
                       style={{ objectFit: "cover", maxWidth: "100%" }}
                     />
@@ -181,11 +202,7 @@ const FilterHotels2 = ({ filterOption, cars }) => {
               </div>
               <div className="cardImage__leftBadge">
                 <div
-                  className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
-                    isTextMatched(item?.tag, "breakfast included")
-                      ? "bg-dark-1 text-white"
-                      : ""
-                  } ${
+                  className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase  ${
                     isTextMatched(item?.tag, "best seller")
                       ? "bg-blue-1 text-white"
                       : ""
@@ -208,18 +225,20 @@ const FilterHotels2 = ({ filterOption, cars }) => {
                 <span>{item?.car_name}</span>
               </h4>
               <p className="text-light-1 lh-14 text-14 mt-5">
-                {item?.location}
+              {item?.agencies.location.location_city}, {item?.agencies.location.location_country}  
               </p>
               <div className="d-flex items-center mt-20">
                 <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
-                  {item?.ratings}
+                  {item?.ratings ?? 7.8}
                 </div>
-                <div className="text-14 text-dark-1 fw-500 ml-10">
-                  Exceptionnel
+                <div className={`text-14 text-dark-1 fw-500 ${direction === 'ltr' ? 'ml-10' : 'mr-10'}`} >
+                  {t(`CarCard.reviewsType.${rateBasedOnRatings}`)}
                 </div>
-                <div className="text-14 text-light-1 ml-10">
-                  {item?.numberOfReviews} reviews
-                </div>
+                {item?.numberOfReviews || 1===1 &&   <div className={`text-14 text-light-1 ${direction === 'ltr' ? 'ml-10' : 'mr-10'}  `}  >
+                  {item?.numberOfReviews ?? "2,322"}&nbsp;
+                   {t("CarCard.reviews")}
+                </div>}
+              
               </div>
 
               {/* Ajout des informations sur l'adresse et la ville de l'agence */}
@@ -240,16 +259,20 @@ const FilterHotels2 = ({ filterOption, cars }) => {
 
               <div className="mt-5">
                 <div className="fw-500">
-                  Starting from{" "}
-                  <span className="text-blue-1">US${item?.car_price}</span>
+                {t("CarCard.priceStarts")}{" "}
+                  <span className="text-blue-1">   {t("CarCard.currency_DH")}{" "}{item?.car_price}</span>
                 </div>
               </div>
             </div>
             </Link>
 
           </div>
-        ))}
+        )}
+        )}
       </div>
+      </> 
+      }
+    
     </div>
   );
 };

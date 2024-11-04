@@ -16,7 +16,7 @@ import {
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const MainMenu = ({ style = "" }) => {
+const MainMenu = ({ style = "" , t}) => {
   const pathname = usePathname();
   const [isActiveParent, setIsActiveParent] = useState(false)
 
@@ -25,7 +25,7 @@ const MainMenu = ({ style = "" }) => {
       <ul className={`menu__nav ${style} -is-active`}>
         <li>
           <Link href="/home">
-            <span className="mr-10">Accueil</span>
+            <span className="mr-10">{t('home')}</span>
             
           </Link>
           {/* <ul className="subnav">
@@ -44,11 +44,11 @@ const MainMenu = ({ style = "" }) => {
         {/* End home page menu */}
 
         <li className={pathname === "/about" ? "current" : ""}>
-          <Link href="/about">À propos de nous</Link>
+          <Link href="/about">{t('about')}</Link>
         </li>
 
         <li className={pathname === "/cars" ? "current" : ""}>
-          <Link href="/cars">Voitures</Link>
+          <Link href="/cars">{t('cars')}</Link>
         </li>
         {/* End About menu */}
         
@@ -141,7 +141,7 @@ const MainMenu = ({ style = "" }) => {
         </li> */}
 
         <li className={pathname === "/contact" ? "current" : ""}>
-          <Link href="/contact">Contact</Link>
+          <Link href="/contact">{t('contact')}</Link>
         </li>
 
         

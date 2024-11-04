@@ -10,12 +10,21 @@ import MobileMenu from "../MobileMenu";
 import { useSelector, useDispatch } from "react-redux";
 
 import { logoutUser } from "@/features/user/thunk";
+import { useTranslations } from "next-intl";
 
 const Header3 = () => {
   const [navbar, setNavbar] = useState(false);
   const { user } = useSelector((state) => state.user);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
+  const t = useTranslations('Common.NavebarComponent')
+
+  const [direction, setDirection] = useState('ltr');
+
+  useEffect(() => {
+    const dir = document.documentElement.getAttribute('dir');
+    setDirection(dir);
+  }, []);
 
   const dispatch = useDispatch();
   const changeBackground = () => {
@@ -56,7 +65,7 @@ const Header3 = () => {
 
   return (
     <>
-      <header className={`header bg-white ${navbar ? "is-sticky" : ""}`}>
+      <header className={`header  ${navbar ? "is-sticky" : ""}`} style={{backgroundColor:"#F7C83E"}}>
         <div className="header__container px-30 sm:px-20">
           <div className="row justify-between items-center">
             <div className="col-auto">
@@ -73,9 +82,10 @@ const Header3 = () => {
                 {/* <HeaderSearch /> */}
                 {/* End logo */}
 
-                <div className="header-menu" style={{marginLeft: "7rem"}}>
+                <div className="header-menu" style={{ marginLeft: direction === 'ltr' ? '7rem' : '0',
+        marginRight: direction === 'rtl' ? '7rem' : '0', }}>
                   <div className="header-menu__content">
-                    <MainMenu style="text-dark-1" />
+                    <MainMenu style="text-dark-1"  t={t}/>
                   </div>
                 </div>
                 {/* End header-menu */}
@@ -86,7 +96,7 @@ const Header3 = () => {
 
             <div className="col-auto">
               < div className="d-flex items-center">
-                <div className="row x-gap-20 items-center xxl:d-none">
+                <div className="row x-gap-20 items-center xl:d-none">
                   {/* <CurrenctyMegaMenu textClass="text-dark-1" /> */}
                   {/* End Megamenu for Currencty */}
 
@@ -96,7 +106,7 @@ const Header3 = () => {
                   </div>
                   {/* End vertical devider*/}
 
-                  <LanguageMegaMenu textClass="text-dark-1" />
+                  <LanguageMegaMenu textClass="text-dark-1" t={t} />
                   {/* End Megamenu for Language */}
                 </div>
                 {/* End language and currency selector */}
@@ -106,10 +116,10 @@ const Header3 = () => {
                 {!user.user ? (
                   <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
                     <Link
-                      href="/signup"
+                      href="/login"
                       className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
                     >
-                      Se connecter / S'inscrire
+                      {t('signIn')} / {t('signUp')}
                     </Link>
                   </div>
                 ) : (
@@ -142,7 +152,7 @@ const Header3 = () => {
                                 d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
                               />
                             </svg>
-                            Profile
+                              {t('profile')}
                           </Link>
                           <button
                             className="dropdown-item"
@@ -165,7 +175,7 @@ const Header3 = () => {
                                 d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
                               />
                             </svg>
-                            Logout
+                            {t('logout')}
                           </button>
                         </div>
                       )}
@@ -175,15 +185,17 @@ const Header3 = () => {
                 {/* End btn-group */}
 
                 {/* Start mobile menu icon */}
-                <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-dark-1">
+                <div className="d-none items-center ml-20 is-menu-opened-hide md:d-flex">
                   {!user.user && (
                     <div>
                       <Link
                         href="/login"
                         className="d-flex items-center icon-user text-inherit text-22"
-                      />
+                        />
                     </div>
                   )}
+                  </div>
+                <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-dark-1">
                   <div>
                     <button
                       className="d-flex items-center icon-menu text-inherit text-20"
@@ -199,7 +211,7 @@ const Header3 = () => {
                       aria-labelledby="offcanvasMenuLabel"
                       data-bs-scroll="true"
                     >
-                      <MobileMenu />
+                      <MobileMenu t={t}/>
                       {/* End MobileMenu */}
                     </div>
                   </div>

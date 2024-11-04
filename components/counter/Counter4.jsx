@@ -1,37 +1,37 @@
-const Counter4 = () => {
-  const blockContent = [
-    {
-      id: 1,
-      number: "751",
-      meta: "destinations desservies à travers le maroc",
-      hasUnit: "",
-      delayAnim: "100",
-    },
-    {
-      id: 2,
-      number: "200",
-      meta: "propriétés disponibles pour répondre à vos besoins de location",
-      hasUnit: "",
-      delayAnim: "200",
-    },
-    {
-      id: 3,
-      number: "800",
-      meta: "clients satisfaits",
-      hasUnit: "",
-      delayAnim: "300",
-    },
-    {
-      id: 4,
-      number: "90",
-      meta: "voitures Neuves",
-      hasUnit: "%",
-      delayAnim: "400",
-    },
-  ];
+const Counter4 = ({content}) => {
+  // const blockContent = [
+  //   {
+  //     id: 1,
+  //     number: "751",
+  //     meta: "destinations desservies à travers le maroc",
+  //     hasUnit: "",
+  //     delayAnim: "100",
+  //   },
+  //   {
+  //     id: 2,
+  //     number: "200",
+  //     meta: "propriétés disponibles pour répondre à vos besoins de location",
+  //     hasUnit: "",
+  //     delayAnim: "200",
+  //   },
+  //   {
+  //     id: 3,
+  //     number: "800",
+  //     meta: "clients satisfaits",
+  //     hasUnit: "",
+  //     delayAnim: "300",
+  //   },
+  //   {
+  //     id: 4,
+  //     number: "90",
+  //     meta: "voitures Neuves",
+  //     hasUnit: "%",
+  //     delayAnim: "400",
+  //   },
+  // ];
   return (
     <>
-      {blockContent.map((item) => (
+      {content.map((item) => (
         <div
           className="col-sm-6"
           key={item.id}

@@ -1,10 +1,10 @@
 import MainFilterSearchBox from "./MainFilterSearchBox";
 
-const index = () => {
+const index = ({t}) => {
   return (
     <section className="masthead -type-3 z-5">
       <div className="masthead__bg">
-        <img alt="image" src="/img/general/auto.jpg" className="js-lazy" />
+        <img alt="image" src="/img/general/auto.avif" className="js-lazy" />
       </div>
       <div className="container">
         <div className="row justify-center">
@@ -14,7 +14,7 @@ const index = () => {
                 className="text-60 lg:text-40 md:text-30 text-white"
                 data-aos="fade-up"
               >
-                Louez avec Confort et Flexibilité
+                {t('title')}
 
               </h1>
               <p
@@ -22,7 +22,7 @@ const index = () => {
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-               <h6> Découvrez notre large gamme de véhicules pour répondre à tous vos besoins de voyage et  déplacement.
+               <h6>      {t('titleDetails')}
                </h6>
               </p>
             </div>
@@ -32,8 +32,9 @@ const index = () => {
               className="masthead__tabs" 
               data-aos="fade-up" 
               data-aos-delay="200" 
+            
             >
-              <MainFilterSearchBox isHome={true} />
+              <MainFilterSearchBox isHome={true} t={t}/>
             </div>
             {/* End tab-filter */}
           </div>

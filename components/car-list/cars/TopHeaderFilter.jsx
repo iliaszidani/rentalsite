@@ -2,11 +2,11 @@
 "use client";
 
 import { useDispatch } from "react-redux";
-import {sortCarsByPrice} from "@/features/car/carSlice";
-const TopHeaderFilter = ({  isAscending, sortedCarsLength }) => {
+import {filterAll, sortCarsByPrice} from "@/features/car/carSlice";
+const TopHeaderFilter = ({  isAscending, sortedCarsLength , t }) => {
   // increment 
   const dispatch = useDispatch();
-  const messageCarsCount =  sortedCarsLength === 0 ?"Ops, no cars found. Try to change the search filter" : sortedCarsLength ===1 ? `${sortedCarsLength} car found.`: `${sortedCarsLength} cars found.` ;
+  const messageCarsCount =  sortedCarsLength === 0 ?t("CarsPage.noCarsFound") : sortedCarsLength ===1 ? `${sortedCarsLength} ${t("CarsPage.carFound")}`: `${sortedCarsLength}  ${t("CarsPage.carsFound")}` ;
   return (
     <>
       <div className="row y-gap-10 items-center justify-between">
@@ -24,11 +24,11 @@ const TopHeaderFilter = ({  isAscending, sortedCarsLength }) => {
   <button className="button-blue-1 h-40 px-20 rounded-100 bg-blue-1-05 text-15 text-blue-1" 
   type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   <i className="icon-up-down text-14 mr-10" />
-  Sort
+  {t("CarsPage.sortBtn")}
   </button>
   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
   <li><button className="dropdown-item bg-blue-1-05 text-15 text-blue-1" 
-   onClick={()=>dispatch(sortCarsByPrice())} >Sort by price {isAscending ? 
+   onClick={()=>dispatch(filterAll({reqSort:true}))} > {t("CarsPage.sortContent")} {isAscending ? 
     <p className="p-icon">   
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="size-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 18.75 7.5-7.5 7.5 7.5" />
@@ -50,7 +50,7 @@ stroke="currentColor" className="size-6">
                 className="button -blue-1 h-40 px-20 rounded-100 bg-blue-1-05 text-15 text-blue-1"
               >
                 <i className="icon-up-down text-14 mr-10" />
-                Filter
+                {t("CarsPage.filterBtn")}
               </button>
             </div>
             {/* End .col */}

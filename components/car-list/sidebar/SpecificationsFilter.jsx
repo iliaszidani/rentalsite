@@ -1,56 +1,48 @@
 'use client'
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setSpecificationFilter } from '@/features/car/carSlice';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterAll } from '@/features/car/carSlice';
 
-const filterCarsBySpecification = (cars, spec, values) => {
-  return cars.filter(car => values.includes(car[spec]));
-};
-
-const SpecificationsFilter = ({ cars, handleSpecificationsChange }) => {
+const SpecificationsFilter = ({t}) => {
   const dispatch = useDispatch();
+  const filters = useSelector(state => state.car.filters); // Get current filters
+  const filteredCars = useSelector(state => state.car.filteredCars); // Get filtered cars
+
   const [selectedSpecifications, setSelectedSpecifications] = useState({
     climate_control: [],
     gps: [],
     doors: [],
   });
+
+  const [dir, setDir] = useState('ltr');
   
-  const [filteredCars, setFilteredCars] = useState({
-    climate_control: [],
-    gps: [],
-    doors: [],
-  });
+    useEffect(() => {
+      const direction = document.documentElement.getAttribute("dir");
+      setDir(direction);
+    }, []);
 
-  useEffect(() => {
-    setFilteredCars({
-      climate_control: filterCarsBySpecification(cars, 'climate_control', [1]),
-      gps: filterCarsBySpecification(cars, 'gps', [1]),
-      doors: filterCarsBySpecification(cars, 'doors', [5]),
-    });
-    console.log('filteredCars', filteredCars);
-  }, [cars]);
-  useEffect(() => {
-    dispatch(setSpecificationFilter(selectedSpecifications));
-    // setSpecificationFilter(selectedSpecifications);
-  }, [selectedSpecifications]);
-
+  // Handle filter change dynamically
   const handleCheckboxChange = (spec, value) => {
-    console.log('handleCheckboxChange', spec, value);
-    setSelectedSpecifications(prevSelectedSpecifications => {
-      const specValues = prevSelectedSpecifications[spec];
-      console.log('specValues', specValues);
-      const newSpecValues = specValues.includes(value)
-      
-        ? specValues.filter(v => v !== value)
-        : [...specValues, value];
-        console.log('newSpecValues', newSpecValues);
-      return {
-        ...prevSelectedSpecifications,
+    setSelectedSpecifications(prevState => {
+      const newSpecValues = prevState[spec].includes(value)
+        ? prevState[spec].filter(v => v !== value)
+        : [...prevState[spec], value];
+
+      const updatedSpecifications = {
+        ...prevState,
         [spec]: newSpecValues,
       };
+
+      // Dispatch updated filters to Redux
+      dispatch(filterAll({
+    
+        specifications:updatedSpecifications , // Pass updated specifications
+      }));
+
+      return updatedSpecifications;
     });
-    console.log('selectedSpecifications', selectedSpecifications);
   };
+
   return (
     <>
       <div className="row y-gap-10 items-center justify-between">
@@ -64,14 +56,16 @@ const SpecificationsFilter = ({ cars, handleSpecificationsChange }) => {
             <div className="form-checkbox__mark">
               <div className="form-checkbox__icon icon-check" />
             </div>
-            <div className="text-15 ml-10">Climate Control</div>
+            <div className={`text-15   ${dir === "ltr"? "ml-10":"mr-10"} `}>{t("CarsPage.SideFilter.Specifications.climateControl")}</div>
           </div>
         </div>
         <div className="col-auto">
-          <div className="text-15 text-light-1">{filteredCars.climate_control.length}</div>
+          <div className="text-15 text-light-1">
+            {filteredCars.filter(car => car.climate_control === 1).length}
+          </div>
         </div>
       </div>
-      {/* End .row */}
+
       <div className="row y-gap-10 items-center justify-between">
         <div className="col-auto">
           <div className="form-checkbox d-flex items-center">
@@ -83,14 +77,16 @@ const SpecificationsFilter = ({ cars, handleSpecificationsChange }) => {
             <div className="form-checkbox__mark">
               <div className="form-checkbox__icon icon-check" />
             </div>
-            <div className="text-15 ml-10">GPS</div>
+            <div className={`text-15   ${dir === "ltr"? "ml-10":"mr-10"} `}>GPS</div>
           </div>
         </div>
         <div className="col-auto">
-          <div className="text-15 text-light-1">{filteredCars.gps.length}</div>
+          <div className="text-15 text-light-1">
+            {filteredCars.filter(car => car.gps === 1).length}
+          </div>
         </div>
       </div>
-      {/* End .row */}
+
       <div className="row y-gap-10 items-center justify-between">
         <div className="col-auto">
           <div className="form-checkbox d-flex items-center">
@@ -102,14 +98,15 @@ const SpecificationsFilter = ({ cars, handleSpecificationsChange }) => {
             <div className="form-checkbox__mark">
               <div className="form-checkbox__icon icon-check" />
             </div>
-            <div className="text-15 ml-10">5 Doors</div>
+            <div className={`text-15   ${dir === "ltr"? "ml-10":"mr-10"} `}>5 {t("CarsPage.SideFilter.Specifications.doors")}</div>
           </div>
         </div>
         <div className="col-auto">
-          <div className="text-15 text-light-1">{filteredCars.doors.length}</div>
+          <div className="text-15 text-light-1">
+            {filteredCars.filter(car => car.doors === 5).length}
+          </div>
         </div>
       </div>
-      {/* End .row */}
     </>
   );
 };

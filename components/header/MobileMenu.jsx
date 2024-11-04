@@ -25,8 +25,9 @@ import Social from "../common/social/Social";
 import ContactInfo from "./ContactInfo";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import LanguageMegaMenu from "./LanguageMegaMenu";
 
-const MobileMenu = () => {
+const MobileMenu = ({t}) => {
   const pathname = usePathname();
 
   const [isActiveParent, setIsActiveParent] = useState(false)
@@ -196,7 +197,7 @@ const MobileMenu = () => {
             }
              
             >
-              Accueil
+              {t('home')}
             </MenuItem>
             <MenuItem
              onClick={()=>router.push("/about")}
@@ -205,7 +206,7 @@ const MobileMenu = () => {
             }
              
             >
-             À propos de nous
+                 {t('about')}
             </MenuItem>
             <MenuItem
              onClick={()=>router.push("/cars")}
@@ -214,7 +215,7 @@ const MobileMenu = () => {
             }
              
             >
-             Voitures
+                  {t('cars')}
             </MenuItem>
             <MenuItem
              onClick={()=>router.push("/contact")}
@@ -223,7 +224,7 @@ const MobileMenu = () => {
             }
              
             >
-              Contact
+                   {t('contact')}
             </MenuItem>
             {/* End Contact  Menu */}
           </Menu>
@@ -234,9 +235,10 @@ const MobileMenu = () => {
       <div className="mobile-footer px-20 py-5 border-top-light"></div>
 
       <div className="pro-footer">
-        <ContactInfo />
+          <LanguageMegaMenu textClass="text-dark-1 mb-5" t={t} />
+        <ContactInfo t={t} />
         <div className="mt-10">
-          <h5 className="text-16 fw-500 mb-10">Follow us on social media</h5>
+          <h5 className="text-16 fw-500 mb-10">     {t('followUs')}</h5>
           <div className="d-flex x-gap-20 items-center">
             <Social />
           </div>
@@ -244,9 +246,9 @@ const MobileMenu = () => {
         <div className="mt-20">
           <Link
             className=" button -dark-1 px-30 fw-400 text-14 bg-blue-1 h-50 text-white"
-            href="/login"
+            href="/become-expert"
           >
-            Become An Expert
+            {t('becomeAnExpert')}
           </Link>
         </div>
       </div>

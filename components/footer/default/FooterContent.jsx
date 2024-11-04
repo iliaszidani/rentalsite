@@ -1,7 +1,7 @@
 import Link from "next/link";
-import footerDataContent from "../../../data/footerContent";
+// import footerDataContent from "../../../data/footerContent";
 
-const FooterContent = () => {
+const FooterContent = ({footerDataContent}) => {
   return (
     <>
       {footerDataContent.map((item) => (

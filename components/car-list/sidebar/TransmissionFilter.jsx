@@ -1,17 +1,24 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {setTransmissionFilter} from '@/features/car/carSlice'
+import {filterAll, setTransmissionFilter} from '@/features/car/carSlice'
 
 const filterCarsByTransmission = (cars, transmission) => {
   return cars.filter(car => car.transmission === transmission);
 };
 
-const TransmissionFilter = ({ cars, handleTransmissionChange }) => { 
+const TransmissionFilter = ({ cars, handleTransmissionChange, t }) => { 
   const dispatch = useDispatch(); 
   const [selectedTransmissions, setSelectedTransmissions] = useState([]);
   const [automaticCars, setAutomaticCars] = useState([]);
   const [manualCars, setManualCars] = useState([]);
+
+  const [dir, setDir] = useState('ltr');
+  
+  useEffect(() => {
+    const direction = document.documentElement.getAttribute("dir");
+    setDir(direction);
+  }, []);
 
   useEffect(() => {
     setAutomaticCars(filterCarsByTransmission(cars, 'Automatic'));
@@ -19,7 +26,7 @@ const TransmissionFilter = ({ cars, handleTransmissionChange }) => {
   }, [cars]);
 
   useEffect(() => {
-    dispatch(setTransmissionFilter(selectedTransmissions));
+    dispatch(filterAll(selectedTransmissions));
   }, [selectedTransmissions]);
 
   const handleCheckboxChange = (transmission) => {
@@ -43,7 +50,7 @@ const TransmissionFilter = ({ cars, handleTransmissionChange }) => {
             <div className="form-checkbox__mark">
               <div className="form-checkbox__icon icon-check" />
             </div>
-            <div className="text-15 ml-10">Automatic</div>
+            <div className={`text-15  ${dir === "ltr"? "ml-10":"mr-10"} `}>{t("CarsPage.Gear.automatic")}</div>
           </div>
         </div>
         <div className="col-auto">
@@ -62,7 +69,7 @@ const TransmissionFilter = ({ cars, handleTransmissionChange }) => {
             <div className="form-checkbox__mark">
               <div className="form-checkbox__icon icon-check" />
             </div>
-            <div className="text-15 ml-10">Manual</div>
+            <div className={`text-15  ${dir === "ltr"? "ml-10":"mr-10"} `}>{t("CarsPage.Gear.manual")}</div>
           </div>
         </div>
         <div className="col-auto">

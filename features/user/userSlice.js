@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { loginUser, logoutUser, registerUser } from "./thunk";
+import { loginUser, logoutUser, registerUser, sendMailPassword } from "./thunk";
 import Cookies from "js-cookie";
  
 
@@ -32,6 +32,15 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(sendMailPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.errorList = action.payload.errorList;
+        state.error = action.payload.message;
+      })
+      .addCase(sendMailPassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = {};
+      })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
  

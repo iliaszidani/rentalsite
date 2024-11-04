@@ -1,0 +1,271 @@
+{
+  "Common":{
+    "cars":"Voitures",
+    "NavebarComponent": {
+      "home": "Accueil",
+      "about": "À propos de nous",
+      "cars": "Voitures",
+      "contact": "Contact",
+      "signIn": "Se connecter",
+      "signUp": "S'inscrire",
+      "profile":"Profile", 
+       "logout":"Se deconnecter",
+       "followUs":"Suivez-nous sur les réseaux sociaux",
+       "becomeAnExpert":"Devenez un expert",
+       "selectLangugage":"Sélectionnez votre langue",
+       "needSupport":"Bien besoin d'assistance en direct ?",
+       "customerCare":"Service client gratuit",
+       "Languages":{
+         
+        "englishLang": "anglais",
+        "englishCountry": "Royaume-Uni",
+        "spanishLang": "espagnol",
+        "spanishCountry": "Espagne",
+        "frenchLang": "français",
+        "frenchCountry": "France",
+        "italianLang": "italien",
+        "italianCountry": "Italie",
+        "arabicLang": "arabe",
+        "arabicCountry": "Maroc",
+        "portugueseLang": "portugais",
+        "portugueseCountry": "Portugal",
+        "germanLang": "allemand",
+        "germanCountry": "Allemagne"
+       }
+    },
+    "Mailer":{
+      "title":"Votre voyage commence ici",
+      "desc":"Inscrivez-vous et nous vous enverrons les meilleures offres",
+      "email":"Ton mail",
+      "subscribe":"S'abonner"
+    },
+    "Footer":{
+      "contactUs":"Contactez Nous",
+      "phone":"Téléphone",
+      "email":"Mail",
+      "informations":"Informations",
+      "support":"Support",
+      "offres":"Offres",
+      "privacyPolicy":"politique de confidentialité",
+      "Terms&Conditions":"Termes et conditions",
+      "siteMap":"Plan du site",
+      "copyright":"par Rental 356 Tous droits réservés.",
+      "privacy":"politique",
+      "terms":"Termes"
+    }
+  },
+ 
+    "HomePage": {
+      "title": "Louez avec Confort et Flexibilité",
+      "titleDetails": "Découvrez notre large gamme de véhicules pour répondre à tous vos besoins de voyage et  déplacement.",
+      "BookingForm":{
+        "type":"Voiture",
+        "pickUpLocation":"Lieu de prise en charge:",
+        "dropOffLocation":"Lieu de restitution:",
+        "pickUpDate":"Date de prise en charge:",
+        "dropOffdate":"Date de restitution:",
+        "search":"Chercher",
+        "dropOffDifferentLocations":"Je souhaite restituer la voiture à un autre endroit" ,
+      "cityOrAirport":"Ville ou aéroport",
+      "selectDateAndTime":"Date et l'heure"
+      },
+      "WhyUsSection":{
+        "whyUs":"Pourquoi nous choisir?",
+        "whyUsResponse":"Nous nous engageons à fournir des véhicules de qualité et un service exceptionnel !",
+        "CompetitiveRates":"Tarifs Compétitifs",
+        "FlexiblePricing":"Que vous ayez besoin d'une voiture pour une journée ou pour un mois, nos tarifs s'adaptent à vos besoins spécifiques.",
+        "WideSelection":"Large Sélection de Véhicules",
+        "DiverseQuality":"Mettez en avant la diversité et la qualité de votre flotte de véhicules.",
+        "ExceptionalService":"Service Client Exceptionnel",
+        "ServiceQuality":"Mettez en avant la qualité de votre service client et comment vous vous assurez ."
+      },
+      "CarsByBrandSection":{
+        "title":"Chercher par marque",
+        "selectBrand":"Sélectionner une marque",
+        "all":"tout",
+        "noDataFound":"Rien à afficher, revenez plus tard."
+      
+      },
+
+  
+      "CarCard":{
+        "reviews":"avis",
+        "reviewsType":{
+          "VeryPoor":"Très Mauvais",
+          "Poor":"Mauvais",
+          "Average":"Moyen",
+          "Good":"Bien",
+          "Excellent":"Excellent"
+        },
+        "priceStarts":"À partir de",
+        "currency_DH":"MAD" 
+      },
+
+      "Destinations":{
+        "title":"Destinations",
+        "desc":"Ces destinations populaires ont beaucoup à offrir !",
+        "discover":"découvrir",
+        "welcomeTitle":"BIENVENUE À L'AGENCE DE LOCATION RENTAL 365",
+        "welcomeDetails":"Explorez Rental 365, la plateforme de réservation de location de voitures de renommée mondiale, offrant une expérience exceptionnelle à ses utilisateurs. Découvrez pourquoi des milliers de clients choisissent RENTAL 365 pour leurs voyages et leurs déplacements."
+        ,"more":"Plus",
+        "cars":"voitures",
+        "Statistics":{
+          "destinations":"destinations desservies à travers le maroc",
+          "properties":"propriétés disponibles pour répondre à vos besoins de location",
+          "clients":"clients satisfaits",
+          "cars":"voitures Neuves"
+        }
+      },
+
+      "DownloadAppSection":{
+        "store":"Boutique",
+        "title":"Download the App",
+        "desc":"Book in advance or last-minute with GoTrip. Receive instant confirmation.",
+        "download":"Télécharger dans",
+        "Apple":{
+          "store":"l'App Store"
+        },
+        "Android":{
+          "store":"Google Play"
+        }
+      },
+      "FAQSection":{
+        "title":"FAQ - Questions Fréquemment Posées",
+        "desc":"Tout ce que vous devez savoir pour une location sans soucis"
+        ,"One":{
+          "title":"Comment puis-je réserver une voiture sur rental 365 ?",
+          "content":"Pour réserver une voiture sur rental 365, il vous suffit de visiter notre site web, de choisir votre destination, de sélectionner les dates et heures de location, et de parcourir les options disponibles. Une fois que vous avez trouvé la voiture qui vous convient, cliquez sur 'Réserver' et suivez les instructions pour finaliser votre réservation."
+        }
+        ,"Two":{
+          "title": "Quels documents dois-je fournir pour louer une voiture ?",
+          "content": "Vous devrez fournir un permis de conduire valide, une pièce d'identité (comme un passeport ou une carte d'identité), et une carte de crédit au nom du conducteur principal pour le dépôt de garantie."
+        
+        }
+        ,"Three":{
+          "title": "Y a-t-il une limite d'âge pour louer une voiture ?",
+          "content": "Oui, l'âge minimum pour louer une voiture sur rental 365 est de 21 ans. Cependant, certaines catégories de véhicules peuvent avoir des restrictions d'âge spécifiques. Veuillez vérifier les conditions de location pour chaque voiture."
+      
+        }
+        ,"Four":{
+          "title": "Quels sont les modes de paiement acceptés ?",
+          "content": "Nous acceptons les principales cartes de crédit (Visa, MasterCard, American Express) pour les paiements en ligne. Certaines locations peuvent également permettre le paiement par carte de débit. Vérifiez les options de paiement disponibles lors de la réservation."
+        }
+        ,"Five":{
+          "title": "Que faire en cas de panne ou d'accident ?",
+          "content": "En cas de panne ou d'accident, contactez immédiatement notre service d'assistance routière 24h/24 et 7j/7. Les numéros de téléphone d'urgence sont inclus dans votre contrat de location. Suivez les instructions fournies et assurez-vous de signaler tout incident dans les plus brefs délais."
+    
+        }
+      }
+   
+    },
+    "AboutPage":{
+      "aboutUs":"À propos de nous",
+      "aboutUsdesc":"La plateforme leader mondiale de la location de voitures",
+      "WhyUsSection":{
+
+        "whyUs":"Pourquoi nous choisir?",
+        "whyUsdesc":"Nous nous engageons à fournir des véhicules de qualité et un service exceptionnel !",
+        "tarif":"Tarifs Compétitifs",
+        "tarifDesc":"Que vous ayez besoin d'une voiture pour une journée ou pour un mois, nos tarifs s'adaptent à vos besoins spécifiques.",
+        "largeSelection":"Large Sélection de Véhicules",
+        "largeSelectionDesc":"Mettez en avant la diversité et la qualité de votre flotte de véhicules.",
+        "serviceClient":"Service Client Exceptionnel",
+        "serviceClientDesc":"Mettez en avant la qualité de votre service client et comment vous vous assurez ."
+      },
+      "Welcome":{
+
+        "title":"BIENVENUE À L’AGENCE DE LOCATION RENTAL 365",
+        "desc":"RENTAL 365 La plateforme leader mondiale de la location de voitures",
+        "morrDesc":{
+          "phrase_1":"L’agence de location de voiture Rental 365, n’a cessé de se développer grâce à une politique de qualité rigoureuse et d’évolution permanente.",
+          "phrase_2":"L’activité de Rental 365 est basée sur la location courte et longue durée de véhicules au profit des particuliers et des sociétés.",
+          "phrase_3":"L’agence de location de voiture Rental 365 a su s’imposer sur le marché marocain par son professionnalisme, sa qualité de service, ainsi qu’un excellent rapport qualité prix.",
+          "phrase_4":"- Ponctualité, rigueur, sérieux sont les maîtres mots qui caractérisent le développement de la société Rental 365.",
+          "phrase_5":"- La ponctualité est une valeur clé de Rental 365, ce qui signifie que l'agence s'efforce d'être à l'heure pour la livraison et la récupération des véhicules loués. Cela garantit aux clients qu'ils peuvent compter sur l'agence pour respecter leurs engagements en matière de temps et de planification."
+        }
+      },
+      "Statistics":{
+        "destinations":"Destinations",
+        "properties":"Propriétés totales",
+        "satistfyClients":"Clients satisfaits",
+        "volunteers":"nos bénévoles"
+      },
+      "Testimonial":{
+        "title":"Testimonial",
+        "ourClients":"Nos clients",
+        "translatedByGoogle":"Ce texte a été traduit par Google Translate  (voir l'original)",
+        "satistfyClients":"Clients Satisfaits",
+        "notes":"Notes",
+        "user_type_male":"client",
+        "user_type_female":"client"
+      }
+    },
+    "CarsPage":{
+      "title":"Réservez votre Voiture, Soyez Satisfaits !",
+      "carsFound":"voitures trouvé.",
+      "carFound":"voiture trouvé.",
+      "noCarsFound":"Ops, aucune voiture trouvée. Essayez de changer le filtre de recherche.",
+      "sortBtn":"Trier",
+      "sortContent":"Trier par prix",
+      "filterBtn":"Filtre",
+      "reviews":"avis",
+        "reviewsType":{
+          "VeryPoor":"Très Mauvais",
+          "Poor":"Mauvais",
+          "Average":"Moyen",
+          "Good":"Bien",
+          "Excellent":"Excellent"
+        },
+        "Gear":{
+
+          "automatic":"Automatique",      
+          "manual":"Manuelle"    
+        },
+        "Fuel":{
+          "diesel":"Diesel",
+          "gasoline":"Essence",
+          "electrical":"Électrique",
+          "hybrid":"Hybride"
+        },
+        "airConditioning":"climatisation",
+        "unlimited":"Illimité",
+        "freeAmendments":"Modifications gratuites",
+        "FreeCancellation":"Annulation gratuite",
+        "total":"totale",
+        "detailBtn":"Voir Details",
+        "SideFilter":{
+          "location":"Location", 
+          "categories":"catégories",
+          "price":"prix",
+          "currency":"MAD",
+          "reviews":"Note des commentaires",
+          "ReviewsType":{
+            "veryPoor":"1 - 2",
+            "poor":"3 - 4",
+            "average":"5 - 6",
+            "good":"Bien : 7 et plus",
+            "veryGood":"Très bien : 8 et plus",
+            "excellent":"Fabuleux : 9 et plus"
+          },
+          "Specifications":{
+            "title":"Specifications",
+            "climateControl":"Climatisation",
+            "doors":"Doors"
+          },
+          "transmission":"Transmission",
+          "fuel":"Carburant"
+        },
+        "orSimilar":" ou similaire" 
+     
+    },
+    "carDetails":{
+      "showOnMap":"Afficher sur la carte",
+      "share":"Partager",
+      "save":"Enregistrer",
+      "reviews":"Avis",
+      "for":"Pour",
+      "day_s":"Jour(s)" 
+    }
+  }
+
+ 

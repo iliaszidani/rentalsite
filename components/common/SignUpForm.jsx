@@ -310,6 +310,7 @@ const SignUpForm = () => {
                 </svg>
               </div>
             </button>
+            <Link href="/become-expert" style={{textDecoration:"underline"}}>Joins us and create a Expert account</Link>
           </div>
         </>
       )}

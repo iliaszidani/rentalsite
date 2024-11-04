@@ -14,7 +14,7 @@ const Address = () => {
       title: "Phone",
       content: (
         <>
-          <a href="tel:+(212) 6 61 32 73 67">+(212) 6 61 32 73 67</a>
+          <a href="tel:+(212) 6 61 32 73 67" dir="ltr">+(212) 6 61 32 73 67</a>
         </>
       ),
     },

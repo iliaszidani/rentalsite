@@ -1,0 +1,252 @@
+{
+  "Common": {
+    "cars": "Carros",
+    "NavebarComponent": {
+      "home": "Início",
+      "about": "Sobre nós",
+      "cars": "Carros",
+      "contact": "Contato",
+      "signIn": "Entrar",
+      "signUp": "Cadastrar-se",
+      "profile": "Perfil",
+      "logout": "Sair",
+      "followUs": "Siga-nos nas redes sociais",
+      "becomeAnExpert": "Torne-se um especialista",
+      "selectLangugage": "Selecione seu idioma",
+      "needSupport":"Precisa de suporte ao vivo?",
+      "customerCare":"Atendimento ao cliente gratuito",
+      "Languages": {
+        "englishLang": "inglês",
+        "englishCountry": "Reino Unido",
+        "spanishLang": "espanhol",
+        "spanishCountry": "Espanha",
+        "frenchLang": "francês",
+        "frenchCountry": "França",
+        "italianLang": "italiano",
+        "italianCountry": "Itália",
+        "arabicLang": "árabe",
+        "arabicCountry": "Marrocos",
+        "portugueseLang": "português",
+        "portugueseCountry": "Portugal",
+        "germanLang": "alemão",
+        "germanCountry": "Alemanha"
+      }
+    },
+    "Mailer": {
+      "title": "Sua jornada começa aqui",
+      "desc": "Inscreva-se e enviaremos as melhores ofertas",
+      "email": "Seu e-mail",
+      "subscribe": "Inscrever-se"
+    },
+    "Footer": {
+      "contactUs": "Contate-Nos",
+      "phone": "Telefone",
+      "email": "E-mail",
+      "informations": "Informações",
+      "support": "Suporte",
+      "offres": "Ofertas",
+      "privacyPolicy": "Política de Privacidade",
+      "Terms&Conditions": "Termos e Condições",
+      "siteMap": "Mapa do site",
+      "copyright": "por Rental 365 Todos os direitos reservados.",
+      "privacy": "Privacidade",
+      "terms": "Termos"
+    }
+  },
+
+  "HomePage": {
+    "title": "Alugue com Conforto e Flexibilidade",
+    "titleDetails": "Explore nossa ampla gama de veículos para atender a todas as suas necessidades de viagem.",
+    "BookingForm": {
+      "type": "Carro",
+      "pickUpLocation": "Local de retirada:",
+      "dropOffLocation": "Local de devolução:",
+      "pickUpDate": "Data de retirada:",
+      "dropOffdate": "Data de devolução:",
+      "search": "Buscar",
+      "dropOffDifferentLocations": "Quero devolver o carro em um local diferente",
+      "cityOrAirport": "Cidade ou Aeroporto",
+      "selectDateAndTime": "Data e Hora"
+    },
+    "WhyUsSection": {
+      "whyUs": "Por que nos escolher?",
+      "whyUsResponse": "Comprometemo-nos a fornecer veículos de qualidade e um serviço excepcional!",
+      "CompetitiveRates": "Taxas competitivas",
+      "FlexiblePricing": "Quer precise de um carro por um dia ou por um mês, nossas tarifas se ajustam às suas necessidades específicas.",
+      "WideSelection": "Grande seleção de veículos",
+      "DiverseQuality": "Destaque a diversidade e qualidade da sua frota.",
+      "ExceptionalService": "Atendimento ao Cliente Excepcional",
+      "ServiceQuality": "Destaque a qualidade do seu atendimento ao cliente e como você garante a satisfação."
+    },
+    "CarsByBrandSection": {
+      "title": "Buscar por Marca",
+      "selectBrand": "Selecione uma marca",
+      "all": "Todos",
+      "noDataFound":"Nada a mostrar, volte mais tarde."
+    },
+   
+    "CarCard": {
+      "reviews": "avaliações",
+      "reviewsType": {
+        "VeryPoor": "Muito Ruim",
+        "Poor": "Ruim",
+        "Average": "Médio",
+        "Good": "Bom",
+        "Excellent": "Excelente"
+      },
+      "priceStarts": "A partir de",
+      "currency_DH": "MAD"
+    },
+    "Destinations": {
+      "title": "Destinos",
+      "desc": "Esses destinos populares têm muito a oferecer!",
+      "discover": "descubra",
+      "welcomeTitle": "BEM-VINDO À AGÊNCIA DE ALUGUEL DE CARROS RENTAL 365",
+      "welcomeDetails": "Explore a Rental 365, a plataforma de reservas de aluguel de carros mundialmente conhecida, que oferece uma experiência excepcional para seus usuários. Descubra por que milhares de clientes escolhem a RENTAL 365 para suas viagens e transporte.",
+      "more": "Mais",
+      "cars": "carros",
+      "Statistics": {
+        "destinations": "destinos atendidos em todo o Marrocos",
+        "properties": "veículos disponíveis para atender às suas necessidades de aluguel",
+        "clients": "clientes satisfeitos",
+        "cars": "Novos carros"
+      }
+    },
+    "DownloadAppSection": {
+      "store": "Loja",
+      "title": "Baixe o Aplicativo",
+      "desc": "Reserve com antecedência ou de última hora com GoTrip. Receba confirmação instantânea.",
+      "download": "Baixar da",
+      "Apple": {
+        "store": "App Store"
+      },
+      "Android": {
+        "store": "Google Play"
+      }
+    },
+    "FAQSection": {
+      "title": "FAQ - Perguntas Frequentes",
+      "desc": "Tudo o que você precisa saber para alugar um carro sem problemas",
+      "One": {
+        "title": "Como posso reservar um carro na Rental 365?",
+        "content": "Para reservar um carro na Rental 365, basta visitar nosso site, escolher seu destino, selecionar as datas e horários de aluguel e navegar pelas opções disponíveis. Assim que encontrar o carro que atenda às suas necessidades, clique em 'Reservar' e siga as instruções para finalizar sua reserva."
+      },
+      "Two": {
+        "title": "Quais documentos preciso para alugar um carro?",
+        "content": "Você precisará fornecer uma carteira de motorista válida, uma identificação (como passaporte ou RG) e um cartão de crédito em nome do condutor principal para o depósito."
+      },
+      "Three": {
+        "title": "Há limite de idade para alugar um carro?",
+        "content": "Sim, a idade mínima para alugar um carro na Rental 365 é 21 anos. No entanto, algumas categorias de veículos podem ter restrições específicas de idade. Verifique os termos de aluguel para cada carro."
+      },
+      "Four": {
+        "title": "Quais formas de pagamento são aceitas?",
+        "content": "Aceitamos os principais cartões de crédito (Visa, MasterCard, American Express) para pagamentos online. Alguns aluguéis também permitem pagamento com cartão de débito. Verifique as opções de pagamento disponíveis durante o processo de reserva."
+      },
+      "Five": {
+        "title": "O que devo fazer em caso de avaria ou acidente?",
+        "content": "Em caso de avaria ou acidente, entre em contato imediatamente com o nosso serviço de assistência 24/7. Os números de emergência estão incluídos no seu contrato de aluguel. Siga as instruções e relate o incidente o mais rápido possível."
+      }
+    }
+  },
+  "AboutPage": {
+    "aboutUs": "Sobre Nós",
+    "aboutUsdesc": "A plataforma líder mundial de aluguel de carros.",
+    "WhyUsSection": {
+      "whyUs": "Por que nos escolher?",
+      "whyUsdesc": "Estamos comprometidos em fornecer veículos de qualidade e um serviço excepcional!",
+      "tarif": "Tarifas Competitivas",
+      "tarifDesc": "Se você precisar de um carro por um dia ou um mês, nossas tarifas se adaptam às suas necessidades específicas.",
+      "largeSelection": "Grande Seleção de Veículos",
+      "largeSelectionDesc": "Destaque a diversidade e qualidade de sua frota de veículos.",
+      "serviceClient": "Atendimento ao Cliente Excepcional",
+      "serviceClientDesc": "Enfatize a qualidade do seu atendimento ao cliente e como você garante a satisfação."
+    },
+    "Welcome": {
+      "title": "BEM-VINDO À AGÊNCIA DE ALUGUEL DE CARROS RENTAL 365",
+      "desc": "RENTAL 365 A plataforma líder mundial de aluguel de carros.",
+      "morrDesc": {
+        "phrase_1": "A agência de aluguel de carros Rental 365 desenvolveu-se continuamente graças a uma política rigorosa de qualidade e evolução constante.",
+        "phrase_2": "A atividade da Rental 365 baseia-se no aluguel de veículos de curto e longo prazo para indivíduos e empresas.",
+        "phrase_3": "A Rental 365 se estabeleceu no mercado marroquino por seu profissionalismo, qualidade de serviço e excelente custo-benefício.",
+        "phrase_4": "- Pontualidade, rigor e seriedade são as palavras-chave que caracterizam o desenvolvimento da Rental 365.",
+        "phrase_5": "- A pontualidade é um valor fundamental da Rental 365, o que significa que a agência se esforça para estar no horário para a entrega e recolha dos veículos alugados. Isso garante aos clientes que podem contar com a agência para cumprir seus compromissos de tempo e planejamento."
+      }
+    },
+    "Statistics": {
+      "destinations": "Destinos",
+      "properties": "Propriedades Totais",
+      "satistfyClients": "Clientes Satisfeitos",
+      "volunteers": "Nossos Voluntários"
+    },
+    "Testimonial": {
+      "title": "Depoimentos",
+      "ourClients": "Nossos Clientes",
+      "translatedByGoogle": "Este texto foi traduzido pelo Google Tradutor (ver original)",
+      "satistfyClients": "Clientes Satisfeitos",
+      "notes": "Notas",
+      "user_type_male": "cliente",
+      "user_type_female": "cliente"
+    }
+  },
+  
+    "CarsPage": {
+      "title": "Reserve seu carro, fique satisfeito!",
+      "carsFound": "carros encontrados.",
+      "carFound": "carro encontrado.",
+      "noCarsFound": "Ops, nenhum carro encontrado. Tente mudar o filtro de busca.",
+      "sortBtn": "Ordenar",
+      "sortContent": "Ordenar por preço",
+      "filterBtn": "Filtro",
+      "reviews": "avaliações",
+      "reviewsType": {
+        "VeryPoor": "Muito Ruim",
+        "Poor": "Ruim",
+        "Average": "Médio",
+        "Good": "Bom",
+        "Excellent": "Excelente"
+      },
+      "Gear": {
+        "automatic": "Automático",
+        "manual": "Manual"
+      },
+      "Fuel": {
+        "diesel": "Diesel",
+        "gasoline": "Gasolina",
+        "electrical": "Elétrico",
+        "hybrid": "Híbrido"
+      },
+      "airConditioning": "ar condicionado",
+      "unlimited": "Ilimitado",
+      "freeAmendments": "Alterações gratuitas",
+      "FreeCancellation": "Cancelamento gratuito",
+      "total": "total",
+      "detailBtn": "Ver Detalhes",
+      "SideFilter": {
+        "location": "Localização",
+        "categories": "categorias",
+        "price": "preço",
+        "currency": "MAD",
+        "reviews": "Pontuação das avaliações",
+        "ReviewsType": {
+          "veryPoor": "1 - 2",
+          "poor": "3 - 4",
+          "average": "5 - 6",
+          "good": "Bom: 7 e mais",
+          "veryGood": "Muito Bom: 8 e mais",
+          "excellent": "Excelente: 9 e mais"
+        },
+        "Specifications": {
+          "title": "Especificações",
+          "climateControl": "Controle climático",
+          "doors": "Portas"
+        },
+        "transmission": "Transmissão",
+        "fuel": "Combustível"
+      },
+      "orSimilar": "ou similar"
+    }
+  
+  
+  
+}

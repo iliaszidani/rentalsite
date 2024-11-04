@@ -1,0 +1,247 @@
+{
+  "Common": {
+    "cars": "Cars",
+    "NavebarComponent": {
+      "home": "Home",
+      "about": "About Us",
+      "cars": "Cars",
+      "contact": "Contact",
+      "signIn": "Sign In",
+      "signUp": "Sign Up",
+      "profile": "Profile",
+      "logout": "Log Out",
+      "followUs": "Follow us on social media",
+      "becomeAnExpert": "Become an expert",
+      "selectLangugage": "Select your language",
+      "needSupport":"Need live support?",
+      "customerCare":"Toll Free Customer Care",
+      "Languages": {
+        "englishLang": "english",
+        "englishCountry": "United Kingdom",
+        "spanishLang": "spanish",
+        "spanishCountry": "Spain",
+        "frenchLang": "French",
+        "frenchCountry": "France",
+        "italianLang": "Italian",
+        "italianCountry": "Italy",
+        "arabicLang": "Arabic",
+        "arabicCountry": "Morocco",
+        "portugueseLang": "Portuguese",
+        "portugueseCountry": "Portugal",
+        "germanLang": "German",
+        "germanCountry": "Germany"
+      }
+    },
+    "Mailer": {
+      "title": "Your journey starts here",
+      "desc": "Sign up and we will send you the best deals",
+      "email": "Your email",
+      "subscribe": "Subscribe"
+    },
+    "Footer": {
+      "contactUs": "Contact Us",
+      "phone": "Phone",
+      "email": "Email",
+      "informations": "Information",
+      "support": "Support",
+      "offres": "Offers",
+      "privacyPolicy": "Privacy Policy",
+      "Terms&Conditions": "Terms and Conditions",
+      "siteMap": "Site Map",
+      "copyright": "by Rental 365 All rights reserved.",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    }
+  },
+  "HomePage": {
+    "title": "Rent with Comfort and Flexibility",
+    "titleDetails": "Explore our wide range of vehicles to meet all your travel needs.",
+    "BookingForm": {
+      "type": "Car",
+      "pickUpLocation": "Pick-up location:",
+      "dropOffLocation": "Drop-off location:",
+      "pickUpDate": "Pick-up date:",
+      "dropOffdate": "Drop-off date:",
+      "search": "Search",
+      "dropOffDifferentLocations": "I want to return the car at a different location",
+      "cityOrAirport": "City or Airport",
+      "selectDateAndTime": "Date and Time"
+    },
+    "WhyUsSection": {
+      "whyUs": "Why choose us?",
+      "whyUsResponse": "We are committed to providing quality vehicles and exceptional service!",
+      "CompetitiveRates": "Competitive Rates",
+      "FlexiblePricing": "Whether you need a car for a day or a month, our rates adjust to your specific needs.",
+      "WideSelection": "Wide Selection of Vehicles",
+      "DiverseQuality": "Highlight the diversity and quality of your fleet.",
+      "ExceptionalService": "Exceptional Customer Service",
+      "ServiceQuality": "Highlight the quality of your customer service and how you ensure satisfaction."
+    },
+    "CarsByBrandSection": {
+      "title": "Search by Brand",
+      "selectBrand": "Select a brand",
+      "all": "All",
+      "noDataFound":"Nothing to show, come back later."
+    },
+     
+    "CarCard": {
+      "reviews": "reviews",
+      "reviewsType": {
+        "VeryPoor": "Very Poor",
+        "Poor": "Poor",
+        "Average": "Average",
+        "Good": "Good",
+        "Excellent": "Excellent"
+      },
+      "priceStarts": "Starting from",
+      "currency_DH": "MAD"
+    },
+    "Destinations": {
+      "title": "Destinations",
+      "desc": "These popular destinations have much to offer!",
+      "discover": "discover",
+      "welcomeTitle": "WELCOME TO RENTAL 365 CAR RENTAL AGENCY",
+      "welcomeDetails": "Explore Rental 365, the world-renowned car rental booking platform offering an exceptional experience for its users. Discover why thousands of customers choose RENTAL 365 for their travels and transportation.",
+      "more": "More",
+      "cars": "cars",
+      "Statistics": {
+        "destinations": "destinations served across Morocco",
+        "properties": "properties available to meet your rental needs",
+        "clients": "satisfied customers",
+        "cars": "New cars"
+      }
+    },
+    "DownloadAppSection": {
+      "store": "Store",
+      "title": "Download the App",
+      "desc": "Book in advance or last-minute with GoTrip. Receive instant confirmation.",
+      "download": "Download from",
+      "Apple": {
+        "store": "App Store"
+      },
+      "Android": {
+        "store": "Google Play"
+      }
+    },
+    "FAQSection": {
+      "title": "FAQ - Frequently Asked Questions",
+      "desc": "Everything you need to know for a hassle-free rental",
+      "One": {
+        "title": "How can I book a car on rental 365?",
+        "content": "To book a car on rental 365, simply visit our website, choose your destination, select the rental dates and times, and browse the available options. Once you find the car that suits you, click 'Book' and follow the instructions to finalize your reservation."
+      },
+      "Two": {
+        "title": "What documents do I need to rent a car?",
+        "content": "You will need to provide a valid driver's license, identification (such as a passport or ID card), and a credit card in the main driver's name for the security deposit."
+      },
+      "Three": {
+        "title": "Is there an age limit to rent a car?",
+        "content": "Yes, the minimum age to rent a car on rental 365 is 21. However, some vehicle categories may have specific age restrictions. Please check the rental conditions for each car."
+      },
+      "Four": {
+        "title": "What payment methods are accepted?",
+        "content": "We accept major credit cards (Visa, MasterCard, American Express) for online payments. Some rentals may also allow debit card payments. Check the available payment options during the booking process."
+      },
+      "Five": {
+        "title": "What should I do in case of a breakdown or accident?",
+        "content": "In case of a breakdown or accident, contact our 24/7 roadside assistance immediately. Emergency phone numbers are included in your rental contract. Follow the provided instructions and make sure to report any incidents as soon as possible."
+      }
+    }
+  },"AboutPage": {
+    "aboutUs": "About Us",
+    "aboutUsdesc": "The world’s leading car rental platform.",
+    "WhyUsSection": {
+      "whyUs": "Why Choose Us?",
+      "whyUsdesc": "We are committed to providing quality vehicles and exceptional service!",
+      "tarif": "Competitive Rates",
+      "tarifDesc": "Whether you need a car for a day or a month, our rates adapt to your specific needs.",
+      "largeSelection": "Wide Selection of Vehicles",
+      "largeSelectionDesc": "Highlight the diversity and quality of your vehicle fleet.",
+      "serviceClient": "Exceptional Customer Service",
+      "serviceClientDesc": "Emphasize the quality of your customer service and how you ensure satisfaction."
+    },
+    "Welcome": {
+      "title": "WELCOME TO RENTAL 365 CAR RENTAL AGENCY",
+      "desc": "RENTAL 365 The world’s leading car rental platform.",
+      "morrDesc": {
+        "phrase_1": "Rental 365 car rental agency has continuously developed thanks to a rigorous quality policy and constant evolution.",
+        "phrase_2": "Rental 365's activity is based on short- and long-term vehicle rental for individuals and companies.",
+        "phrase_3": "Rental 365 has established itself in the Moroccan market through its professionalism, service quality, and excellent value for money.",
+        "phrase_4": "- Punctuality, rigor, and seriousness are the guiding principles behind Rental 365's growth.",
+        "phrase_5": "- Punctuality is a key value at Rental 365, meaning the agency strives to be on time for vehicle delivery and pick-up. This guarantees clients that they can rely on the agency to meet their time and planning commitments."
+      }
+    },
+    "Statistics": {
+      "destinations": "Destinations",
+      "properties": "Total Properties",
+      "satistfyClients": "Satisfied Clients",
+      "volunteers": "Our Volunteers"
+    },
+    "Testimonial": {
+      "title": "Testimonial",
+      "ourClients": "Our Clients",
+      "translatedByGoogle": "This text has been translated by Google Translate (see the original)",
+      "satistfyClients": "Satisfied Clients",
+      "notes": "Notes",
+      "user_type_male": "client",
+      "user_type_female": "client"
+    }
+  },
+  "CarsPage": {
+    "title": "Book Your Car, Be Satisfied!",
+    "carsFound": "cars found.",
+    "carFound": "car found.",
+    "noCarsFound": "Oops, no cars found. Try changing the search filter.",
+    "sortBtn": "Sort",
+    "sortContent": "Sort by price",
+    "filterBtn": "Filter",
+    "reviews": "reviews",
+    "reviewsType": {
+      "VeryPoor": "Very Poor",
+      "Poor": "Poor",
+      "Average": "Average",
+      "Good": "Good",
+      "Excellent": "Excellent"
+    },
+    "Gear": {
+      "automatic": "Automatic",
+      "manual": "Manual"
+    },
+    "Fuel": {
+      "diesel": "Diesel",
+      "gasoline": "Gasoline",
+      "electrical": "Electric",
+      "hybrid": "Hybrid"
+    },
+    "airConditioning": "air conditioning",
+    "unlimited": "Unlimited",
+    "freeAmendments": "Free Amendments",
+    "FreeCancellation": "Free Cancellation",
+    "total": "total",
+    "detailBtn": "View Details",
+    "SideFilter": {
+      "location": "Location",
+      "categories": "categories",
+      "price": "price",
+      "currency": "MAD",
+      "reviews": "Review score",
+      "ReviewsType": {
+        "veryPoor": "1 - 2",
+        "poor": "3 - 4",
+        "average": "5 - 6",
+        "good": "Good: 7 and up",
+        "veryGood": "Very Good: 8 and up",
+        "excellent": "Excellent: 9 and up"
+      },
+      "Specifications": {
+        "title": "Specifications",
+        "climateControl": "Climate Control",
+        "doors": "Doors"
+      },
+      "transmission": "Transmission",
+      "fuel": "Fuel"
+    },
+    "orSimilar": "or similar"
+  }
+  
+}

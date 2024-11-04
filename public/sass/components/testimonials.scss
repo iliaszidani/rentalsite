@@ -31,3 +31,13 @@
     }
   }
 }
+.googleTraductionStyle {
+  color: #777d78;
+  font-size: 0.75em;
+}
+
+.googleTraductionStyle:hover {
+  text-decoration: underline;
+  color: #555; /* Par exemple, un changement de couleur sur hover */
+  cursor: pointer;
+}

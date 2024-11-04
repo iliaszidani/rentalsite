@@ -1,7 +1,10 @@
+import { useTranslations } from "next-intl";
+
 
 const CallToActions = () => {
+  const t = useTranslations('Common.Mailer')
   return (
-    <section className="layout-pt-md layout-pb-md bg-dark-2">
+    <section className="layout-pt-md layout-pb-md " style={{backgroundColor:'#2c2c74'}}>
       <div className="container">
         <div className="row y-gap-30 justify-between items-center">
           <div className="col-auto">
@@ -11,10 +14,10 @@ const CallToActions = () => {
               </div>
               <div className="col-auto">
                 <h4 className="text-26 text-white fw-600">
-                Votre voyage commence ici
+                {t('title')}
                 </h4>
                 <div className="text-white">
-                Inscrivez-vous et nous vous enverrons les meilleures offres
+                {t('desc')}
                 </div>
               </div>
             </div>
@@ -27,14 +30,14 @@ const CallToActions = () => {
                 <input
                   className="bg-white h-60"
                   type="text"
-                  placeholder="Your Email"
+                  placeholder={t('email')}
                 />
               </div>
               {/* End email input */}
 
               <div>
-                <button className="button -md h-60 bg-blue-1 text-white">
-                S'abonner
+                <button className="button -md h-60  text-white" style={{backgroundColor:"rgb(247, 200, 62)"}}>
+                {t('subscribe')}
                 </button>
               </div>
               {/* End subscribe btn */}

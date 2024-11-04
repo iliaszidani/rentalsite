@@ -1,34 +1,5 @@
-const Counter = () => {
-  const blockContent = [
-    {
-      id: 1,
-      number: "958",
-      meta: "Destinations",
-      hasUnit: "",
-      delayAnim: "100",
-    },
-    {
-      id: 2,
-      number: "869",
-      meta: "Propriétés totales",
-      hasUnit: "",
-      delayAnim: "200",
-    },
-    {
-      id: 3,
-      number: "350",
-      meta: "Clients satisfaits",
-      hasUnit: "",
-      delayAnim: "300",
-    },
-    {
-      id: 4,
-      number: "958",
-      meta: "nos bénévoles",
-      hasUnit: "",
-      delayAnim: "400",
-    },
-  ];
+const Counter = ({blockContent}) => {
+ 
   return (
     <>
       {blockContent.map((item) => (

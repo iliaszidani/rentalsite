@@ -71,7 +71,7 @@
 import React, { useState, useEffect } from 'react';
 import InputRange from 'react-input-range';
 import { useDispatch, useSelector } from "react-redux";
-import {setCarsByPrice} from "@/features/car/carSlice";
+import {filterAll, setCarsByPrice} from "@/features/car/carSlice";
 
 const PriceSlider = () => {
   const { cars} = useSelector((state) => state.car);
@@ -92,8 +92,8 @@ const PriceSlider = () => {
     <div>
        <div className="d-flex justify-between mb-20">
         <div className="text-15 text-dark-1">
-          <span className="js-lower mx-1">${price.min}</span>-
-          <span className="js-upper mx-1">${price.max}</span>
+          <span className="js-lower mx-1">{price.min} MAD</span>-
+          <span className="js-upper mx-1">{price.max} MAD</span>
         </div>
        </div>
       <div>
@@ -104,7 +104,8 @@ const PriceSlider = () => {
           onChange={value => {
             setPrice(value)
             // filterCarsByPrice(value.min, value.max);
-            dispatch(setCarsByPrice(value))
+            // dispatch(setCarsByPrice(value))
+            dispatch(filterAll({price:value}));
           } }
         />
       </div> 

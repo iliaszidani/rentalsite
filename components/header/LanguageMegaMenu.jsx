@@ -1,40 +1,72 @@
 
 'use client'
 
+import Cookies from "js-cookie";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { startTransition, useEffect, useState } from "react";
 
-const LanguageMegaMenu = ({ textClass }) => {
+const LanguageMegaMenu = ({ textClass, t }) => {
+  const languageContent = [
+
+    { "id": 1, "language": "English", "country": "United Kingdom", "code": "en" },
+    { "id": 2, "language": "Español", "country": "España", "code": "es" },
+    { "id": 3, "language": "Français", "country": "France", "code": "fr" },
+    { "id": 4, "language": "Italiano", "country": "Italia", "code": "it" },
+    { "id": 5, "language": "العربية", "country": "المغرب", "code": "ar" },
+    { "id": 6, "language": "Português", "country": "Portugal", "code": "pt" },
+    { "id": 7, "language": "Deutsch", "country": "Deutschland", "code": "de" }
+  ];
+  const [localValue, setLocalValue] = useState('');
+  const [direction, setDirection] = useState('ltr');
+
+  useEffect(() => {
+    const dir = document.documentElement.getAttribute('dir');
+    setDirection(dir);
+  }, []);
+  useEffect(() => {
+    const cookieValue = Cookies.get('NEXT_LOCALE');
+    console.log("cookie ", cookieValue )
+    setLocalValue(cookieValue || '');
+  }, []);
   const [click, setClick] = useState(false);
+  const router = useRouter();
+ 
+  const curretLang = languageContent.find((e)=> e.code === localValue)
+  console.log("&& curretLang ", curretLang )
+
   const handleCurrency = () => setClick((prevState) => !prevState);
 
-  const languageContent = [
-    { id: 1, language: "English", country: "United States" },
-    { id: 2, language: "Türkçe", country: "Turkey" },
-    { id: 3, language: "Español", country: "España" },
-    { id: 4, language: "Français", country: "France" },
-    { id: 5, language: "Italiano", country: "Italia" },
-    { id: 6, language: "Dari, Pashto", country: "Afghanistan" },
-    { id: 7, language: "Albanian", country: "Albania" },
-    { id: 8, language: "Arabic", country: "	Morocco" },
-    { id: 9, language: "Catalan", country: "Andorra" },
-    { id: 10, language: "Portuguese	", country: "Angola" },
-    { id: 11, language: "Spanish", country: "Argentina" },
-    { id: 12, language: "Armenian", country: "Armenia" },
-    { id: 13, language: "English", country: "Australia" },
-    { id: 14, language: "German", country: "Austria" },
-    { id: 15, language: "Azerbaijani", country: "Azerbaijan" },
-    { id: 16, language: "Bengali", country: "Bangladesh" },
-    { id: 17, language: "English", country: "Barbados" },
-    { id: 18, language: "Belarusian", country: "Belarus" },
-    { id: 19, language: "Dutch, French", country: "Belgium" },
-    { id: 20, language: "English", country: "Belize" },
-  ];
 
-  const [selectedCurrency, setSelectedCurrency] = useState(languageContent[0]);
+  const [selectedCountry, setSelectedCountry] = useState(  languageContent[0]);
+  
 
   const handleItemClick = (item) => {
-    setSelectedCurrency(item);
+    const nextLocale = item.code;
+    setSelectedCountry(item);
+
+    // Get the current path
+    const currentPath = window.location.pathname;
+    console.log("*************************************");
+    console.log("currentPath ", currentPath);
+    const pathSegments = currentPath.split('/').filter(Boolean);
+    
+    console.log("pathSegments before ", pathSegments);
+    // Check if the first segment is a locale
+    if (languageContent.some(lang => lang.code === pathSegments[0])) {
+      console.log(true);
+      pathSegments[0] = nextLocale;
+    } else {
+      console.log(false);
+      pathSegments.unshift(nextLocale);
+    }
+    console.log("pathSegments after ", pathSegments);
+    
+    const newPath = `/${pathSegments.join('/')}`;
+    console.log("*************************************");
+
+    // Navigate to the new path
+    router.replace(newPath);
     setClick(false);
   };
 
@@ -42,6 +74,7 @@ const LanguageMegaMenu = ({ textClass }) => {
     <>
       {/* Start language currency Selector */}
       <div className="col-auto">
+     
         <button
           className={`d-flex items-center text-14 ${textClass}`}
           onClick={handleCurrency}
@@ -49,13 +82,13 @@ const LanguageMegaMenu = ({ textClass }) => {
           <Image
             width={20}
             height={20}
-            src="/img/general/lang.png"
-            alt="image"
-            className="rounded-full mr-10"
+            src={`/img/general/lang/lang_${ curretLang?.code || selectedCountry.code}.png`}
+            alt={`${ curretLang?.code || selectedCountry.code}`}
+            className={`rounded-full ${direction === 'ltr' ? 'mr-10' : 'ml-10'}`}  
           />
           <span className="js-language-mainTitle">
             {" "}
-            {selectedCurrency.country}
+            { curretLang?.language || selectedCountry.language}
           </span>
           <i className="icon-chevron-sm-down text-7 ml-15" />
         </button>
@@ -66,7 +99,7 @@ const LanguageMegaMenu = ({ textClass }) => {
         <div className="currencyMenu__bg" onClick={handleCurrency}></div>
         <div className="langMenu__content bg-white rounded-4">
           <div className="d-flex items-center justify-between px-30 py-20 sm:px-15 border-bottom-light">
-            <div className="text-20 fw-500 lh-15">Select your language</div>
+            <div className="text-20 fw-500 lh-15">{t("selectLangugage")}</div>
             {/* End title */}
             <button className="pointer" onClick={handleCurrency}>
               <i className="icon-close" />
@@ -78,7 +111,7 @@ const LanguageMegaMenu = ({ textClass }) => {
             {languageContent.map((item) => (
               <li
                 className={`modalGrid__item js-item ${
-                  selectedCurrency.country === item.country ? "active" : ""
+                  curretLang?.country  === item.country ? "active" : ""
                 }`}
                 key={item.id}
                 onClick={() => handleItemClick(item)}
@@ -102,3 +135,32 @@ const LanguageMegaMenu = ({ textClass }) => {
 };
 
 export default LanguageMegaMenu;
+
+/*
+
+const [selectedCountry, setSelectedCountry] = useState(languageContent[0]);
+useEffect(() => {
+  if (router.isReady) {
+    // Code using query
+    console.log("aaaaaaa" ,router.query);
+  }
+}, [router.isReady]);
+const handleItemClick = (item) => {
+  const nextLocale = item.code;
+  setSelectedCountry(item);
+  console.log("router.path: ", router.path);
+
+
+  startTransition(() => {
+    const currentPath = router.asPath || ''; // Fallback to an empty string if undefined
+    const newPath = `/${nextLocale}${currentPath.replace(/^\/[a-z]{2}/, `/${nextLocale}`)}`;
+    
+    // Navigate to the new path
+    router.replace(newPath);
+  });
+
+  // Navigate to the new path
+  router.replace(newPath);
+  setClick(false);
+};
+*/

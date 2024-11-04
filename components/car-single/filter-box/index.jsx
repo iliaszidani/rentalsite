@@ -8,13 +8,15 @@ import { setSearchData } from "@/features/searchData/searchDataSlice";
 import Alert from "@/components/common/Alert";
 import axiosInstance from "@/lib/axiosConfig";
 import Cookies from "js-cookie";
+import { setCoupon } from "@/features/car/carSlice";
 
-const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
+const index = ({ carDetails, setDays, setExtras, ExtrasValues, t , handleScrollToDriverInfoForm }) => {
   console.log(" ExtrasValues ", ExtrasValues);
   const { searchData } = useSelector((state) => state.searchData);
   const { activeCarExtras } = useSelector((state) => state.car);
   const { user } = useSelector((state) => state.user);
-
+  
+  const [couponCode, setCouponCode] = useState('');
   const dispatch = useDispatch();
   const [dataToSend, setDataToSend] = useState({
     pickUpAgence: "",
@@ -46,10 +48,9 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
   const handleBookSubmit = async  (e) => {
     e.preventDefault();
 
-
  
 
-   
+    dispatch(setCoupon(couponCode))
     
     setErrorList({});
     const pickUpTime = new Date(searchData.pick_up_time);
@@ -88,56 +89,59 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
         setErrorList(errors);
       }, 0);
     } else {
-      console.log("All dates are valid, proceed with booking.");
-      const token = Cookies.get("token");
+
+    handleScrollToDriverInfoForm();
+
+      // console.log("All dates are valid, proceed with booking.");
+      // const token = Cookies.get("token");
      
  
-      if(Object.keys(user).length == 0 || !token ||!user.token){
-        setErrorList({});
-        errors["Login Error"] = ["Please log in or create an account to proceed with your reservation."];
+      // if(Object.keys(user).length == 0 || !token ||!user.token){
+      //   setErrorList({});
+      //   errors["Login Error"] = ["Please log in or create an account to proceed with your reservation."];
 
-      // Update errorList after clearing to force the component to re-render
-      setTimeout(() => {
-        setErrorList(errors);
-      }, 0);
-        console.log("not logged ")
-        const width = 600;
-        const height = 700;
-        const left = (window.innerWidth - width) / 2;
-        const top = (window.innerHeight - height) / 2;
+      // // Update errorList after clearing to force the component to re-render
+      // setTimeout(() => {
+      //   setErrorList(errors);
+      // }, 0);
+      //   console.log("not logged ")
+      //   const width = 600;
+      //   const height = 700;
+      //   const left = (window.innerWidth - width) / 2;
+      //   const top = (window.innerHeight - height) / 2;
       
-        window.open('/login?close=true', 'Login', `width=${width},height=${height},top=${top},left=${left}`);
+      //   window.open('/login?close=true', 'Login', `width=${width},height=${height},top=${top},left=${left}`);
       
-        // window.open('/login', "_blank")
-      }else{
-        console.log("logged ")
+      //   // window.open('/login', "_blank")
+      // }else{
+      //   console.log("logged ")
 
-        const dataToSend = {
-          date_start: formatDateForMySQL(new Date(searchData.pick_up_time)),
-          date_end: formatDateForMySQL(new Date(searchData.drop_off_time)),
-          car_options: activeCarExtras, // Include selected extras
-        };
-        console.log("reservation dataToSend  ", dataToSend)
+      //   const dataToSend = {
+      //     date_start: formatDateForMySQL(new Date(searchData.pick_up_time)),
+      //     date_end: formatDateForMySQL(new Date(searchData.drop_off_time)),
+      //     car_options: activeCarExtras, // Include selected extras
+      //   };
+      //   console.log("reservation dataToSend  ", dataToSend)
         
          
-        try{
-          const response = await axiosInstance.post(`/api/cars/reserve/${carDetails.car.id}`, dataToSend)
-          console.log('response ', response)
-        }catch(e){
-          console.error('error /cars/reserve catch ', e )
-          if(e.response.message){
+      //   try{
+      //     const response = await axiosInstance.post(`/api/cars/reserve/${carDetails.car.id}`, dataToSend)
+      //     console.log('response ', response)
+      //   }catch(e){
+      //     console.error('error /cars/reserve catch ', e )
+      //     if(e.response.message){
 
-            errors["API Error"] = [e.response.message]; // Add the error message to the errors object
-          }else{
+      //       errors["API Error"] = [e.response.message]; // Add the error message to the errors object
+      //     }else{
 
-            errors["API Error"] = [e.message]; // Add the error message to the errors object
-          }
-          setErrorList({});
-          setTimeout(() => {
-            setErrorList(errors);
-          }, 0);
-        }
-      }
+      //       errors["API Error"] = [e.message]; // Add the error message to the errors object
+      //     }
+      //     setErrorList({});
+      //     setTimeout(() => {
+      //       setErrorList(errors);
+      //     }, 0);
+      //   }
+      // }
 
     }
     setErrorList({});
@@ -189,6 +193,7 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
         <div>
           <h4 className="text-15 fw-500 ls-2 lh-16">Date</h4>
           <DateSearch
+          t={t}
           carAvailabilities={carDetails.car.availabilities}
           // changeDataFilter={handleFilterChange}
           // initialData={initialData}
@@ -203,6 +208,7 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
         <div>
           <h4 className="text-15 fw-500 ls-2 lh-16">Date</h4>
           <DateSearch 
+            t={t}
           carAvailabilities={carDetails.car.availabilities}
           // changeDataFilter={handleFilterChange}
           // initialData={initialData}
@@ -218,7 +224,9 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
     {/* {
       check if vendor allow drop off in diffrent locations if true you should use the drop off locations
       searchData.isFilled && */} 
-    <div className="home-checkbox">
+      {
+        searchData.drop_off_agency.id &&
+        <div className="home-checkbox">
           <input
             id="searchbox-toolbox-drop-off-checkbox-desktop"
             type="checkbox"
@@ -227,21 +235,34 @@ const index = ({ carDetails, setDays, setExtras, ExtrasValues }) => {
             style={{ width: "50px" }}
             checked={searchData.isDifferentLocations}
             onChange={() => { 
-
+              
               dispatch( setSearchData({...searchData, isDifferentLocations: !searchData.isDifferentLocations}))
               
               // setDifferentLocations(!differentLocations)
-             }}
-          />
+            }}
+            />
           <label htmlFor="searchbox-toolbox-drop-off-checkbox-desktop">
             <span className={`checkbox-label text-dark  `}>
               Drop car off at different location
             </span>
           </label>
         </div>
+          }
     {/* } */}
    
-
+    <div className="col-12">
+      <div className="searchMenu-date px-20 py-10 border-light rounded-4 -right js-form-dd js-calendar">
+        <div>
+          <h4 className="text-15 fw-500 ls-2 lh-16">Coupon code</h4>
+           <input type="text" 
+            onChange={(e)=>{
+              console.log("e = ", e.target.value)
+              setCouponCode(e.target.value) 
+            }}
+           /> 
+        </div>
+      </div>
+    </div>
     <div className="col-12">
       <button
         className="button -dark-1 py-15 px-35 h-60 col-12 rounded-4 bg-yellow-1 text-dark-1"

@@ -2,7 +2,74 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 // import axios from axiosInstance
 import axiosInstance from "@/lib/axiosConfig";
+export const resetPassword = createAsyncThunk("user/resetPassword", async (formData ,{ rejectWithValue}) => {
+  try{
+    console.log("resetPassword formdata", formData);
+    const response = await axiosInstance.post("/api/password-email", formData);
+    console.log("response ", response);
+    return response.data;
+  }catch(error){
+    console.log("error ", error);
+      if (error.response) {
+        // Server responded with a status other than 200 range
+        console.error("Error response: ", error.response.data);
+        
+        return rejectWithValue({
+          success: false,
+          status_code: error.response.status,
+          error: true,
+          message: 'error de validation',
+          errorList: error.response.data.errorList || error.response.data
+        });
+      } else if (error.request) {
+        // Request was made but no response received
+        console.error("Error request: ", error.request);
+        return rejectWithValue({
+          success: false,
+          status_code: 500,
+          error: true,
+          message: 'No response from server',
+          errorList: error.request
+        });
+  
+}
+}
+}
+);
+export const sendMailPassword = createAsyncThunk("user/sendMailPassword", async ({ email} ,{ rejectWithValue}) => {
+  try{
 
+    const response = await axiosInstance.post("/api/password-email", { email });
+    console.log("response ", response);
+    return response.data;
+  }catch(error){
+    console.log("error ", error);
+      if (error.response) {
+        // Server responded with a status other than 200 range
+        console.error("Error response: ", error.response.data);
+        
+        return rejectWithValue({
+          success: false,
+          status_code: error.response.status,
+          error: true,
+          message: 'error de validation',
+          errorList: error.response.data.errorList || error.response.data
+        });
+      } else if (error.request) {
+        // Request was made but no response received
+        console.error("Error request: ", error.request);
+        return rejectWithValue({
+          success: false,
+          status_code: 500,
+          error: true,
+          message: 'No response from server',
+          errorList: error.request
+        });
+  
+}
+}
+}
+);
 export const loginUser = createAsyncThunk("user/loginUser", async ({ phone1_or_email, password} ,{ rejectWithValue}) => {
   try{
 
@@ -46,6 +113,7 @@ export const logoutUser = createAsyncThunk("user/logoutUser", async () => {
 
   export const registerUser = createAsyncThunk("user/registerUser", async (userObject, { rejectWithValue }) => {
     try {
+      console.log("registerUser thunk ", userObject)
       const response = await axiosInstance.post("/api/register", userObject);
       console.log("response ", response);
       return response.data;
