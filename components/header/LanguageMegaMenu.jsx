@@ -47,23 +47,23 @@ const LanguageMegaMenu = ({ textClass, t }) => {
 
     // Get the current path
     const currentPath = window.location.pathname;
-    console.log("*************************************");
-    console.log("currentPath ", currentPath);
+    // console.log("*************************************");
+    // console.log("currentPath ", currentPath);
     const pathSegments = currentPath.split('/').filter(Boolean);
     
-    console.log("pathSegments before ", pathSegments);
+    // console.log("pathSegments before ", pathSegments);
     // Check if the first segment is a locale
     if (languageContent.some(lang => lang.code === pathSegments[0])) {
-      console.log(true);
+      // console.log(true);
       pathSegments[0] = nextLocale;
     } else {
-      console.log(false);
+      // console.log(false);
       pathSegments.unshift(nextLocale);
     }
-    console.log("pathSegments after ", pathSegments);
+    // console.log("pathSegments after ", pathSegments);
     
     const newPath = `/${pathSegments.join('/')}`;
-    console.log("*************************************");
+    // console.log("*************************************");
 
     // Navigate to the new path
     router.replace(newPath);

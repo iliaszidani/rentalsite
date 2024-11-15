@@ -4,9 +4,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/lib/axiosConfig";
 export const resetPassword = createAsyncThunk("user/resetPassword", async (formData ,{ rejectWithValue}) => {
   try{
-    console.log("resetPassword formdata", formData);
+    // console.log("resetPassword formdata", formData);
     const response = await axiosInstance.post("/api/password-email", formData);
-    console.log("response ", response);
+    // console.log("response ", response);
     return response.data;
   }catch(error){
     console.log("error ", error);
@@ -40,7 +40,7 @@ export const sendMailPassword = createAsyncThunk("user/sendMailPassword", async 
   try{
 
     const response = await axiosInstance.post("/api/password-email", { email });
-    console.log("response ", response);
+    // console.log("response ", response);
     return response.data;
   }catch(error){
     console.log("error ", error);
@@ -74,7 +74,7 @@ export const loginUser = createAsyncThunk("user/loginUser", async ({ phone1_or_e
   try{
 
     const response = await axiosInstance.post("/api/login", { phone1_or_email, password });
-    console.log("response ", response);
+    // console.log("response ", response);
     return response.data;
   }catch(error){
     console.log("error ", error);
@@ -106,16 +106,16 @@ export const loginUser = createAsyncThunk("user/loginUser", async ({ phone1_or_e
 );
 
 export const logoutUser = createAsyncThunk("user/logoutUser", async () => {
-    console.log("is called ")
+    // console.log("is called ")
     const response = await axiosInstance.post("/api/logout");
     return response.data;
   });
 
   export const registerUser = createAsyncThunk("user/registerUser", async (userObject, { rejectWithValue }) => {
     try {
-      console.log("registerUser thunk ", userObject)
+      // console.log("registerUser thunk ", userObject)
       const response = await axiosInstance.post("/api/register", userObject);
-      console.log("response ", response);
+      // console.log("response ", response);
       return response.data;
     } catch (error) {
       console.log("error ", error);

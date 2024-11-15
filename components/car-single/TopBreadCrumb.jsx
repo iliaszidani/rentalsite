@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 
 const TopBreadCrumb = ({city, agence,id}) => {
   const t = useTranslations();
-  console.log("top bread ", agence)
+  // console.log("top bread ", agence)
   return (
     <section className="py-10 d-flex items-center bg-light-2">
       <div className="container">

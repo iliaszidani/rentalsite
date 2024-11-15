@@ -18,12 +18,12 @@ const ContactForm = () => {
  
     const data = Object.fromEntries(formData.entries());
 
-    console.log('ContactForm data:', data);
+    // console.log('ContactForm data:', data);
     // handle form submission logic here
     try {
       const response = await axiosInstance.post("/api/contact-us", data);
       const responseData = response.data;
-      console.log('response ', responseData);
+      // console.log('response ', responseData);
       
       setAPImessage( t("ApiResponse.success")); // Assuming the server response has a message field
       setError(false); // No error occurred

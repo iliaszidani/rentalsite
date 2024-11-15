@@ -25,7 +25,7 @@ import { useEffect, useState } from 'react';
 // }
 
 const CarProperties = ({ cars, t }) => {
-  console.log('les cars ' , cars);
+  // console.log('les cars ' , cars);
    
   const [dir, setDir] = useState('ltr');
   

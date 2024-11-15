@@ -101,7 +101,7 @@ const SignUpForm = () => {
   const router = useRouter();
   const { user, error, isLoading, errorList } = useSelector((slice) => slice.user);
 
-  console.log("is loading ", isLoading);
+  // console.log("is loading ", isLoading);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     first_name: "",

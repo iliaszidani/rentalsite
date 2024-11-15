@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 const PropertyHighlights = ({car}) => {
   const t = useTranslations("carDetails")
-  console.log("car", car)
+  // console.log("car", car)
   const propertyContent = [
     {
       id: 1,

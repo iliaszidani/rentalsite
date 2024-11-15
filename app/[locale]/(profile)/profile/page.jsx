@@ -279,7 +279,7 @@ const ClientProfile = () => {
         if (!showProfile) {
             axiosInstance.get(`/api/get-all-client-reservations`)
                 .then(response => {
-                  console.log("res ", response)
+                  // console.log("res ", response)
                     setReservations(response.data.all_client_reservations);
                 })
                 .catch(error => {
@@ -375,14 +375,14 @@ const ProfileForm = ({user}) => {
     
 
     for (let [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
+      // console.log(`${key}: ${value}`);
     }
 
     try {
-      console.log("formData ", formData);
+      // console.log("formData ", formData);
       // Send form data to server
       const response = await axiosInstance.post('/api/update-profile', formData);
-      console.log("response ", response)
+      // console.log("response ", response)
       const updatedUser = response.data;
 
       // Update Redux store with new user data
@@ -609,7 +609,7 @@ const ProfileForm = ({user}) => {
 };
 
 const ReservationTable = ({ reservations }) => {
-  console.log("ReservationTable", reservations)
+  // console.log("ReservationTable", reservations)
   
   const formatDateForDisplay = (date) => {
     const d = new Date(date);   

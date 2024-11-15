@@ -12,6 +12,7 @@ import { filterAll, filterCarByApi, setBookingDetails } from "@/features/car/car
 import { useTranslations } from "next-intl";
 import { fetchLocations } from "@/features/locations/thunk";
 import { fetchFilteredCars } from "@/features/car/thunk";
+import { store } from "@/store/store";
 
 const MainFilterSearchBox = ({isHome , initialData }) => {
 
@@ -24,7 +25,7 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
   const [resetTriggered, setResetTriggered] = useState(0); // Track reset state
 
   const handleReset = () => {
-    console.log("handleReset and call emptying data")
+    // console.log("handleReset and call emptying data")
     sessionStorage.removeItem("searchData");
     //call update search Data
     const initialState = {
@@ -38,7 +39,7 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
         drop_off_time: null,
       },
     };
-    console.log("prebv ", resetTriggered)
+    // console.log("prebv ", resetTriggered)
     setResetTriggered((prev)=>prev+1);
     dispatch( setSearchData(initialState.searchData));
  
@@ -46,9 +47,9 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
 
   useEffect(() => {
 
-    console.log("fetch location main filter search box ");
+    // console.log("fetch location main filter search box ");
     const dir = document.documentElement.getAttribute('dir');
-    dispatch(fetchLocations());
+    dispatch(fetchLocations()); 
 
     setDirection(dir);
   
@@ -81,8 +82,8 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
   // Convert FormData entries to an object
   const formValues = Object.fromEntries(formData.entries());
   
-  console.log(formValues);
-    console.log('submit using : ', formatedSearchData)
+  // console.log(formValues);
+    // console.log('submit using : ', formatedSearchData)
     dispatch(fetchFilteredCars(formatedSearchData));
     
     Router.push("/cars");
@@ -221,5 +222,12 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
   );
 };
 
+export const getServerSideProps = () =>{
+  store.dispatch()
+}
 
 export default MainFilterSearchBox;
+
+
+
+ 

@@ -20,11 +20,11 @@ const PaymentForm = forwardRef((props, ref) =>{
             return;
         }
 
-        console.log('Données de paiement:', {
-            cardNumber,
-            expirationDate,
-            securityCode,
-        });
+        // console.log('Données de paiement:', {
+        //     cardNumber,
+        //     expirationDate,
+        //     securityCode,
+        // });
     };
 
     // Styles en ligne

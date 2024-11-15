@@ -39,8 +39,8 @@ const DateSearch = ({ carAvailabilities , setDays,setDataToSend }) => {
   };
 
   const handleDateChange = (newDates) => {
-    console.log(" handleDateChange = (newDates) ", newDates)
-    console.log("before : ",dates);
+    // console.log(" handleDateChange = (newDates) ", newDates)
+    // console.log("before : ",dates);
     if (newDates.length === 2) {
       const [start, end] = newDates.map(date => date.toDate());
       const timeDifference = end.getTime() - start.getTime();
@@ -56,18 +56,18 @@ const DateSearch = ({ carAvailabilities , setDays,setDataToSend }) => {
         return false;
         
       }else{
-        console.log("entred here")
+        // console.log("entred here")
         setDates(newDates);
       
-          console.log("difference : ",end.getTime()," - ",start.getTime()," = " , timeDifference);
-          console.log("nbr des jours" , daysDifference);
+          // console.log("difference : ",end.getTime()," - ",start.getTime()," = " , timeDifference);
+          // console.log("nbr des jours" , daysDifference);
           setDays(daysDifference);
           setDataToSend((prev)=>({...prev,pickUpDate:start,dropOffDate:end}));
       }
     }
   
    
-    console.log("after : ",dates);
+    // console.log("after : ",dates);
   };
 
   return (

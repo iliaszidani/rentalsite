@@ -45,11 +45,11 @@ export const carSlice = createSlice({
   initialState,
   reducers: {
     filterCarByApi:(state,action) => {
-      console.log("filterCarByApi:", action);
+      // console.log("filterCarByApi:", action);
 
     },
     filterAll: (state, action) => {
-      console.log("filterAll called with action:", action);
+      // console.log("filterAll called with action:", action);
       if (!action.payload.reqSort) {
         state.filters = { ...state.filters, ...action.payload };
       }
@@ -190,7 +190,7 @@ export const carSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchFilteredCars.fulfilled, (state, action) => {
-        console.log('filtred cars ' , action )
+        // console.log('filtred cars ' , action )
         state.filteredCars = action.payload;
         state.totalPages = Math.ceil(state.filteredCars.length / state.itemsPerPage);
         state.isLoading = false;
@@ -203,7 +203,7 @@ export const carSlice = createSlice({
         state.reservationLoading = true;
       })
       .addCase(reserveCar.fulfilled , (state, action)=>{
-        console.log("reserve car success  act.pay" , action.payload)
+        // console.log("reserve car success  act.pay" , action.payload)
         state.carReservationReturnedData = action.payload.data;
         state.reservationLoading = false;
       })

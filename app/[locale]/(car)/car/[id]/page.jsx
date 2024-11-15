@@ -42,13 +42,13 @@ const CarSinglePage = ({ params }) => {
 
   // Step 2: Scroll handler function that scrolls to DriverInfoForm
   const scrollToDriverInfoForm = () => {
-    console.log("Scrolling to driver info form");
+    // console.log("Scrolling to driver info form");
     if (driverInfoRef.current) {
       driverInfoRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
   const scrollToPaymentForm = () => {
-    console.log("Scrolling to payment form");
+    // console.log("Scrolling to payment form");
     if (paymentRef.current) {
       paymentRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -83,7 +83,7 @@ const CarSinglePage = ({ params }) => {
         return notFound();
       }
       try {
-        console.log("Fetching car with id", id);
+        // console.log("Fetching car with id", id);
         const carData = await getCarData(id);
         setCar(carData);
       } catch (error) {
@@ -121,7 +121,7 @@ const CarSinglePage = ({ params }) => {
 
       const price = parseFloat(option.option_price);
       const isPerDay = option.option_type == 0; // 0: per day, 1: per rental
-      console.log("isPerDay ", isPerDay, " for ", option.option_name);
+      // console.log("isPerDay ", isPerDay, " for ", option.option_name);
       const extraCost = isPerDay
         ? price * nbrDays * extra.quantity
         : price * extra.quantity;
@@ -139,38 +139,38 @@ const CarSinglePage = ({ params }) => {
   //     const car2 = data.car;
   //     console.log('data ',data);
 
-  const faqContent = [
-    {
-      id: 1,
-      collapseTarget: "One",
-      title: t("FAQSection.One.title"),
-      content: t("FAQSection.One.content"),
-    },
-    {
-      id: 2,
-      collapseTarget: "Two",
-      title: t("FAQSection.Two.title"),
-      content: t("FAQSection.Two.content"),
-    },
-    {
-      id: 3,
-      collapseTarget: "Three",
-      title: t("FAQSection.Three.title"),
-      content: t("FAQSection.Three.content"),
-    },
-    {
-      id: 4,
-      collapseTarget: "Four",
-      title: t("FAQSection.Four.title"),
-      content: t("FAQSection.Four.content"),
-    },
-    {
-      id: 5,
-      collapseTarget: "Five",
-      title: t("FAQSection.One.title"),
-      content: t("FAQSection.One.content"),
-    },
-  ];
+  // const faqContent = [
+  //   {
+  //     id: 1,
+  //     collapseTarget: "One",
+  //     title: t("FAQSection.One.title"),
+  //     content: t("FAQSection.One.content"),
+  //   },
+  //   {
+  //     id: 2,
+  //     collapseTarget: "Two",
+  //     title: t("FAQSection.Two.title"),
+  //     content: t("FAQSection.Two.content"),
+  //   },
+  //   {
+  //     id: 3,
+  //     collapseTarget: "Three",
+  //     title: t("FAQSection.Three.title"),
+  //     content: t("FAQSection.Three.content"),
+  //   },
+  //   {
+  //     id: 4,
+  //     collapseTarget: "Four",
+  //     title: t("FAQSection.Four.title"),
+  //     content: t("FAQSection.Four.content"),
+  //   },
+  //   {
+  //     id: 5,
+  //     collapseTarget: "Five",
+  //     title: t("FAQSection.One.title"),
+  //     content: t("FAQSection.One.content"),
+  //   },
+  // ];
   return (
     <>
       <div className="header-margin"></div>

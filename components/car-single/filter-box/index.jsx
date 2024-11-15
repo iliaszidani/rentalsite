@@ -19,7 +19,7 @@ const index = ({
   t,
   handleScrollToDriverInfoForm,
 }) => {
-  console.log(" ExtrasValues ", ExtrasValues);
+  // console.log(" ExtrasValues ", ExtrasValues);
   const { searchData } = useSelector((state) => state.searchData);
   const { activeCarExtras } = useSelector((state) => state.car);
   const { user } = useSelector((state) => state.user);
@@ -264,7 +264,7 @@ const index = ({
             <input
               type="text"
               onChange={(e) => {
-                console.log("e = ", e.target.value);
+                // console.log("e = ", e.target.value);
                 setCouponCode(e.target.value);
               }}
             />

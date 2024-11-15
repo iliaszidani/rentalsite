@@ -104,7 +104,7 @@ const CategorieFilters = () => {
     const fetchCategories = async () => {
       try {
         const response = await axiosInstance.get('/api/get-all-categories-for-client'); // removed http://localhost/car-rental-api/public
-        console.log('Données reçues:', response.data);
+        // console.log('Données reçues:', response.data);
         setCategories(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des catégories:', error);

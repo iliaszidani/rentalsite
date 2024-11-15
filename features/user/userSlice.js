@@ -46,7 +46,7 @@ export const userSlice = createSlice({
  
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log("actikon ", action);
+        // console.log("actikon ", action);
         state.isLoading = false;
         state.user = action.payload;
         if (typeof window !== "undefined") {
@@ -66,7 +66,7 @@ export const userSlice = createSlice({
         Cookies.remove("token");
       })
       .addCase(logoutUser.rejected, (state ,action) => {
-        console.log('logoutUser.rejected ',  action.error)
+        // console.log('logoutUser.rejected ',  action.error)
        
       }).addCase(registerUser.pending, (state ) => {
         state.isLoading = true;
@@ -82,7 +82,7 @@ export const userSlice = createSlice({
         Cookies.set("token", action.payload.token);
        
       }).addCase(registerUser.rejected, (state ,action) => {
-          console.log("rejected ", action.payload.errorList.errorList);
+          // console.log("rejected ", action.payload.errorList.errorList);
         state.isLoading = false;
         state.error = action.error;
         state.errorList = action.payload.errorList.errorList;

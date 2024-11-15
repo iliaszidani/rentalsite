@@ -15,23 +15,23 @@ const ForgotPasswordForm = () => {
   const {errorList} = useSelector(state => state.user)
   useEffect(() => {
     if  (user?.token && searchParams.get('close') === 'true'){
-      console.log("a1 close");
+      // console.log("a1 close");
       window.close();
     }else if(user?.token && searchParams.get('close') != 'true'){
-      console.log("a1 push");
+      // console.log("a1 push");
       router.push("/"); // Navigate to home page after successful login
     }
   }, [user, router]);
 
 useEffect(()=>{
-  console.log("Object.entries:", Object.entries(errorList));
+  // console.log("Object.entries:", Object.entries(errorList));
 },[errorList])
   const handleChange = (event) => { 
     setCredentials((prev)=>({...prev, [event.target.name]:event.target.value }))
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("credentials:", credentials);
+    // console.log("credentials:", credentials);
    
   
     try {
@@ -40,12 +40,12 @@ useEffect(()=>{
   
       // Check if login was successful (you might need to adjust this based on your response structure)
       if (result.payload?.status === "Success") {
-        console.log("Mail is sent successful");
+        // console.log("Mail is sent successful");
   
         setMessage("Un mail a été envoyer pour changer le mot de passe");
         
       } else {
-        console.log("Mail is not sent ", );
+        // console.log("Mail is not sent ", );
         setMessage(response.data.message || 'Une erreur est survenue.');
       }
     } catch (error) {

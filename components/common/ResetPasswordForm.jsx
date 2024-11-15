@@ -28,10 +28,10 @@ const ResetPasswordForm = () => {
 
   useEffect(() => {
     if  (user?.token && searchParams.get('close') === 'true'){
-      console.log("a1 close");
+      // console.log("a1 close");
       window.close();
     }else if(user?.token && searchParams.get('close') != 'true'){
-      console.log("a1 push");
+      // console.log("a1 push");
       router.push("/"); // Navigate to home page after successful login
     }
   }, [user, router]);
@@ -44,7 +44,7 @@ const ResetPasswordForm = () => {
     event.preventDefault();
     if(  credentials.password  !== credentials.password_confirmation  ){ setNotMatching(true) }else  {setNotMatching(false);}
 
-    console.log("credentials:", credentials);
+    // console.log("credentials:", credentials);
 
     try {
       // Wait for the login to complete
@@ -52,12 +52,12 @@ const ResetPasswordForm = () => {
   
       // Check if login was successful (you might need to adjust this based on your response structure)
       if (result.payload?.status === "Success") {
-        console.log("Le mot de passe est changé avec succès");
+        // console.log("Le mot de passe est changé avec succès");
   
         setMessage("Le mot de passe est changé avec succès");
         
       } else {
-        console.log("Password does  not change ", );
+        // console.log("Password does  not change ", );
         setMessage(response.data.message || 'Une erreur est survenue.');
       }
     } catch (error) {

@@ -132,7 +132,7 @@ const ExpertSignUpForm = () => {
     (slice) => slice.user
   );
 
-  console.log("is loading ", isLoading);
+  // console.log("is loading ", isLoading);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     // Existing owner info
@@ -311,8 +311,8 @@ const ExpertSignUpForm = () => {
     if (formData.password !== formData.password_confirmation) return;
     const currentStepFields = requiredFields[step];
     const isValid = currentStepFields.every((field) => formData[field]);
-    console.log("step  :::", step);
-    console.log("formData  :::", formData);
+    // console.log("step  :::", step);
+    // console.log("formData  :::", formData);
     if (isValid) {
       setStep(step + 1);
     } else {
@@ -345,14 +345,14 @@ const ExpertSignUpForm = () => {
       }
       
     });
-    console.log('FormData contents:');
-    for (let [key, value] of newformData.entries()) {
-      if (value instanceof File) {
-        console.log(`${key}: ${value.name} (${value.size} bytes, ${value.type})`);
-      } else {
-        console.log(`${key}: ${value}`);
-      }
-    }
+    // console.log('FormData contents:');
+    // for (let [key, value] of newformData.entries()) {
+    //   if (value instanceof File) {
+    //     console.log(`${key}: ${value.name} (${value.size} bytes, ${value.type})`);
+    //   } else {
+    //     console.log(`${key}: ${value}`);
+    //   }
+    // }
     
     dispatch(registerUser(newformData));
     // console.log(formData);

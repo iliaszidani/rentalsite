@@ -38,7 +38,7 @@ const searchSlice = createSlice({
       state.searchData = action.payload;
       state.searchData.isFilled = true;
        if (state.searchData.pick_up_time && state.searchData.drop_off_time ) {
-        console.log("dkhol hna : state.searchData.pick_up_time",state.searchData.pick_up_time)
+        // console.log("dkhol hna : state.searchData.pick_up_time",state.searchData.pick_up_time)
          const pickUpTime = new Date(state.searchData.pick_up_time);
          const dropOffTime = new Date(state.searchData.drop_off_time);
          

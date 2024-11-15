@@ -46,14 +46,14 @@ const FuelTypeFilter = ({t}) => {
   }, [selectedFuelTypes]);
 
   const handleCheckboxChange = (fuelType) => {
-    console.log('car fuelType ',fuelType);
-    console.log('selected fuelTypes bef: ' ,selectedFuelTypes)
+    // console.log('car fuelType ',fuelType);
+    // console.log('selected fuelTypes bef: ' ,selectedFuelTypes)
     setSelectedFuelTypes(prevSelectedFuelTypes =>
       prevSelectedFuelTypes.includes(fuelType)
         ? prevSelectedFuelTypes.filter(type => type !== fuelType)
         : [...prevSelectedFuelTypes, fuelType]
     );
-    console.log('selected fuelTypes aft: ' ,selectedFuelTypes)
+    // console.log('selected fuelTypes aft: ' ,selectedFuelTypes)
   };
   return (
     <>

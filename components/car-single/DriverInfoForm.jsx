@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const DriverInfoForm = forwardRef((props, ref) => {
   const logedInUser = JSON.parse(localStorage.getItem("user"));
-  console.log("loged in user ", logedInUser);
+  // console.log("loged in user ", logedInUser);
   const { searchData } = useSelector((state) => state.searchData);
   const { activeCarExtras } = useSelector((state) => state.car);
   const { reservationCouponcode } = useSelector((state) => state.car);
@@ -69,12 +69,12 @@ const DriverInfoForm = forwardRef((props, ref) => {
   };
 
   const handleSubmit = (e) => {
-    console.log("searchData.pick_up_time", searchData.pick_up_time);
+    // console.log("searchData.pick_up_time", searchData.pick_up_time);
     e.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length === 0) {
       setErrors({});
-      console.log("car i got in driver form ", props.carDetails);
+      // console.log("car i got in driver form ", props.carDetails);
 
       const formData = {
         "id :": props.carId,
@@ -92,12 +92,12 @@ const DriverInfoForm = forwardRef((props, ref) => {
         car_options: activeCarExtras,
         coupon: reservationCouponcode,
       };
-      console.log("Formulaire soumis data: ", formData);
+      // console.log("Formulaire soumis data: ", formData);
       dispatch(reserveCar({ carId: props.carId, formData }));
     } else {
       setErrors(formErrors);
-      console.log("errors ", formErrors);
-      console.log("Veuillez remplir tous les champs.");
+      console.error("errors ", formErrors);
+      console.error("Veuillez remplir tous les champs.");
     }
   };
 

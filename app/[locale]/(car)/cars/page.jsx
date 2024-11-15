@@ -166,8 +166,8 @@ const Index = () => {
  
   const getCurrentPageCars = () => {
     if (Array.isArray(filteredCars)) {
-      console.log("called getCurrentPageCars filteredCars", filteredCars);
-      console.log("called getCurrentPageCars cars", cars);
+      // console.log("called getCurrentPageCars filteredCars", filteredCars);
+      // console.log("called getCurrentPageCars cars", cars);
       const startIndex = (currentPage - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
       

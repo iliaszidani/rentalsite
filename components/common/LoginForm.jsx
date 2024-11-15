@@ -14,10 +14,10 @@ const LoginForm = () => {
 
   useEffect(() => {
     if  (user?.token && searchParams.get('close') === 'true'){
-      console.log("a1 close");
+      // console.log("a1 close");
       window.close();
     }else if(user?.token && searchParams.get('close') != 'true'){
-      console.log("a1 push");
+      // console.log("a1 push");
       router.push("/"); // Navigate to home page after successful login
     }
   }, [user, router]);
@@ -28,7 +28,7 @@ const LoginForm = () => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("credentials:", credentials);
+    // console.log("credentials:", credentials);
   
     try {
       // Wait for the login to complete
@@ -36,14 +36,14 @@ const LoginForm = () => {
   
       // Check if login was successful (you might need to adjust this based on your response structure)
       if (result.payload?.token) {
-        console.log("Login successful");
+        // console.log("Login successful");
   
         const closeWindow = searchParams.get('close') === 'true';
         if (closeWindow) {
           window.close();  // Close the popup window if 'close=true'
         }
       } else {
-        console.log("Login failed");
+        // console.log("Login failed");
       }
     } catch (error) {
       console.error("Error during login:", error);

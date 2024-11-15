@@ -8,11 +8,11 @@ import { useDispatch } from "react-redux";
  
 
 const LocationSearch = ({setDataToSend,  isDropOff ,searchData , carDetails}) => {
-  console.log('LocationSearchcar ', carDetails)
+  // console.log('LocationSearchcar ', carDetails)
   const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState(isDropOff ? searchData.drop_off_agency.name : searchData.pick_up_agency.name);
-console.log("zaz ", searchData);
+// console.log("zaz ", searchData);
 const t = useTranslations();
   const locationSearchContent = [
     {
