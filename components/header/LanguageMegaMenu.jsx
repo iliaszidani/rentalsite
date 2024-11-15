@@ -26,14 +26,14 @@ const LanguageMegaMenu = ({ textClass, t }) => {
   }, []);
   useEffect(() => {
     const cookieValue = Cookies.get('NEXT_LOCALE');
-    console.log("cookie ", cookieValue )
+    // console.log("cookie ", cookieValue )
     setLocalValue(cookieValue || '');
   }, []);
   const [click, setClick] = useState(false);
   const router = useRouter();
  
   const curretLang = languageContent.find((e)=> e.code === localValue)
-  console.log("&& curretLang ", curretLang )
+  // console.log("&& curretLang ", curretLang )
 
   const handleCurrency = () => setClick((prevState) => !prevState);
 

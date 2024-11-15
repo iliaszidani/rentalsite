@@ -58,7 +58,7 @@ const CarProperties = ({ cars, t }) => {
     <>
       {carsToShow.map((item) => 
       {
-        console.log('nissan ', item);
+        // console.log('nissan ', item);
         return (
         <div className="col-12" key={item?.id}>
           <div className="border-top-light pt-30">

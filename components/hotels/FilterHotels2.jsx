@@ -8,8 +8,12 @@ import isTextMatched from "../../utils/isTextMatched";
 import Link from "next/link";
 import axiosInstance from "@/lib/axiosConfig";
 
-const FilterHotels2 = ({ filterOption, cars, t }) => {
+const     FilterHotels2 = ({ filterOption, cars, t }) => {
   const [filteredItems, setFilteredItems] = useState([]);
+
+  const [initialeRange, setInitialeRange] = useState(8); // initial number for cars to show
+  const [rangeIcreaseValue, setRangeIcreaseValue] = useState(8); //  number for cars to add
+  const [visibleRange, setVisibleRange] = useState(initialeRange); // State to manage visible range
   const [selectedBrand, setSelectedBrand] = useState(t("CarsByBrandSection.all")); // Marque par défaut
   const [brands, setBrands] = useState([]);
   const [direction, setDirection] = useState('ltr');
@@ -32,21 +36,24 @@ const FilterHotels2 = ({ filterOption, cars, t }) => {
             .filter((brand) => carBrands.has(brand)),
         ];
         setBrands(filteredBrands);
-      })
-      .catch((error) =>
+      }).catch((error) =>
         console.error("Erreur lors de la récupération des marques :", error)
       );
   }, [cars]);
-  useEffect(() => {
+  useEffect(() => { 
     // Filtrage par marque
     const brandFilteredItems = (cars || []).filter((item) => {
-      console.log("selectedBrand", selectedBrand);
+      // console.log("selectedBrand", selectedBrand);
       return (
         selectedBrand === t("CarsByBrandSection.all") || item?.brands?.brand_name === selectedBrand
       );
     });
+    setVisibleRange(initialeRange); // Reset range when brand changes
+
     setFilteredItems(brandFilteredItems);
   }, [cars, selectedBrand, filterOption]);
+ 
+
 
   // Navigation personnalisée
   function ArrowSlick(props) {
@@ -82,12 +89,12 @@ const FilterHotels2 = ({ filterOption, cars, t }) => {
         <label htmlFor="brandSelect"> {t('CarsByBrandSection.selectBrand')} </label>
       </div>
 
-      <div class="tabs_controls row x-gap-15 justify-center js-tabs-controls">
+      <div className="tabs_controls row x-gap-15 justify-center js-tabs-controls">
        {brands.map((brand) => (
-       <div class="col-auto"><button class="tabs_button text-14 fw-500 px-20 py-10 rounded-4  js-tabs-button mb-10 is-tab-el-active"  key={brand}
+       <div className="col-auto" key={brand}><button className="tabs_button text-14 fw-500 px-20 py-10 rounded-4  js-tabs-button mb-10 is-tab-el-active"  
        onClick={() => {
-        console.log('brand',brand);
-        console.log('selectedBrand',selectedBrand);
+        // console.log('brand',brand);
+        // console.log('selectedBrand',selectedBrand);
         setSelectedBrand(brand)}}
         
 
@@ -109,42 +116,13 @@ const FilterHotels2 = ({ filterOption, cars, t }) => {
        ))}
      </div>
 
-
-      {/* <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: "20px",
-        }}
-      >
-        {brands.map((brand) => (
-          <button
-            key={brand}
-            onClick={() => setSelectedBrand(brand)}
-            style={{
-              margin: "0 5px",
-              padding: "10px 20px",
-              backgroundColor: selectedBrand === brand ? "#dc3545" : "#f8f9fa",
-              color: selectedBrand === brand ? "#fff" : "#dc3545",
-              border: "1px solid #dc3545",
-              borderRadius: "4px",
-              cursor: "pointer",
-              outline: "none",
-              fontWeight: "bold",
-            }}
-          >
-            {brand}
-          </button>
-        ))}
-      </div> */}
-
-      {/* Affichage des éléments filtrés */}
+ 
       <div
        className="row y-gap-30"
       >
-        {filteredItems.slice(0, 10).map((item) => 
+        {filteredItems.slice(0, visibleRange).map((item) => 
         {
-          console.log("item ", item)
+          // console.log("item ", item)
           var rateBasedOnRatings =  'Good';
           if(item?.ratings < 2 ){rateBasedOnRatings = "VeryPoor"}else
           if(item?.ratings < 4 ){rateBasedOnRatings = "Poor"}else
@@ -155,7 +133,7 @@ const FilterHotels2 = ({ filterOption, cars, t }) => {
           }
         return (
           <div
-            className="col-xl-3 col-lg-3 col-sm-6 aos-init aos-animate"
+            className="col-xl-3 col-lg-3 col-sm-6"
             key={item?.id}
             data-aos="fade"
             data-aos-delay={item.delayAnimation}
@@ -269,6 +247,24 @@ const FilterHotels2 = ({ filterOption, cars, t }) => {
           </div>
         )}
         )}
+          {/* Load More Button */}
+          {visibleRange < filteredItems.length && (
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+              <button
+                onClick={() => setVisibleRange(visibleRange + rangeIcreaseValue)}
+                style={{
+                  padding: "10px 20px",
+                  backgroundColor: "#F7C83E",
+                  color: "#051036",
+                  border: "1px solid #051036",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                }}
+              >
+                {t("CarsByBrandSection.loadMore")}
+              </button>
+            </div>
+          )}
       </div>
       </> 
       }

@@ -8,6 +8,7 @@ import Social from "@/components/common/social/Social";
 import ContactForm from "@/components/common/ContactForm";
 import LocationTopBar from "@/components/common/LocationTopBar";
 import Header3 from "@/components/header/header-3";
+import { useTranslations } from "next-intl";
 
 export const metadata = {
   title: "Contact || GoTrip - Travel & Tour React NextJS Template",
@@ -15,6 +16,8 @@ export const metadata = {
 };
 
 const Contact = () => {
+  const t=useTranslations("contactUsPage");
+
   return (
     <>
       {/* End Page Title */}
@@ -46,8 +49,8 @@ const Contact = () => {
         <div className="row justify-end">
           <div className="col-xl-5 col-lg-7">
             <div className="map-form px-40 pt-40 pb-50 lg:px-30 lg:py-30 md:px-24 md:py-24 bg-white rounded-4 shadow-4">
-              <div className="text-22 fw-500">Envoyer un message</div>
-              <ContactForm />
+              <div className="text-22 fw-500">{t("Form.sendMessage")}</div>
+              <ContactForm  />
             </div>
           </div>
         </div>
@@ -58,7 +61,7 @@ const Contact = () => {
         <div className="container">
           <div className="row x-gap-80 y-gap-20 justify-between">
             <div className="col-12">
-              <div className="text-30 sm:text-24 fw-600">Contactez Nous</div>
+              <div className="text-30 sm:text-24 fw-600">{t("ContactUs.contactUs")}</div>
             </div>
             {/* End .col */}
 
@@ -67,7 +70,7 @@ const Contact = () => {
 
             <div className="col-auto">
               <div className="text-14 text-light-1">
-                Suivez Nous
+              {t("ContactUs.followUs")}
               </div>
               <div className="d-flex x-gap-20 items-center mt-10">
                 <Social />

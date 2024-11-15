@@ -117,7 +117,8 @@ import Fuse from 'fuse.js';
 
 const LocationSearch = ({ isDropOff , disabled = false
   // , changeDataFilter, initialData = {} 
- , t
+ , t ,
+ resetTriggered , setResetTriggered
 }) => {
   const { searchData } = useSelector((state) => state.searchData);
   const [searchValue, setSearchValue] = useState(isDropOff ? searchData.drop_off_agency.location_city : searchData.pick_up_agency.location_city);
@@ -128,9 +129,25 @@ const LocationSearch = ({ isDropOff , disabled = false
   const {locations } = useSelector((state)=>state.location);
   const [filteredLocations, setFilteredLocations] = useState([]);
 
+  // useEffect(() => {
+  //   setSearchValue(isDropOff ? searchData.drop_off_agency.location_city : searchData.pick_up_agency.location_city);
+  // }, [isDropOff, searchData]);
+
+  // useEffect(() => {
+  //   // Check if searchData is empty, and reset the searchValue if necessary
+  //   if (!searchData.pick_up_agency || !searchData.drop_off_agency) {
+  //     setSearchValue(''); // Reset searchValue if there's no pick-up or drop-off agency
+  //   } else {
+  //     setSearchValue(isDropOff ? searchData.drop_off_agency.location_city : searchData.pick_up_agency.location_city);
+  //   }
+  // }, [isDropOff, searchData]); // Listen to changes in searchData and isDropOff
+  
   useEffect(() => {
-    setSearchValue(isDropOff ? searchData.drop_off_agency.location_city : searchData.pick_up_agency.location_city);
-  }, [isDropOff, searchData]);
+    // Reset searchValue whenever resetTrigger changes
+    if (resetTriggered) {
+      setSearchValue(''); // Clear input when resetTriggered changes
+    }
+  }, [resetTriggered]); // Only run when resetTrigger changes
 
   // useEffect(()=>{
   //   if(searchValue){
@@ -146,7 +163,14 @@ const LocationSearch = ({ isDropOff , disabled = false
   //     setFilteredLocations(filteredLocations);
   //   } 
   // },[searchValue,isDropOff]);
-
+// Add a new useEffect to listen for reset changes
+useEffect(() => {
+  // Only reset if triggered by form reset, not when typing
+  if (resetTriggered && searchData.pick_up_agency?.id == null) {
+    setSearchValue(''); // Clear input if reset is triggered
+    setResetTriggered(false); // Reset `resetTriggered` to allow normal typing
+  }
+}, [searchData, resetTriggered]);
 
   useEffect(() => {
     if (searchValue) {
@@ -172,7 +196,7 @@ const LocationSearch = ({ isDropOff , disabled = false
 
   
   const handleOptionClick = (item) => {
-    console.log("item ", item);
+    // console.log("item ", item);
     setSearchValue(item.location_city);
     setSelectedItem(item);
 

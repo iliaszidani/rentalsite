@@ -81,6 +81,7 @@
       "title": "Search by Brand",
       "selectBrand": "Select a brand",
       "all": "All",
+      "loadMore": "Load more",
       "noDataFound":"Nothing to show, come back later."
     },
      
@@ -242,6 +243,79 @@
       "fuel": "Fuel"
     },
     "orSimilar": "or similar"
+  },
+  "contactUsPage": {
+    "MapsTopBar": {
+      "continent": "Africa",
+      "country": "Morocco",
+      "city": "Casablanca"
+    },
+    "Form": {
+      "sendMessage": "Send a Message",
+      "fullName": "Full Name",
+      "email": "Email",
+      "object": "Subject",
+      "message": "Message",
+      "btn": "Send Message",
+      "ApiResponse": {
+        "error": "An error occurred. Please try again.",
+        "success": "Message sent successfully"
+      }
+    },
+    "ContactUs": {
+      "contactUs": "Contact Us",
+      "address": "Address",
+      "phone": "Phone",
+      "needSupport": "Need support?",
+      "followUs": "Follow us"
+    }
+  },
+  "carDetails": {
+    "showOnMap": "Show on Map",
+    "share": "Share",
+    "save": "Save",
+    "reviews": "Reviews",
+    "for": "For",
+    "day_s": "Day(s)",
+    "propertyHighlights": "Property Highlights",
+    "seatingCapacity": "Seating Capacity",
+    "luggage": "Luggage",
+    "transmission": "Transmission",
+    "mileage": "Mileage",
+    "fuel": "Fuel",
+    "per": "per",
+    "total": "Total",
+    "pickUpLocation": "Pick-up Location",
+    "pickUpDate": "Pick-up Date",
+    "dropOffDate": "Drop-off Date",
+    "extrasOptional": "Extras (Optional)",
+    "toPay4Extras": "To Pay for Extras",
+    "couponCode": "Coupon Code",
+    "bookNow": "Book Now",
+    "driverInfo": "Driver Information",
+    "identityCard": "ID Card",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phoneNumber": "Phone Number",
+    "email": "Email",
+    "address": "Address",
+    "termsAndConditions": "I have read and accept the terms and conditions.",
+    "submit": "Submit",
+    "specifications": "Specifications",
+    "make": "Make",
+    "model": "Model",
+    "madeYear": "Made Year",
+    "firstNameRequired": "First Name is required.",
+    "lastNameRequired": "Last Name is required.",
+    "emailRequired": "Email is required.",
+    "emailInvalid": "Please enter a valid email.",
+    "phoneRequired": "Phone number is required.",
+    "phoneInvalid": "Please enter a valid phone number.",
+    "identityRequired": "ID card is required.",
+    "addressRequired": "Address is required.",
+    "termsRequired": "You must accept the terms and conditions."
   }
+  
+  
   
 }

@@ -98,8 +98,8 @@ const PriceSlider = () => {
        </div>
       <div>
         <InputRange
-          maxValue={maxPrice}
-          minValue={minPrice}
+          maxValue={maxPrice || 0}
+          minValue={minPrice || 0}
           value={price}
           onChange={value => {
             setPrice(value)

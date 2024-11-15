@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setActiveCarExtras } from "@/features/car/carSlice";
+import { useTranslations } from "next-intl";
 
 // Counter component to handle the increment and decrement of extras
 const Counter = ({ options, defaultValue, onCounterChange }) => {
@@ -69,7 +70,7 @@ const Counter = ({ options, defaultValue, onCounterChange }) => {
 // GuestSearch component for managing the selection of extras
 const GuestSearch = ({ optionsDetails }) => {
   const dispatch = useDispatch();
-
+  const t = useTranslations();
   // State to store the quantity of each extra selected
   const [guestCounts, setGuestCounts] = useState(
     optionsDetails.reduce((acc, option) => {
@@ -104,7 +105,7 @@ const GuestSearch = ({ optionsDetails }) => {
         aria-expanded="false"
         data-bs-offset="0,22"
       >
-        <h4 className="text-15 fw-500 ls-2 lh-16">Extras (optional)</h4>
+        <h4 className="text-15 fw-500 ls-2 lh-16">{t("carDetails.extrasOptional")}</h4>
         <div className="text-15 text-light-1 ls-2 lh-16">
           {/* Display the current selection */}
           {Object.keys(guestCounts).map((key) => (

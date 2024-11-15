@@ -1,34 +1,39 @@
+import { useTranslations } from "next-intl";
+
+ 
+
 const PropertyHighlights = ({car}) => {
+  const t = useTranslations("carDetails")
   console.log("car", car)
   const propertyContent = [
     {
       id: 1,
       icon: "icon-user-2",
-      name: "Seating capacity",
+      name: t("seatingCapacity"),
       content: car.car.seating_capacity,
     },    
     {
       id: 2,
       icon: "icon-luggage",
-      name: "Luggage",
+      name:t("luggage") ,
       content: car.car.small_bag + car.car.large_bag,
     },
     {
       id: 3,
       icon: "icon-transmission",
-      name: "Transmission",
+      name: t("transmission"),
       content: car.car.transmission,
     },
     {
       id: 4,
       icon: "icon-speedometer",
-      name: "Mileage",
+      name: t("mileage"),
       content: `${car.car.mileage} `,
     },
     {
       id: 5,
       icon: "icon-fuel",
-      name: "Fuel",
+      name: t("fuel"),
       content:car.car.fuel_type,
     },
   ];

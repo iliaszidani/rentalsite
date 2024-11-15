@@ -126,7 +126,7 @@ const home = () => {
     },
   ];
   const { filteredCars, isLoading } = useSelector((state) => state.car);
-  console.log("H 9 ", filteredCars);
+  // console.log("H 9 ", filteredCars);
 
   return (
     <>

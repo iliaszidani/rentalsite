@@ -82,6 +82,7 @@
       "title": "Nach Marke suchen",
       "selectBrand": "Marke auswählen",
       "all": "Alle",
+      "loadMore": "Mehr laden",
       "noDataFound":"Nichts zu zeigen, kommen Sie später wieder."
     },
     
@@ -246,6 +247,79 @@
       },
       "orSimilar": "oder ähnlich"
     }
+  ,
+  "contactUsPage": {
+    "MapsTopBar": {
+      "continent": "Afrika",
+      "country": "Marokko",
+      "city": "Casablanca"
+    },
+    "Form": {
+      "sendMessage": "Nachricht senden",
+      "fullName": "Vollständiger Name",
+      "email": "E-Mail",
+      "object": "Betreff",
+      "message": "Nachricht",
+      "btn": "Nachricht senden",
+      "ApiResponse": {
+        "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+        "success": "Nachricht erfolgreich gesendet"
+      }
+    },
+    "ContactUs": {
+      "contactUs": "Kontaktieren Sie uns",
+      "address": "Adresse",
+      "phone": "Telefon",
+      "needSupport": "Brauchen Sie Unterstützung?",
+      "followUs": "Folgen Sie uns"
+    }
+  },
+  "carDetails": {
+    "showOnMap": "Auf der Karte anzeigen",
+    "share": "Teilen",
+    "save": "Speichern",
+    "reviews": "Bewertungen",
+    "for": "Für",
+    "day_s": "Tag(e)",
+    "propertyHighlights": "Hauptmerkmale",
+    "seatingCapacity": "Sitzkapazität",
+    "luggage": "Gepäck",
+    "transmission": "Getriebe",
+    "mileage": "Kilometerstand",
+    "fuel": "Kraftstoff",
+    "per": "pro",
+    "total": "Gesamt",
+    "pickUpLocation": "Abholort",
+    "pickUpDate": "Abholdatum",
+    "dropOffDate": "Abgabedatum",
+    "extrasOptional": "Extras (optional)",
+    "toPay4Extras": "Für Extras zu bezahlen",
+    "couponCode": "Gutschein-Code",
+    "bookNow": "Jetzt buchen",
+    "driverInfo": "Fahrerinformation",
+    "identityCard": "Ausweis",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phoneNumber": "Telefonnummer",
+    "email": "E-Mail",
+    "address": "Adresse",
+    "termsAndConditions": "Ich habe die Allgemeinen Geschäftsbedingungen gelesen und akzeptiere sie.",
+    "submit": "Absenden",
+    "specifications": "Spezifikationen",
+    "make": "Marke",
+    "model": "Modell",
+    "madeYear": "Baujahr",
+    "firstNameRequired": "Vorname ist erforderlich.",
+    "lastNameRequired": "Nachname ist erforderlich.",
+    "emailRequired": "E-Mail ist erforderlich.",
+    "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+    "phoneRequired": "Telefonnummer ist erforderlich.",
+    "phoneInvalid": "Bitte geben Sie eine gültige Telefonnummer ein.",
+    "identityRequired": "Ausweis ist erforderlich.",
+    "addressRequired": "Adresse ist erforderlich.",
+    "termsRequired": "Sie müssen die Allgemeinen Geschäftsbedingungen akzeptieren."
+  }
+  
   
   
   

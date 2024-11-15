@@ -7,24 +7,46 @@ import GuestSearch from "./GuestSearch";
 import LocationSearch from "./LocationSearch";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { setSearchData } from "@/features/searchData/searchDataSlice";
+import {  setSearchData } from "@/features/searchData/searchDataSlice";
 import { filterAll, filterCarByApi, setBookingDetails } from "@/features/car/carSlice"; 
 import { useTranslations } from "next-intl";
 import { fetchLocations } from "@/features/locations/thunk";
 import { fetchFilteredCars } from "@/features/car/thunk";
 
 const MainFilterSearchBox = ({isHome , initialData }) => {
+
   const { tabs, currentTab } = useSelector((state) => state.hero) || {};
   const dispatch = useDispatch();
   const Router = useRouter();
   const { searchData, isLoading  } = useSelector((state) => state.searchData);
   const t = useTranslations("HomePage.BookingForm")
   const [direction, setDirection] = useState('ltr');
+  const [resetTriggered, setResetTriggered] = useState(0); // Track reset state
 
-
+  const handleReset = () => {
+    console.log("handleReset and call emptying data")
+    sessionStorage.removeItem("searchData");
+    //call update search Data
+    const initialState = {
+      searchData: {
+        isLoading : false,
+        isFilled: false,
+        isDifferentLocations: false,
+        pick_up_agency: { id: null, name: "", type: "", address: "" },
+        drop_off_agency: { id: null, name: "", type: "", address: "" },
+        pick_up_time: null,
+        drop_off_time: null,
+      },
+    };
+    console.log("prebv ", resetTriggered)
+    setResetTriggered((prev)=>prev+1);
+    dispatch( setSearchData(initialState.searchData));
+ 
+  };
 
   useEffect(() => {
 
+    console.log("fetch location main filter search box ");
     const dir = document.documentElement.getAttribute('dir');
     dispatch(fetchLocations());
 
@@ -53,7 +75,13 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
       date_start:searchData.pick_up_time,
       date_end:searchData.drop_off_time,
     }
-
+  
+    const formData = new FormData(event.target);
+  
+  // Convert FormData entries to an object
+  const formValues = Object.fromEntries(formData.entries());
+  
+  console.log(formValues);
     console.log('submit using : ', formatedSearchData)
     dispatch(fetchFilteredCars(formatedSearchData));
     
@@ -86,6 +114,7 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
        >
           <div className="button-grid items-center d-lg-flex justify-content-between" >
             <LocationSearch
+            resetTriggered={resetTriggered}  setResetTriggered={setResetTriggered}
               isDropOff={false}
               // changeDataFilter={handleFilterChange}
               // initialData={initialData}
@@ -96,6 +125,7 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
             // searchData.isFilled ? (
               searchData?.isDifferentLocations && (
                 <LocationSearch
+                resetTriggered={resetTriggered}  setResetTriggered={setResetTriggered}
                 t={t}
                   // changeDataFilter={handleFilterChange}
                   isDropOff={true}
@@ -117,6 +147,7 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
             }
 
             <div className="searchMenu-date px-30 lg:py-20 lg:px-0 js-form-dd js-calendar">
+           
               <div>
                 <h4 className="text-15 fw-500 ls-2 lh-16">          {t("pickUpDate")}</h4>
                 <DateSearch
@@ -124,6 +155,7 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
                   // initialData={initialData}
                   t={t}
                   isDropOff={false}
+                  outerFilter={true}
                   required
                 />
               </div>
@@ -135,7 +167,7 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
                 <DateSearch
                   t={t}
                   // changeDataFilter={handleFilterChange}
-                  isDropOff={true}
+                  isDropOff={true} outerFilter={true}
                   searchData={searchData}
                   // initialData={initialData}
                   required
@@ -143,16 +175,23 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
               </div>
             </div>
 
-            <div className="button-item">
+            <div className="button-item d-flex  ">
               <button
                 type="submit"
-                className="mainSearch__submit button -dark-1 py-15 px-35 h-60 col-12 rounded-4 bg-blue-1 text-white"
+                className="mainSearch__submit button -dark-1 py-15 px-35 h-60 col-8 rounded-4 bg-blue-1 text-white"
                 disabled={  isLoading  }
               >
                 <i className={`icon-search text-20  ${direction === 'ltr' ? 'mr-10' : 'ml-10'} `} />
                 {t("search")}
               </button>
-            </div>
+    
+           {/* <button type="reset" onClick={()=>{sessionStorage.removeItem("searchData")}}>X</button> */}
+              <div>
+              <button className="button h-60   mx-3 col-4 border border-danger" style={{backgroundColor:"#FF00002e" , padding:"15px" }} type="button" onClick={handleReset}>X</button> {/* Reset button */}
+
+              </div>
+          
+               </div>
           </div>
         </form>
 

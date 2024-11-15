@@ -37,6 +37,7 @@ const CarSinglePage = ({ params }) => {
   const t = useTranslations();
   const activeCarExtras = useSelector((state) => state.car.activeCarExtras);
   const searchData = useSelector((state) => state.searchData.searchData);
+  const search = useSelector((state)=>state.searchData);
   const user = useSelector((state) => state.user);
 
   // Step 2: Scroll handler function that scrolls to DriverInfoForm
@@ -174,21 +175,23 @@ const CarSinglePage = ({ params }) => {
     <>
       <div className="header-margin"></div>
       <Header3 />
-      {!car ? 
-      (
+      {!car ? (
         <SignlePageSkeleton />
-        ) : (
-          <>
-          <TopBreadCrumb  agence={car.car.agencies} id={car.car.id} />
+      ) : (
+        <>
+          <TopBreadCrumb agence={car.car.agencies} id={car.car.id} />
           <section className="pt-40">
             <div className="container">
               <div className="row y-gap-30">
                 <div className="col-lg-8">
                   <div className="row y-gap-20 justify-between items-end">
                     <div className="col-auto">
+
                       <h1 className="text-30 sm:text-24 fw-600">
-                        {car.car.brands.brand_name} {car.car.series?.serie_name}
+                        {car.car.brands.brand_name} {car.car.series?.serie_name} <span style={{color:"lightgray"}}>{t("CarsPage.orSimilar")}</span>
                       </h1>
+
+                      
                       {/* <div className="row x-gap-10 items-center pt-10">
                         <div className="col-auto">
                           <div className="d-flex x-gap-5 items-center">
@@ -255,7 +258,9 @@ const CarSinglePage = ({ params }) => {
                         "image not found"
                       )}
                     </div>
-                    <h3 className="text-22 fw-500">Property highlights</h3>
+                    <h3 className="text-22 fw-500">
+                      {t("carDetails.propertyHighlights")}
+                    </h3>
                     <PropertyHighlights car={car} />
                   </div>
                 </div>
@@ -268,15 +273,17 @@ const CarSinglePage = ({ params }) => {
                         <div className="col-auto">
                           <div className="text-14 text-light-1">
                             <span className="text-20 fw-500 text-dark-1 ml-5">
-                              {car.car.car_price * nbrDays} MAD
+                              {car.car.car_price * nbrDays}{" "}
+                              {t("HomePage.CarCard.currency_DH")}
                             </span>
-                            &nbsp; For {nbrDays} day(s)
+                            &nbsp; {t("carDetails.per")} {nbrDays}{" "}
+                            {t("carDetails.day_s")}
                           </div>
                           <hr />
                           {activeCarExtras.length > 0 && (
                             <>
                               <div className="strong text-16 text-dark-1">
-                                To pay for Extras
+                              {t("carDetails.toPay4Extras")} 
                               </div>
                               {activeCarExtras.map((extra) => {
                                 const option = car.vendor_options.find(
@@ -290,8 +297,10 @@ const CarSinglePage = ({ params }) => {
                                     +{" "}
                                     {parseFloat(option.option_price) *
                                       extra.quantity}{" "}
-                                    MAD ({extra.quantity}x {option.option_name})
-                                    per {option.option_type ? "rental" : "day"}
+                                    {t("HomePage.CarCard.currency_DH")} (
+                                    {extra.quantity}x {option.option_name})
+                                    {t("carDetails.per")}{" "}
+                                    {option.option_type ? "rental" : "day"}
                                   </div>
                                 );
                               })}
@@ -299,8 +308,9 @@ const CarSinglePage = ({ params }) => {
                             </>
                           )}
                           <div className="text-18 fw-500 text-dark-1">
-                            Total: {car.car.car_price * nbrDays + extrasCost}{" "}
-                            MAD
+                            {t("carDetails.total")}:{" "}
+                            {car.car.car_price * nbrDays + extrasCost}{" "}
+                            {t("HomePage.CarCard.currency_DH")}
                           </div>
                         </div>
                       </div>
@@ -329,22 +339,24 @@ const CarSinglePage = ({ params }) => {
             <div className="container">
               <div className="row">
                 <div className="col-lg-8">
-                  <div>
-                   
-                    <DriverInfoForm
-                      carId={params.id}
-                      ref={driverInfoRef}
-                      handlescrollToPaymentForm={scrollToPaymentForm}
-                    />
-                    <PaymentForm ref={paymentRef} />
-
-                  <Overview car={car} />  
-                  </div>
+                  {
+                    true  &&
+                    <div>
+                      <DriverInfoForm
+                       carDetails={car}
+                        carId={params.id}
+                        ref={driverInfoRef}
+                        handlescrollToPaymentForm={scrollToPaymentForm}
+                      />
+                      {/* <PaymentForm ref={paymentRef} /> */}
+                      <Overview car={car} />
+                    </div>
+                  }
                 </div>
               </div>
             </div>
           </section>
-           {/*
+          {/*
           <section className="mt-40 pt-40">
             <div className="container">
               <h3 className="text-22 fw-500 mb-20">Car Location</h3>
@@ -416,7 +428,6 @@ const CarSinglePage = ({ params }) => {
           </section>
           {/* End Reply Comment box section  
         */}
-
         </>
       )}
       <CallToActions />

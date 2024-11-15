@@ -205,13 +205,13 @@ const Sidebar = ({ cars,
         <Map />
       </div>
       {/* End find map */}
-      <div className="sidebar__item">
+      {/* <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">{t("CarsPage.SideFilter.location")}</h5>
         <div className="sidebar-checkbox">
           <LocationFilters />
         </div>
-        {/* End Sidebar-checkbox */}
-      </div>
+        {/* End Sidebar-checkbox  
+      </div> */}
       {/* End Location filter */}
       <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">{t("CarsPage.SideFilter.categories")}</h5>

@@ -19,13 +19,13 @@ export const locationSlice = createSlice({
             state.isLoading = true;
         })
         .addCase(fetchLocations.fulfilled , (state, action)=>{
-            console.log("fulfielled ", action   )
+            // console.log("fulfielled ", action   )
             state.isLoading = false;
             state.locations =  action.payload;
         })
         .addCase(fetchLocations.rejected , (state, action)=>{
             state.isLoading = false;
-            console.response("locations/fetchLocations ", action)
+            // console.log("locations/fetchLocations ", action)
         })
     }
 });

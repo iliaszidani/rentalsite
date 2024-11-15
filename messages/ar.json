@@ -83,6 +83,7 @@
       "title": "ابحث حسب العلامة التجارية",
       "selectBrand": "اختر علامة تجارية",
       "all": "الكل",
+      "loadMore": "عرض المزيد",
       "noDataFound":"لا يوجد شيء لعرضه، عد لاحقًا."
     },
     
@@ -246,7 +247,81 @@
         "transmission": "ناقل الحركة",
         "fuel": "الوقود"
       }
+    },
+
+    "contactUsPage": {
+      "MapsTopBar": {
+        "continent": "أفريقيا",
+        "country": "المغرب",
+        "city": "الدار البيضاء"
+      },
+      "Form": {
+        "sendMessage": "أرسل رسالة",
+        "fullName": "الاسم الكامل",
+        "email": "البريد الإلكتروني",
+        "object": "الموضوع",
+        "message": "الرسالة",
+        "btn": "أرسل الرسالة",
+        "ApiResponse": {
+          "error": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+          "success": "تم إرسال الرسالة بنجاح"
+        }
+      },
+      "ContactUs": {
+        "contactUs": "اتصل بنا",
+        "address": "العنوان",
+        "phone": "الهاتف",
+        "needSupport": "هل تحتاج إلى مساعدة؟",
+        "followUs": "تابعنا"
+      }
+    },
+    "carDetails": {
+      "showOnMap": "عرض على الخريطة",
+      "share": "مشاركة",
+      "save": "حفظ",
+      "reviews": "المراجعات",
+      "for": "لـ",
+      "day_s": "يوم(أيام)",
+      "propertyHighlights": "الميزات الرئيسية",
+      "seatingCapacity": "سعة المقاعد",
+      "luggage": "الحقائب",
+      "transmission": "ناقل الحركة",
+      "mileage": "المسافة المقطوعة",
+      "fuel": "الوقود",
+      "per": "لكل",
+      "total": "الإجمالي",
+      "pickUpLocation": "مكان الاستلام",
+      "pickUpDate": "تاريخ الاستلام",
+      "dropOffDate": "تاريخ الإرجاع",
+      "extrasOptional": "إضافات (اختيارية)",
+      "toPay4Extras": "للدفع مقابل الإضافات",
+      "couponCode": "رمز القسيمة",
+      "bookNow": "احجز الآن",
+      "driverInfo": "معلومات السائق",
+      "identityCard": "بطاقة الهوية",
+      "firstName": "الاسم الأول",
+      "lastName": "الاسم الأخير",
+      "phoneNumber": "رقم الهاتف",
+      "email": "البريد الإلكتروني",
+      "address": "العنوان",
+      "termsAndConditions": "قرأت وأوافق على الشروط والأحكام.",
+      "submit": "إرسال",
+      "specifications": "المواصفات",
+      "make": "الصانع",
+      "model": "الطراز",
+      "madeYear": "سنة الصنع",
+      "firstNameRequired": "الاسم الأول مطلوب.",
+      "lastNameRequired": "الاسم الأخير مطلوب.",
+      "emailRequired": "البريد الإلكتروني مطلوب.",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صالح.",
+      "phoneRequired": "رقم الهاتف مطلوب.",
+      "phoneInvalid": "يرجى إدخال رقم هاتف صالح.",
+      "identityRequired": "بطاقة الهوية مطلوبة.",
+      "addressRequired": "العنوان مطلوب.",
+      "termsRequired": "يجب عليك قبول الشروط والأحكام."
     }
+    
+    
   
   
   

@@ -83,6 +83,7 @@
       "title": "Cerca per marca",
       "selectBrand": "Seleziona una marca",
       "all": "tutti",
+      "loadMore": "Carica di più",
       "noDataFound":"Niente da mostrare, torna più tardi."
     },
     
@@ -245,7 +246,80 @@
         "fuel": "Carburante"
       },
       "orSimilar": "o simile"
+    },
+    "contactUsPage": {
+      "MapsTopBar": {
+        "continent": "Africa",
+        "country": "Marocco",
+        "city": "Casablanca"
+      },
+      "Form": {
+        "sendMessage": "Invia un messaggio",
+        "fullName": "Nome completo",
+        "email": "Email",
+        "object": "Oggetto",
+        "message": "Messaggio",
+        "btn": "Invia messaggio",
+        "ApiResponse": {
+          "error": "Si è verificato un errore. Riprova.",
+          "success": "Messaggio inviato con successo"
+        }
+      },
+      "ContactUs": {
+        "contactUs": "Contattaci",
+        "address": "Indirizzo",
+        "phone": "Telefono",
+        "needSupport": "Hai bisogno di assistenza?",
+        "followUs": "Seguici"
+      }
+    },
+    "carDetails": {
+      "showOnMap": "Mostra sulla mappa",
+      "share": "Condividi",
+      "save": "Salva",
+      "reviews": "Recensioni",
+      "for": "Per",
+      "day_s": "Giorno(i)",
+      "propertyHighlights": "Caratteristiche principali",
+      "seatingCapacity": "Capacità di posti",
+      "luggage": "Bagaglio",
+      "transmission": "Trasmissione",
+      "mileage": "Chilometraggio",
+      "fuel": "Carburante",
+      "per": "per",
+      "total": "Totale",
+      "pickUpLocation": "Luogo di ritiro",
+      "pickUpDate": "Data di ritiro",
+      "dropOffDate": "Data di restituzione",
+      "extrasOptional": "Extra (opzionali)",
+      "toPay4Extras": "Da pagare per gli extra",
+      "couponCode": "Codice coupon",
+      "bookNow": "Prenota ora",
+      "driverInfo": "Informazioni sul conducente",
+      "identityCard": "Carta d'identità",
+      "firstName": "Nome",
+      "lastName": "Cognome",
+      "phoneNumber": "Numero di telefono",
+      "email": "Email",
+      "address": "Indirizzo",
+      "termsAndConditions": "Ho letto e accetto i termini e le condizioni.",
+      "submit": "Invia",
+      "specifications": "Specifiche",
+      "make": "Marca",
+      "model": "Modello",
+      "madeYear": "Anno di produzione",
+      "firstNameRequired": "Il nome è obbligatorio.",
+      "lastNameRequired": "Il cognome è obbligatorio.",
+      "emailRequired": "L'email è obbligatoria.",
+      "emailInvalid": "Per favore inserisci un'email valida.",
+      "phoneRequired": "Il numero di telefono è obbligatorio.",
+      "phoneInvalid": "Per favore inserisci un numero di telefono valido.",
+      "identityRequired": "La carta d'identità è obbligatoria.",
+      "addressRequired": "L'indirizzo è obbligatorio.",
+      "termsRequired": "Devi accettare i termini e le condizioni."
     }
+    
+    
    
   
   

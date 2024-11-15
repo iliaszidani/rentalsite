@@ -1,17 +1,20 @@
+import { useTranslations } from "next-intl";
+
 const Address = () => {
+  const t=useTranslations("contactUsPage");
   const addressContent = [
     {
       id: 1,
       colClass: "col-lg-3",
-      title: "Address",
+      title: t("ContactUs.address"),
       content: (
-        <>Casablanca, Maroc.</>
+        <> {t("MapsTopBar.city") +", "+ t("MapsTopBar.country") + "."} </>
       ),
     },
     {
       id: 2,
       colClass: "col-auto",
-      title: "Phone",
+      title: t("ContactUs.phone"),
       content: (
         <>
           <a href="tel:+(212) 6 61 32 73 67" dir="ltr">+(212) 6 61 32 73 67</a>
@@ -21,7 +24,7 @@ const Address = () => {
     {
       id: 3,
       colClass: "col-auto",
-      title: "Besoin support?",
+      title: t("ContactUs.needSupport"),
       content: (
         <>
           {" "}

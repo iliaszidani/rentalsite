@@ -2,6 +2,7 @@
 'use client'
 
 import { setSearchData } from "@/features/searchData/searchDataSlice";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
  
@@ -11,7 +12,8 @@ const LocationSearch = ({setDataToSend,  isDropOff ,searchData , carDetails}) =>
   const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState(isDropOff ? searchData.drop_off_agency.name : searchData.pick_up_agency.name);
-console.log("zaz ", searchData)
+console.log("zaz ", searchData);
+const t = useTranslations();
   const locationSearchContent = [
     {
       id: 1,
@@ -87,13 +89,13 @@ console.log("zaz ", searchData)
           data-bs-auto-close="true"
           data-bs-offset="0,22"
         >
-          <h4 className="text-15 fw-500 ls-2 lh-16">{!isDropOff ?"Pick up Location": "Drop off Location"}</h4>
+          <h4 className="text-15 fw-500 ls-2 lh-16">{!isDropOff ?t("HomePage.BookingForm.pickUpLocation"): t("HomePage.BookingForm.dropOffLocation")}</h4> 
           <div className="text-15 text-light-1 ls-2 lh-16">
             <input
 
               autoComplete="off"
               type="search"
-              placeholder="City or Airport"
+              placeholder={t("HomePage.BookingForm.cityOrAirport")} //"City or Airport"
               className="js-search js-dd-focus disabled"
               // value={searchValue  }
               value={isDropOff ?   (searchData.drop_off_agency.id ? searchData.drop_off_agency.location_city+", "+searchData.drop_off_agency.location_country : carDetails.agencies.address_agence ): (searchData.pick_up_agency.id ? searchData.pick_up_agency.location_city+", "+searchData.pick_up_agency.location_country : carDetails.agencies.address_agence ) }  // use car.agency.location.city , country . for drop_off we should get the accepted drop off location by this agency

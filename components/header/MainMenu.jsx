@@ -15,16 +15,20 @@ import {
 
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+const stripLangPrefix = (pathname) => { 
+  return pathname.replace(/^\/(fr|es|de|it|en|ar|pt)(?=\/)/, ""); // Adjust language codes as needed
+};
 
 const MainMenu = ({ style = "" , t}) => {
   const pathname = usePathname();
+  const cleanPathname = stripLangPrefix(pathname); // Path without language prefix
   const [isActiveParent, setIsActiveParent] = useState(false)
-
+ 
   return (
     <nav className="menu js-navList">
       <ul className={`menu__nav ${style} -is-active`}>
-        <li>
-          <Link href="/home">
+        <li className={cleanPathname === "" || cleanPathname === "/home" ? "active" : ""}>
+          <Link  href="/home">
             <span className="mr-10">{t('home')}</span>
             
           </Link>
@@ -43,11 +47,11 @@ const MainMenu = ({ style = "" , t}) => {
         </li>
         {/* End home page menu */}
 
-        <li className={pathname === "/about" ? "current" : ""}>
+        <li className={cleanPathname === "/about" ? "active" : ""}>
           <Link href="/about">{t('about')}</Link>
         </li>
 
-        <li className={pathname === "/cars" ? "current" : ""}>
+        <li className={cleanPathname === "/cars" ? "active" : ""}>
           <Link href="/cars">{t('cars')}</Link>
         </li>
         {/* End About menu */}
@@ -140,7 +144,7 @@ const MainMenu = ({ style = "" , t}) => {
           </ul>
         </li> */}
 
-        <li className={pathname === "/contact" ? "current" : ""}>
+        <li className={cleanPathname === "/contact" ? "active" : ""}>
           <Link href="/contact">{t('contact')}</Link>
         </li>
 

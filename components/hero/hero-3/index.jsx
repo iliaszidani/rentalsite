@@ -17,14 +17,12 @@ const index = ({t}) => {
                 {t('title')}
 
               </h1>
-              <p
-                className="text-white mt-6 md:mt-10"
+              
+               <h2  className="text-white mt-6 md:mt-10"
                 data-aos="fade-up"
-                data-aos-delay="100"
-              >
-               <h6>      {t('titleDetails')}
-               </h6>
-              </p>
+                data-aos-delay="100" style={{fontSize:"1em"}}>{t('titleDetails')}
+               </h2 >
+             
             </div>
             {/* End hero title */}
 
@@ -45,3 +43,4 @@ const index = ({t}) => {
 };
 
 export default index;
+

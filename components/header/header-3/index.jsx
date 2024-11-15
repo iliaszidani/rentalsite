@@ -82,7 +82,7 @@ const Header3 = () => {
                 {/* <HeaderSearch /> */}
                 {/* End logo */}
 
-                <div className="header-menu" style={{ marginLeft: direction === 'ltr' ? '7rem' : '0',
+                <div className="header-menu " style={{ marginLeft: direction === 'ltr' ? '7rem' : '0',
         marginRight: direction === 'rtl' ? '7rem' : '0', }}>
                   <div className="header-menu__content">
                     <MainMenu style="text-dark-1"  t={t}/>

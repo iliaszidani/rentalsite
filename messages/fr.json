@@ -83,8 +83,8 @@
         "title":"Chercher par marque",
         "selectBrand":"Sélectionner une marque",
         "all":"tout",
-        "noDataFound":"Rien à afficher, revenez plus tard."
-      
+        "noDataFound":"Rien à afficher, revenez plus tard.",
+        "loadMore": "Charger plus"
       },
 
   
@@ -264,8 +264,88 @@
       "save":"Enregistrer",
       "reviews":"Avis",
       "for":"Pour",
-      "day_s":"Jour(s)" 
+      "day_s":"Jour(s)",
+
+        "propertyHighlights": "Caractéristiques principales",
+        "seatingCapacity": "Capacité d'accueil",
+        "luggage": "Bagage",
+        "transmission": "Transmission",
+        "mileage": "Kilométrage",
+        "fuel": "Carburant",
+        "per": "pour",
+        "total": "Total",
+        "pickUpLocation": "Lieu de prise en charge",
+        "pickUpDate": "Date de prise en charge",
+        "dropOffDate": "Date de retour",
+    
+        "extrasOptional": "Extras (optionnels)",
+        "toPay4Extras":"à payer pour les Extras",
+        "couponCode": "Code de réduction",
+        "bookNow": "Réserver maintenant",
+        "driverInfo": "Renseignement du conducteur principal",
+        "identityCard": "Pièce d'identité",
+      
+        "firstName": "Prénom",
+     
+        "lastName": "Nom",
+      
+        "phoneNumber": "N° Téléphone",
+      
+        "email": "Email",
+    
+        "address": "Adresse",
+       
+        "termsAndConditions": "J'ai lu et j'accepte les termes et conditions.",
+        "submit": "Soumettre",
+        
+        "specifications": "Spécifications",
+        "make": "Marque",
+        "model": "Modèle",
+        "madeYear": "Année de fabrication",
+        "firstNameRequired": "Le prénom est requis.",
+        "lastNameRequired": "Le nom est requis.",
+        "emailRequired": "L'e-mail est requis.",
+        "emailInvalid": "Veuillez entrer un e-mail valide.",
+        "phoneRequired": "Le numéro de téléphone est requis.",
+        "phoneInvalid": "Veuillez entrer un numéro de téléphone valide.",
+        "identityRequired": "La pièce d'identité est obligatoire.",
+        "addressRequired": "L'adresse est requise.",
+        "termsRequired": "Vous devez accepter les termes et conditions."
+     
+      
+    },
+    "contactUsPage":{
+      "MapsTopBar":{
+        "continent":"Afrique",
+        "country":"Maroc",
+        "city":"Casanlanca"
+      },
+      "Form":{
+
+        "sendMessage":"Envoyer un message",
+        "fullName":"Nom Complet",
+        "email":"Email",
+        "object":"Sujet",
+        "message":"Message",
+        "btn":"Envoyer Message",
+        "ApiResponse":{
+          "error":"Une erreur est survenue. Veuillez réessayer.",
+          "success":"Message envoyé avec succès"
+        }
+      },
+      "ContactUs":{
+        "contactUs":"Contactez Nous",
+        "address":"Adresse",
+        "phone":"Téléphone",
+        "needSupport":"Besoin d'assistance?",
+        "followUs":"Suivez-nous" 
+
+      } 
+    },
+    "Errors":{
+      "pickOffOrDropOffMissing": "L'heure de prise en charge ou de dépôt est manquante",
+    "outsideAvailable": "La date de prise en charge ou de dépôt est en dehors des plages de dates disponibles ou tombe dans des dates indisponibles"
+      
     }
   }
-
  

@@ -1,4 +1,7 @@
+import { useTranslations } from "next-intl";
+
 const TopBreadCrumb = ({city, agence,id}) => {
+  const t = useTranslations();
   console.log("top bread ", agence)
   return (
     <section className="py-10 d-flex items-center bg-light-2">
@@ -6,11 +9,11 @@ const TopBreadCrumb = ({city, agence,id}) => {
         <div className="row y-gap-10 items-center justify-between">
           <div className="col-auto">
             <div className="row x-gap-10 y-gap-5 items-center text-14 text-light-1">
-              <div className="col-auto">Voiture</div>
+              <div className="col-auto">{t("HomePage.BookingForm.type")}</div>
               {/* End .col-auto */}
               <div className="col-auto">&gt;</div>
               {/* End .col-auto */}
-              <div className="col-auto">{agence?.location.location_city} Voitures</div>
+              <div className="col-auto">{agence?.location.location_city} {t("Common.cars")}</div>
               {/* End .col-auto */}
               <div className="col-auto">&gt;</div>
               {/* End .col-auto */}

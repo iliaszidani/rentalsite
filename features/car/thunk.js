@@ -14,6 +14,7 @@ export const fetchCars = createAsyncThunk("cars/fetchCars", async () => {
     'cars/fetchFilteredCars',
     async (filters, thunkAPI) => {
       try {
+        console.log("cars/fetchFilteredCars filter ", filters);
         const response = await axiosInstance.post("/api/filter-cars-by-location", filters);
         console.log('25/10/2024 11:00 fetch filtred cars  response.status ', response.status)
         return response.data;

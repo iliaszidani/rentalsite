@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterAll, showCityCars } from "@/features/car/carSlice";
 import { setSearchData } from "@/features/searchData/searchDataSlice";
 import { useRouter } from "next/navigation";
-import { fetchCars, fetchFilteredCars } from "@/features/car/thunk";
+ 
   
 const  PopularDestinations = ({t}) => {
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const  PopularDestinations = ({t}) => {
           },
         }}
       >
-        {locations.map((item) => (
+        {locations.map((item) => ( (    item.location_photo!="null" && item.location_photo != null)  &&
           <SwiperSlide key={item.id}>
             <Link
               href="/cars"
@@ -59,11 +59,17 @@ const  PopularDestinations = ({t}) => {
                 e.preventDefault(); // Prevent default navigation to customize logic
                 console.log("clicked on", item);
               
-                const formatedSearchData = {
-                  pickup_location:item.id,
-             
-                }
-                dispatch(fetchFilteredCars(formatedSearchData));
+         
+                
+                dispatch(setSearchData(  {
+                  isLoading : false,
+                  isFilled: false,
+                  isDifferentLocations: false,
+                  pick_up_agency: item,
+                  drop_off_agency: { id: null, name: "", type: "", address: "" },
+                  pick_up_time: null,
+                  drop_off_time: null,
+                } ));
                 router.push("/cars");
                 // // Create the search data with the selected city
                 // const searchData = {

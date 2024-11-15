@@ -48,6 +48,14 @@ const Index = () => {
         date_end:searchData.drop_off_time,
       }
       dispatch(fetchFilteredCars(formatedSearchData));
+    }else if(searchData.pick_up_agency.id){
+
+      const formatedSearchData = {
+        pickup_location:searchData.pick_up_agency.id,
+      }
+      
+      dispatch(fetchFilteredCars(formatedSearchData));
+      
     }else{
 
       dispatch(fetchCars()); //should pass search data
@@ -160,7 +168,6 @@ const Index = () => {
     if (Array.isArray(filteredCars)) {
       console.log("called getCurrentPageCars filteredCars", filteredCars);
       console.log("called getCurrentPageCars cars", cars);
-  
       const startIndex = (currentPage - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
       

@@ -72,7 +72,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const DateSearch = ({
   isDropOff,
-  carAvailabilities = null , t
+  carAvailabilities = null , t ,  outerFilter= false
 }) => {
   const dispatch = useDispatch();
   const { searchData } = useSelector((state) => state.searchData);
@@ -81,10 +81,14 @@ const DateSearch = ({
 
   // this logic inside useEffect will get the first valid date to fill the pick up by  a valid initial value ( cauuse today date could be unavailable)
   useEffect(() => {
+    
     if (carAvailabilities) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
       const validDates = carAvailabilities
-        .filter(availability => availability.availability === 1)
-        .map(availability => new Date(availability.date_start));
+      .filter(availability => availability.availability === 1)
+      .map(availability => new Date(availability.date_start))
+      .filter(date => date >= today); // Exclude past dates
       if (validDates.length > 0) {
         const minValidDate = new Date(Math.min(...validDates)).toISOString();
         if(!searchData.pick_up_time){
@@ -153,7 +157,7 @@ const DateSearch = ({
       <DatePicker
         
         value={isDropOff ? searchData.drop_off_time : searchData.pick_up_time || initialDate}
-        placeholder={t("selectDateAndTime")}  
+        placeholder={outerFilter ?t("selectDateAndTime") : t("HomePage.BookingForm.selectDateAndTime") }  
         format="DD/MM/YYYY HH:mm"
         minDate={getMinDate()}
         plugins={[<TimePicker hideSeconds />]}

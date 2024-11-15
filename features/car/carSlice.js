@@ -5,7 +5,8 @@ const initialState = {
   itemsPerPage: 5,
   totalPages: 0,
   currentPage: 1,
-
+ 
+  
   cars: [],
   filteredCars: [],
   isLoading: null,
@@ -36,6 +37,7 @@ const initialState = {
   reservationLoading: false,
   carReservationReturnedData :null,
   reservationCouponcode: null,
+  
 };
 
 export const carSlice = createSlice({
@@ -132,7 +134,8 @@ export const carSlice = createSlice({
 
     setCoupon:(state, action) => {
       state.reservationCouponcode = action.payload;
-    } 
+    } ,
+  
   },
 
   extraReducers: (builder) => { 

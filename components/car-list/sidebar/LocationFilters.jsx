@@ -9,6 +9,8 @@ const LocationFilter = () => {
     const direction = document.documentElement.getAttribute("dir");
     setDir(direction);
   }, []);
+
+
   const filters = [
     {
       label: "Airport (meet & greet)",
@@ -20,6 +22,7 @@ const LocationFilter = () => {
     },
   ];
 
+  
   return (
     <>
       {filters.map((filter, index) => (

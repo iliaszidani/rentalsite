@@ -31,6 +31,7 @@ const searchSlice = createSlice({
   name: "search",
   initialState: finalInitialState,
   reducers: {
+   
     setSearchData(state, action) {
       
       state.isLoading = true;
@@ -58,5 +59,5 @@ const searchSlice = createSlice({
   },
 });
 
-export const { setSearchData } = searchSlice.actions;
+export const { setSearchData, initializeSearchData } = searchSlice.actions;
 export default searchSlice.reducer;
