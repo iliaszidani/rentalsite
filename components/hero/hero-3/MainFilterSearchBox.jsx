@@ -12,7 +12,6 @@ import { filterAll, filterCarByApi, setBookingDetails } from "@/features/car/car
 import { useTranslations } from "next-intl";
 import { fetchLocations } from "@/features/locations/thunk";
 import { fetchFilteredCars } from "@/features/car/thunk";
-import { store } from "@/store/store";
 
 const MainFilterSearchBox = ({isHome , initialData }) => {
 
@@ -49,7 +48,7 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
 
     // console.log("fetch location main filter search box ");
     const dir = document.documentElement.getAttribute('dir');
-    dispatch(fetchLocations()); 
+    dispatch(fetchLocations()); //try getServerSideProps
 
     setDirection(dir);
   
@@ -222,12 +221,5 @@ const MainFilterSearchBox = ({isHome , initialData }) => {
   );
 };
 
-export const getServerSideProps = () =>{
-  store.dispatch()
-}
 
 export default MainFilterSearchBox;
-
-
-
- 

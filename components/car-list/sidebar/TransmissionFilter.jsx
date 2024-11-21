@@ -26,7 +26,8 @@ const TransmissionFilter = ({ cars, handleTransmissionChange, t }) => {
   }, [cars]);
 
   useEffect(() => {
-    dispatch(filterAll(selectedTransmissions));
+    
+    dispatch(filterAll({transmission:selectedTransmissions}));
   }, [selectedTransmissions]);
 
   const handleCheckboxChange = (transmission) => {

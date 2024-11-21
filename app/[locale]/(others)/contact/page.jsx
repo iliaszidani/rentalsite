@@ -95,4 +95,4 @@ const Contact = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Contact), { ssr: false });
+export default dynamic(() => Promise.resolve(Contact), { ssr: false }); // change with lazy to fix the status 500 problem

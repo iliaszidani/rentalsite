@@ -210,7 +210,7 @@
     },
     "Fuel": {
       "diesel": "Diesel",
-      "gasoline": "Gasoline",
+      "gasoline": "Petrol",
       "electrical": "Electric",
       "hybrid": "Hybrid"
     },

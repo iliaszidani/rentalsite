@@ -86,12 +86,15 @@
 'use client'
 import React, { useEffect, useState } from 'react';
  
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { filterAll, setCategoryFilter } from '@/features/car/carSlice';
 import axiosInstance from '@/lib/axiosConfig';
+
+
 const CategorieFilters = () => {  
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const filteredCars = useSelector(state => state.car.filteredCars); // Get filtered cars
   const dispatch = useDispatch();
   const [dir, setDir] = useState('ltr');
   
@@ -100,11 +103,19 @@ const CategorieFilters = () => {
     setDir(direction);
   }, []);
 
+
+    function getFiltredCarsLengthForThisCategory(CategoryId){
+
+    const cars = filteredCars?.filter((car)=>car.categorie_id === CategoryId)
+
+    return cars?.length;
+  }
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axiosInstance.get('/api/get-all-categories-for-client'); // removed http://localhost/car-rental-api/public
-        // console.log('Données reçues:', response.data);
+        console.log('Données reçues:', response.data);
         setCategories(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des catégories:', error);
@@ -115,8 +126,10 @@ const CategorieFilters = () => {
 
   useEffect(() => {
     // dispatch(setCategoryFilter(selectedCategories));
+    // console.log("selected categories ", selectedCategories)
     dispatch(filterAll({categories: selectedCategories }));
     // onCategoryChange(selectedCategories);
+    
   }, [selectedCategories]);
 
   const handleCheckboxChange = (categoryId) => {
@@ -144,7 +157,7 @@ const CategorieFilters = () => {
             </div>
           </div>
           <div className="col-auto">
-            <div className="text-15 text-light-1">{category.cars.length}</div>
+            <div className="text-15 text-light-1">{getFiltredCarsLengthForThisCategory(category.id)}</div>
           </div>
         </div>
       ))}

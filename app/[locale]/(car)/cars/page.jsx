@@ -40,7 +40,7 @@ const Index = () => {
 
   useEffect(() => {
     if(searchData.pick_up_time && searchData.pick_up_agency && searchData.drop_off_time ){
-      console.log("search Data is available ", searchData)
+      // console.log("search Data is available ", searchData)
       const formatedSearchData = {
         pickup_location:searchData.pick_up_agency.id,
         drop_off_location:searchData.drop_off_agency.id,

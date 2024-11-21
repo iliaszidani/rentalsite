@@ -12,5 +12,5 @@ export const store = configureStore({
         user:userReducer,
         searchData:searchReducer,
         location:locationReducer,
-    },
+    },
 });

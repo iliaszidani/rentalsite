@@ -8,7 +8,7 @@ import SrollTop from "../../components/common/ScrollTop";
 export default async function RootLayout({ children, params }) {
   const { locale } = params;
 
-  console.log("------lo----------------" + locale + "------------------------------");
+  // console.log("------lo----------------" + locale + "------------------------------");
   
   const direction = locale ==='ar' ? "rtl" : "ltr";
   // Fetch locale-specific messages

@@ -9,11 +9,13 @@ const initialState = {
   
   cars: [],
   filteredCars: [],
+  initialFilteredCars: [], // 
   isLoading: null,
+  
   filters: {
     isAscending: true,
     categories: [],
-    transmission: null,
+    transmission: [],
     specifications: {
       gps: null,
       bluetooth: null,
@@ -29,7 +31,7 @@ const initialState = {
       cruise_control: null,
       parking_sensors: null,
     },
-    fuelType: null,
+    selectedFuelTypes: null,
     price: null,
     bookingDetails: null
   },
@@ -49,24 +51,39 @@ export const carSlice = createSlice({
 
     },
     filterAll: (state, action) => {
-      // console.log("filterAll called with action:", action);
+          // console.log("filterAll called with action:", JSON.stringify(action.payload, null, 2));
+
+
+
       if (!action.payload.reqSort) {
         state.filters = { ...state.filters, ...action.payload };
       }
-
+ 
       const {
-        categories, transmission, fuelType, specifications, price, bookingDetails
+        categories, transmission, selectedFuelTypes, specifications, price, bookingDetails
       } = state.filters;
+ 
+    //  console.log("transmission ", transmission);
+ 
+      if (state.initialFilteredCars.length === 0) {
+        state.initialFilteredCars = [...state.filteredCars];
+      }
+    
+      state.filteredCars = state.initialFilteredCars.filter(car => {
 
-      state.filteredCars = state.cars.filter(car => {
         // Category Filter
         const categoryMatch = categories.length === 0 || categories.includes(car.categorie_id);
-
+ 
+        
         // Transmission Filter
-        const transmissionMatch = !transmission || car.transmission === transmission;
+        const isTransmissionValid = Array.isArray(transmission) || transmission === null;
+const transmissionMatch = 
+  (isTransmissionValid && (transmission?.length === 0 || transmission?.includes(car.transmission)));
+        // console.log(" transmissionMatch ", transmissionMatch);
+        
 
         // Fuel Type Filter
-        const fuelTypeMatch = !fuelType || car.fuel_type === fuelType;
+        const selectedFuelTypesMatch =   selectedFuelTypes.length === 0  || selectedFuelTypes.includes(car.fuel_type); //Causing errors
 
         // Specification Filter
         const specificationMatch = Object.keys(specifications || {}).every(key => {
@@ -109,8 +126,9 @@ export const carSlice = createSlice({
         }
 
         // Combine all matches
-        return categoryMatch && transmissionMatch && fuelTypeMatch && specificationMatch && priceMatch && bookingMatch;
+        return categoryMatch && transmissionMatch && selectedFuelTypesMatch && specificationMatch && priceMatch && bookingMatch;
       });
+      // console.log("still thre filtred ", state.filteredCars);
 
       if (action.payload.reqSort) {
         const sorted = [...state.filteredCars].sort((a, b) =>
@@ -122,7 +140,7 @@ export const carSlice = createSlice({
 
       state.totalPages = Math.ceil(state.filteredCars.length / state.itemsPerPage);
     },
-
+  
     setActiveCarExtras: (state, action) => {
       state.activeCarExtras = action.payload;
     },
@@ -147,9 +165,11 @@ export const carSlice = createSlice({
       })
       .addCase(fetchCars.fulfilled, (state, action) => {
         state.cars = action.payload.all_cars;
-
+        // console.log("last chapter  state.filters.bookingDetails ",  state.filters.bookingDetails);
         const { pick_up_agency, pick_up_time, drop_off_agency, drop_off_time } = state.filters.bookingDetails || {};
+        // console.log("sfs ",  pick_up_agency && pick_up_time && drop_off_agency && drop_off_time);
         if (pick_up_agency && pick_up_time && drop_off_agency && drop_off_time) {
+          // console.log("boba ios   ")
           const userCity = pick_up_agency.name.toLowerCase();
           const userAddress = pick_up_agency.address.toLowerCase();
 
@@ -184,7 +204,8 @@ export const carSlice = createSlice({
       .addCase(fetchCars.rejected, (state, action) => {
         state.isLoading = false;
         console.error("fetchCars.rejected: ", action.error);
-      }).addCase(fetchFilteredCars.pending, (state) => {
+      })
+      .addCase(fetchFilteredCars.pending, (state) => {
         state.filteredCars = [];
         state.totalPages = Math.ceil(state.filteredCars.length / state.itemsPerPage);
         state.isLoading = true;
@@ -233,7 +254,7 @@ export default carSlice.reducer;
 //     categories: [],
 //     transmission: null,
 //     SpecificationFilter: null,
-//     fuelType: null,
+//     selectedFuelTypes: null,
 //     price: null,
 //     bookingDetails: null
 //   },
@@ -341,7 +362,7 @@ export default carSlice.reducer;
 //       state.totalPages = Math.ceil(state.filteredCars.length / state.itemsPerPage); 
 //     },
 //     setFuelTypeFilter: (state, action) => {
-//       state.filters.fuelType = action.payload;
+//       state.filters.selectedFuelTypes = action.payload;
 //       if (action.payload.length === 0) {
 //         state.filteredCars = state.cars;
 //       } else {

@@ -7,22 +7,7 @@ import { getCars } from '../../services/carService';
 import 'swiper/swiper-bundle.css';
 import { useEffect, useState } from 'react';
 
-// export async function getServerSideProps() {
-//   console.log('getServerSideProps est appelée');
-//   try {
-//     const cars = await getCars();
-//     console.log('les cars getServerSideProps', cars);
-
-//     return {
-//       props: { cars },
-//     };
-//   } catch (error) {
-//     console.error("Erreur lors de l'appel de getCars:", error);
-//     return {
-//       props: { cars: [] },
-//     };
-//   }
-// }
+ 
 
 const CarProperties = ({ cars, t }) => {
   // console.log('les cars ' , cars);
