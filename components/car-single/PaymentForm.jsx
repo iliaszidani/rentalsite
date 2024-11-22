@@ -122,5 +122,5 @@ const PaymentForm = forwardRef((props, ref) =>{
         </div>
     );
 });
-
+PaymentForm.displayName = "PaymentForm"; // Add this line
 export default PaymentForm;

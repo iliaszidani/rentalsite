@@ -266,7 +266,6 @@ const DriverInfoForm = forwardRef((props, ref) => {
 });
 
 // Styles inline pour simplifier le code
-
 const styles = {
   form: {
     maxWidth: "600px",
@@ -280,7 +279,7 @@ const styles = {
     marginBottom: "15px",
   },
   input: {
-   
+    
     width: "100%",
     padding: "10px",
     borderRadius: "4px",
@@ -315,4 +314,5 @@ const styles = {
   },
 };
 
+DriverInfoForm.displayName = "DriverInfoForm"; // Add this line
 export default DriverInfoForm;
