@@ -11,7 +11,7 @@ export const metadata = {
   description: "GoTrip - Travel & Tour React NextJS Template",
 };
 
-const index = () => {
+const Index = () => {
   return (
     <>
       {/* End Page Title */}
@@ -33,4 +33,4 @@ const index = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(index), { ssr: false });
+export default dynamic(() => Promise.resolve(Index), { ssr: false });

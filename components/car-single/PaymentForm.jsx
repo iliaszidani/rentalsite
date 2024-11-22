@@ -87,7 +87,7 @@ const PaymentForm = forwardRef((props, ref) =>{
                         />
                     </div>
                     <div>
-                        <label htmlFor="expirationDate" style={labelStyle}>Date d'expiration (mm/aa)</label>
+                        <label htmlFor="expirationDate" style={labelStyle}>Date d&apos;expiration (mm/aa)</label>
                         <input
                             type="text"
                             id="expirationDate"

@@ -56,7 +56,7 @@ const LoginForm = () => {
       <div className="col-12">
         <h1 className="text-22 fw-500">Welcome back</h1>
         <p className="mt-10">
-          Don't have an account yet?{" "}
+          Don&apos;t have an account yet?{" "}
           <Link href={searchParams.get('close') === 'true' ? "/signup" : "/signup?close=true"} className="text-blue-1">
             Sign up for free
           </Link>

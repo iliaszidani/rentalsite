@@ -307,7 +307,7 @@ useEffect(() => {
                   <div className="d-flex">
                     {item.type === 'city' ?
                       <div className="icon-location-2 text-light-1 text-20 pt-4" /> :
-                      <div className="icon-airplane text-light-1 text-20 pt-4 bg-infos" />
+                      <div className="icon-location-pin text-light-1 text-20 pt-4 bg-infos" />
                     }
                     <div className="ml-10">
                       <div className="text-15 lh-12 fw-500 js-search-option-target">

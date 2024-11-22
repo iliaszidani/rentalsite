@@ -160,7 +160,7 @@ const DateSearch = ({
         placeholder={outerFilter ?t("selectDateAndTime") : t("HomePage.BookingForm.selectDateAndTime") }  
         format="DD/MM/YYYY HH:mm"
         minDate={getMinDate()}
-        plugins={[<TimePicker hideSeconds />]}
+        plugins={[<TimePicker hideSeconds key="time-picker" />]}
         onChange={handleChange}
         required
         mapDays={({ date }) => {

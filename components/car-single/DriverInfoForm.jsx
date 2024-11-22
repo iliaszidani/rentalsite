@@ -2,6 +2,8 @@ import { reserveCar } from "@/features/car/thunk";
 import { useTranslations } from "next-intl";
 import React, { forwardRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import logo from "@/public/ay-icons/pdf-file-svgrepo-com.png";
+import Image from "next/image";
 
 const DriverInfoForm = forwardRef((props, ref) => {
   const logedInUser = JSON.parse(localStorage.getItem("user"));
@@ -228,17 +230,25 @@ const DriverInfoForm = forwardRef((props, ref) => {
         </div>
 
         {/* Checkbox pour accepter les termes */}
-        <div className="form-check mb-3 d-flex align-items-center">
+        <div className="form-check mb-3   align-items-center">
           <input
             className={`form-check-input  ${direction === "ltr" ? "me-2" : "ms-2"} `}
             type="checkbox"
             checked={acceptedTerms}
             onChange={() => setAcceptedTerms(!acceptedTerms)}
+            
             style={{ width: "20px", height: "20px", border: "1px solid #ccc" }}
           />
-          <label className="form-check-label">
-            {t("carDetails.termsAndConditions")}
-          </label>
+         <a
+    href="/docs/rental365_general_conditions.pdf"
+    download="TermsAndConditions.pdf"
+    style={{ textDecoration: "underline", cursor: "pointer" }}
+  >
+    {t("carDetails.termsAndConditions")}
+    <span className="mx-2"> 
+          <Image src={logo} alt="PDF Logo" width={25} height={25} />
+          </span>
+  </a>
           {errors.acceptedTerms && (
             <div className="text-danger ms-3">{errors.acceptedTerms}</div>
           )}
@@ -246,9 +256,11 @@ const DriverInfoForm = forwardRef((props, ref) => {
 
         {/* Bouton de soumission */}
         <button type="submit" className="driver_submit_form">
-          {t("carDetails.submit")}
+          {t("carDetails.submit")} 
+        
         </button>
       </form>
+      
     </div>
   );
 });

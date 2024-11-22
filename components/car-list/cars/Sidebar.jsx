@@ -34,7 +34,7 @@ const FuelTypeFilter = ({cars , t}) => {
 
   const filterCarsByFuelType = ( fuelType) => {
     const filtredCars = cars.filter(car => car.fuel_type === fuelType)
-    console.log("fuelType ("+fuelType+"): ", filtredCars.length);
+    // console.log("fuelType ("+fuelType+"): ", filtredCars.length);
     return  filtredCars.length;
   };
 

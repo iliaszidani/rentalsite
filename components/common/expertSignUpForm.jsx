@@ -589,7 +589,7 @@ const ExpertSignUpForm = () => {
             </div>
             {formData.password !== formData.password_confirmation && (
               <div className="alert alert-danger col-12 mt-3 ">
-                Passwords don't match
+                Passwords don&apos;t match
               </div>
             )}
             <div className="col-12 mt-3">

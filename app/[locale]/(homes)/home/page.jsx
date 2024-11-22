@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 // import {Link} from '@/i18n/routing';
-const home = () => {
+const Home = () => {
   const t = useTranslations("HomePage");
   const dispatch = useDispatch();
 
@@ -278,4 +278,4 @@ const home = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(home), { ssr: false });
+export default dynamic(() => Promise.resolve(Home), { ssr: false });

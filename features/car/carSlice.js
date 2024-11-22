@@ -83,7 +83,7 @@ const transmissionMatch =
         
 
         // Fuel Type Filter
-        const selectedFuelTypesMatch =   selectedFuelTypes.length === 0  || selectedFuelTypes.includes(car.fuel_type); //Causing errors
+        const selectedFuelTypesMatch =   selectedFuelTypes?.length === 0  || selectedFuelTypes?.includes(car.fuel_type); //Causing errors
 
         // Specification Filter
         const specificationMatch = Object.keys(specifications || {}).every(key => {

@@ -5,7 +5,7 @@ import ContactInfo from "./ContactInfo";
 import Copyright from "./Copyright";
 import FooterContent from "./FooterContent";
 
-const index = () => {
+const Index = () => {
   const t = useTranslations('Common')
   const footerData = [
     {
@@ -73,4 +73,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

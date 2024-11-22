@@ -57,7 +57,7 @@ const  PopularDestinations = ({t}) => {
               key={item.id}
               onClick={  (e) =>  {
                 e.preventDefault(); // Prevent default navigation to customize logic
-                console.log("clicked on", item);
+                //console.log("clicked on", item);
               
                 const formatedSearchData = {
                   pickup_location:item.id,

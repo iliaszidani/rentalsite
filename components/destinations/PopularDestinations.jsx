@@ -49,7 +49,7 @@ const  PopularDestinations = ({t}) => {
           },
         }}
       >
-        {locations.map((item) => ( (    item.location_photo!="null" && item.location_photo != null)  &&
+        {!locations ? <div style={{ marginBottom: "10px", textAlign: "center" }}> {t('CarsByBrandSection.noDataFound')} </div>:locations?.map((item) => ( (    item.location_photo!="null" && item.location_photo != null)  &&
           <SwiperSlide key={item.id}>
             <Link
               href="/cars"
