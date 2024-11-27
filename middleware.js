@@ -144,6 +144,11 @@
 //   matcher: ['/', '/(en|de)/:path*'],
 // };
 
+
+
+
+
+
 //this is the working one:
 import createMiddleware from 'next-intl/middleware';
 import { localePrefix, locales } from './navigation';

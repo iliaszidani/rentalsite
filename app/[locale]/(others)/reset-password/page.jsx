@@ -12,6 +12,7 @@ export const metadata = {
 };
 
 const ResetPassword = () => {
+  
   return (
     <>
       {/* End Page Title */}

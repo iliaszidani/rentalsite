@@ -269,15 +269,22 @@ import CallToActions from '@/components/common/CallToActions';
  
 
 const ClientProfile = () => {
-    const [showProfile, setShowProfile] = useState(true);
-    const [reservations, setReservations] = useState([]);
-    const { user } = useSelector((state) => state.user);
-   
 
-   
+
+  
+  const [showProfile, setShowProfile] = useState(true);
+  const [reservations, setReservations] = useState([]);
+  const { user } = useSelector((state) => state.user);
+  console.log("uszers ", Object.keys(user).length)
+  if(!Object.keys(user).length)
+{
+    redirect("/");
+  }
+
+  
     useEffect(() => {
         if (!showProfile) {
-            axiosInstance.get(`/api/get-all-client-reservations`)
+            axiosInstance.get(`/api/client/get-all-client-reservations`)
                 .then(response => {
                   // console.log("res ", response)
                     setReservations(response.data.all_client_reservations);
@@ -313,6 +320,7 @@ const ClientProfile = () => {
 };
 export default ClientProfile;
 import { updateUserProfile } from '@/features/user/userSlice';  
+import { redirect, useRouter } from 'next/navigation';
 const ProfileForm = ({user}) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.user); // Access user from Redux store

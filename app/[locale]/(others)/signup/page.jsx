@@ -11,6 +11,8 @@ export const metadata = {
 };
 
 const SignUp = () => {
+
+  
   return (
     <>
       {/* End Page Title */}

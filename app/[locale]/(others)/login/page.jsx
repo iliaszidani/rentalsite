@@ -11,6 +11,7 @@ export const metadata = {
 };
 
 const LogIn = () => {
+  
   return (
     <>
       {/* End Page Title */}
