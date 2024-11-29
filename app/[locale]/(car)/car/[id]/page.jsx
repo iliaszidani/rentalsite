@@ -16,7 +16,7 @@ import ReplyFormReview2 from "@/components/car-single/ReplyFormReview2";
 import CallToActions from "@/components/common/CallToActions";
 import DefaultFooter from "@/components/footer/default";
 // import FilterBox from "@/components/car-single/filter-box/Index";
-import FilterBox from "./../../../../../components/car-single/filter-box/Index";
+import FilterBox from "../../../../../components/car-single/filter-box/index";
 import Faq from "@/components/faq/Faq";
 import MapPropertyFinder from "@/components/car-single/MapPropertyFinder";
 import notFound from "@/app/[locale]/not-found";

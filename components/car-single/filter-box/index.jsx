@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import { setCoupon } from "@/features/car/carSlice";
 import { useTranslations } from "next-intl";
 
-const Index = ({
+const index = ({
   carDetails,
   setDays,
   setExtras,
@@ -285,4 +285,4 @@ const Index = ({
   );
 };
 
-export default Index;
+export default index;
