@@ -141,7 +141,7 @@ const CategorieFilters = () => {
   };
   return (
     <>
-      {categories.map((category) => (
+      {categories ? categories.map((category) => (
         <div key={category.id} className="row y-gap-10 items-center justify-between">
           <div className="col-auto">
             <div className="form-checkbox d-flex items-center">
@@ -160,7 +160,7 @@ const CategorieFilters = () => {
             <div className="text-15 text-light-1">{getFiltredCarsLengthForThisCategory(category.id)}</div>
           </div>
         </div>
-      ))}
+      )): "no categories"}
     </>
   );
 };
