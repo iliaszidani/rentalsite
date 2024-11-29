@@ -8,7 +8,7 @@ import { getUserFromStorage } from "@/features/user/userSlice";
 import { getCarData } from "@/lib/getCarData";
 import DriverInfoForm from "@/components/car-single/DriverInfoForm";
 import Overview from "@/components/car-single/Overview";
-import FilterBox from "@/components/car-single/filter-box";
+import FilterBox from "@/components/car-single/filter-box/FilterBox";
 import { useTranslations } from "next-intl";
 
 const ClientSideContent = ({ id }) => {

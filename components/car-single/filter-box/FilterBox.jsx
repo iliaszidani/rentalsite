@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import { setCoupon } from "@/features/car/carSlice";
 import { useTranslations } from "next-intl";
 
-const index = ({
+const FilterBox  = ({
   carDetails,
   setDays,
   setExtras,
@@ -285,4 +285,4 @@ const index = ({
   );
 };
 
-export default index;
+export default FilterBox ;
