@@ -173,7 +173,7 @@ useEffect(() => {
 }, [searchData, resetTriggered]);
 
   useEffect(() => {
-    if (searchValue) {
+    if (searchValue&& locations) {
       // Configure Fuse.js
       const fuse = new Fuse(locations, {
         keys: ['location_city', 'location_country', 'location_types.title', 'location_types.sub_title'], // Fields to search
